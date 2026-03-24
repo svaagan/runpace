@@ -435,6 +435,52 @@
       padding: 2rem 1rem;
     }
 
+    /* ── Distansefart page ── */
+    #page-maal {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 1rem 1.25rem max(env(safe-area-inset-bottom), 0.75rem);
+    }
+    .picker-wheel.w-maal { height: 120px; }
+    .picker-wheel.w-maal .picker-item { font-size: 1.5rem; font-weight: 200; }
+    .w-maal-dist { width: 120px; }
+    .picker-wheel.w-maal.w-maal-dist .picker-item { font-size: 0.85rem; font-weight: 300; }
+    .w-maal-h  { width: 36px; }
+    .w-maal-ms { width: 54px; }
+    .maal-result {
+      margin-top: 1rem;
+      border-top: 1px solid var(--divider);
+      padding-top: 0.9rem;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .maal-pace-val {
+      font-size: 3rem;
+      font-weight: 200;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .maal-pace-unit {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.1rem;
+    }
+    .maal-speed-val {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      padding-top: 0.3rem;
+    }
+    .maal-speed-val span {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--btn-op);
+    }
+
     /* ── Install button & modal ── */
     .install-btn {
       display: flex;
@@ -530,6 +576,9 @@
       <li class="sb-item active" data-page="calc" onclick="navigate('calc')">
         <span class="sb-dot"></span>Kalkulator
       </li>
+      <li class="sb-item" data-page="maal" onclick="navigate('maal')">
+        <span class="sb-dot"></span>Distansefart
+      </li>
       <li class="sb-item" data-page="half" onclick="navigate('half')">
         <span class="sb-dot"></span>Pacing halvmaraton
       </li>
@@ -567,6 +616,16 @@
       <div id="page-calc" class="page">
         <div class="calc-combined" id="calcCombined"></div>
         <div class="calc-dist-section" id="calcDistSection"></div>
+      </div>
+
+      <!-- Distansefart -->
+      <div id="page-maal" class="page hidden">
+        <div class="calc-combined" id="maalCombined"></div>
+        <div class="maal-result">
+          <div class="maal-pace-val" id="maalPaceVal">–</div>
+          <div class="maal-pace-unit">min/km</div>
+          <div class="maal-speed-val" id="maalSpeedVal"></div>
+        </div>
       </div>
 
       <!-- Pacing halvmaraton -->
@@ -624,6 +683,7 @@
 
     const PAGE_TITLES = {
       calc: 'Kalkulator',
+      maal: 'Distansefart',
       half: 'Pacing halvmaraton',
       full: 'Pacing maraton',
     };
@@ -843,6 +903,73 @@
       if (w) w.scrollTop = val * ITEM_H;
     }
 
+    // ── Distansefart ──
+    function buildMaalPicker() {
+      const container = document.getElementById('maalCombined');
+      container.innerHTML = '';
+
+      const distGroup = document.createElement('div');
+      distGroup.className = 'calc-group';
+      const distLabel = document.createElement('div');
+      distLabel.className = 'calc-group-label';
+      distLabel.textContent = 'Distanse';
+      const distWrap = document.createElement('div');
+      distWrap.className = 'calc-picker-wrap';
+      distWrap.appendChild(makeWheel('maal', 'dist', DISTANCES.map(d => d.name), 'w-maal w-maal-dist', updateMaalResult));
+      distGroup.appendChild(distLabel);
+      distGroup.appendChild(distWrap);
+      container.appendChild(distGroup);
+
+      const divider = document.createElement('div');
+      divider.className = 'calc-divider';
+      container.appendChild(divider);
+
+      const timeGroup = document.createElement('div');
+      timeGroup.className = 'calc-group';
+      const timeLabel = document.createElement('div');
+      timeLabel.className = 'calc-group-label';
+      timeLabel.textContent = 'Måltid';
+      const timeWrap = document.createElement('div');
+      timeWrap.className = 'calc-picker-wrap';
+      timeWrap.appendChild(makeWheel('maal', 'h', [...Array(10).keys()].map(String),                            'w-maal w-maal-h',  updateMaalResult));
+      timeWrap.appendChild(makeCalcSep(':'));
+      timeWrap.appendChild(makeWheel('maal', 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult));
+      timeWrap.appendChild(makeCalcSep(':'));
+      timeWrap.appendChild(makeWheel('maal', 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult));
+      timeGroup.appendChild(timeLabel);
+      timeGroup.appendChild(timeWrap);
+      container.appendChild(timeGroup);
+
+      // Default: 5 km, 25:00 → 5:00 min/km
+      requestAnimationFrame(() => {
+        setWheelValue('maal', 'dist', 2);
+        setWheelValue('maal', 'h', 0);
+        setWheelValue('maal', 'm', 25);
+        setWheelValue('maal', 's', 0);
+        updateMaalResult();
+      });
+    }
+
+    function updateMaalResult() {
+      const paceEl  = document.getElementById('maalPaceVal');
+      const speedEl = document.getElementById('maalSpeedVal');
+      const distIdx = getWheelValue('maal', 'dist');
+      const h = getWheelValue('maal', 'h');
+      const m = getWheelValue('maal', 'm');
+      const s = getWheelValue('maal', 's');
+      const totalMin = h*60 + m + s/60;
+      const dist = DISTANCES[distIdx];
+      if (!dist || totalMin <= 0) {
+        paceEl.textContent = '–';
+        speedEl.textContent = '';
+        return;
+      }
+      const pace  = totalMin / dist.km;
+      const speed = 60 / pace;
+      paceEl.textContent = fmtPace(pace);
+      speedEl.innerHTML  = `<span>${speed.toFixed(2)}</span> km/h`;
+    }
+
     // ── Pacing pages ──
     function makeSep(char) {
       const s = document.createElement('span');
@@ -899,6 +1026,7 @@
     // ── Init ──
     buildCalcDist();
     buildCalcPicker();
+    buildMaalPicker();
 
     buildPacingPicker('half', () => updatePacingTable('half'));
     buildPacingPicker('full', () => updatePacingTable('full'));
