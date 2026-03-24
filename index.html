@@ -1098,6 +1098,16 @@
       updatePacingTable('half');
       updatePacingTable('full');
     });
+
+    // Auto-refresh: reload when app comes back from background after 5+ minutes
+    let hiddenAt = 0;
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        hiddenAt = Date.now();
+      } else if (navigator.onLine && hiddenAt && Date.now() - hiddenAt > 5 * 60 * 1000) {
+        location.reload();
+      }
+    });
   </script>
 </body>
 </html>
