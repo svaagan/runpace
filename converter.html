@@ -209,7 +209,7 @@
       <button onclick="press('1')">1</button>
       <button onclick="press('2')">2</button>
       <button onclick="press('3')">3</button>
-      <button id="btnSeparator" class="btn-special" onclick="pressSeparator()">:</button>
+      <button id="btnSeparator" class="btn-special" onclick="pressSeparator()">.</button>
       <button onclick="press('0')">0</button>
       <button class="btn-special btn-clear" onclick="backspace()">⌫</button>
     </div>
@@ -225,23 +225,24 @@
       document.getElementById('btnPaceMode').classList.toggle('active', m === 'pace');
       document.getElementById('btnSpeedMode').classList.toggle('active', m === 'speed');
       document.getElementById('displayUnit').textContent = m === 'pace' ? 'min/km' : 'km/h';
-      document.getElementById('btnSeparator').textContent = m === 'pace' ? ':' : '.';
+      // In pace mode: separator button becomes Clear; in speed mode: it's the decimal point
+      const sep = document.getElementById('btnSeparator');
+      if (m === 'pace') {
+        sep.textContent = 'C';
+        sep.classList.add('btn-clear');
+      } else {
+        sep.textContent = '.';
+        sep.classList.remove('btn-clear');
+      }
       updateDisplay();
       updateResult();
     }
 
     function press(char) {
       if (mode === 'pace') {
-        // Format: digits before colon (max 2), digits after colon (max 2)
-        if (value.includes(':')) {
-          const parts = value.split(':');
-          if (parts[1].length >= 2) return; // max 2 digits after colon
-        } else {
-          const digits = value.replace(':', '');
-          if (digits.length >= 2) return; // max 2 digits before colon
-        }
+        // value stores raw digits only (max 3: 1 minute digit + 2 second digits)
+        if (value.length >= 3) return;
       } else {
-        // Speed: max 5 chars total, only one decimal point
         if (char === '.') return; // handled by pressSeparator
         if (value.length >= 5) return;
       }
@@ -252,11 +253,10 @@
 
     function pressSeparator() {
       if (mode === 'pace') {
-        if (value.includes(':')) return; // only one colon
-        if (value === '') value = '0';
-        value += ':';
+        // Clear all
+        value = '';
       } else {
-        if (value.includes('.')) return; // only one dot
+        if (value.includes('.')) return;
         if (value === '') value = '0';
         value += '.';
       }
@@ -270,10 +270,18 @@
       updateResult();
     }
 
+    // Format raw pace digits (max 3) as M:SS for display
+    function formatPaceDisplay(digits) {
+      if (digits.length === 0) return '';
+      if (digits.length === 1) return digits;
+      return digits[0] + ':' + digits.slice(1).padEnd(2, ' ').trimEnd();
+    }
+
     function updateDisplay() {
       const inputEl = document.getElementById('displayInput');
       const placeholder = document.getElementById('placeholder');
       const cursor = document.getElementById('cursor');
+      const displayValue = mode === 'pace' ? formatPaceDisplay(value) : value;
       if (value === '') {
         placeholder.style.display = '';
         cursor.style.display = 'none';
@@ -281,19 +289,18 @@
       } else {
         placeholder.style.display = 'none';
         cursor.style.display = '';
-        // Set text node
         let textNode = inputEl.childNodes[0];
         if (!textNode || textNode.nodeType !== 3) {
           textNode = document.createTextNode('');
           inputEl.insertBefore(textNode, cursor);
         }
-        textNode.textContent = value;
+        textNode.textContent = displayValue;
       }
     }
 
     function updateResult() {
       const resultEl = document.getElementById('result');
-      if (value === '' || value === '0' || value === '0:' || value === '0.') {
+      if (value === '' || value === '0' || value === '0.') {
         resultEl.innerHTML = 'Enter a value';
         resultEl.className = 'display-result empty';
         return;
@@ -322,18 +329,16 @@
       }
     }
 
-    function parsePace(str) {
-      if (str.includes(':')) {
-        const [m, s] = str.split(':');
-        const mins = parseInt(m, 10) || 0;
-        if (s === '' || s === undefined) return mins > 0 ? mins : null;
-        const secs = parseInt(s, 10);
-        if (isNaN(secs) || secs >= 60) return null;
-        const total = mins + secs / 60;
-        return total > 0 ? total : null;
-      }
-      const val = parseFloat(str);
-      return isNaN(val) || val <= 0 ? null : val;
+    // Parse raw pace digits (e.g. "530" → 5 min 30 sec = 5.5)
+    function parsePace(digits) {
+      if (!digits || digits.length === 0) return null;
+      const mins = parseInt(digits[0], 10);
+      if (digits.length === 1) return mins > 0 ? mins : null;
+      const secStr = digits.slice(1).padEnd(2, '0');
+      const secs = parseInt(secStr, 10);
+      if (secs >= 60) return null;
+      const total = mins + secs / 60;
+      return total > 0 ? total : null;
     }
 
     function formatPace(totalMinutes) {
