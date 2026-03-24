@@ -84,7 +84,7 @@
     .topbar-title {
       flex: 1;
       text-align: center;
-      font-size: 0.88rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text);
       white-space: nowrap;
@@ -201,7 +201,7 @@
       gap: 0.45rem;
     }
     .calc-group-label {
-      font-size: 0.65rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -239,7 +239,7 @@
       flex-shrink: 0;
     }
     .calc-dist-header span {
-      font-size: 0.62rem;
+      font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -304,7 +304,7 @@
       gap: 0.35rem;
     }
     .picker-label {
-      font-size: 0.65rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -400,7 +400,7 @@
       position: sticky;
       top: 0;
       background: var(--bg);
-      font-size: 0.65rem;
+      font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -481,6 +481,33 @@
       color: var(--btn-op);
     }
 
+    /* ── FAQ page ── */
+    #page-faq {
+      padding: 1rem 1.25rem max(env(safe-area-inset-bottom), 1rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .faq-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+    }
+    .faq-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--btn-op);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+    .faq-body {
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.55;
+    }
+
     /* ── Install button & modal ── */
     .install-btn {
       display: flex;
@@ -547,19 +574,19 @@
   <!-- Install modal -->
   <div class="modal-backdrop hidden" id="installModal" onclick="hideInstallModal(event)">
     <div class="modal-sheet">
-      <p class="modal-title">Legg til RunPace på hjemskjerm</p>
+      <p class="modal-title">Legg RunPace på hjemskjermen</p>
       <div class="modal-steps">
         <div class="modal-step">
           <div class="step-num">1</div>
-          <p class="step-text">Trykk på <strong>Del-knappen</strong> nederst i Safari</p>
+          <p class="step-text">Trykk på <strong>⋯ (tre prikker)</strong> nederst til høyre i nettleseren</p>
         </div>
         <div class="modal-step">
           <div class="step-num">2</div>
-          <p class="step-text">Scroll ned og trykk <strong>«Legg til på Hjem-skjerm»</strong></p>
+          <p class="step-text">Velg <strong>Del</strong></p>
         </div>
         <div class="modal-step">
           <div class="step-num">3</div>
-          <p class="step-text">Trykk <strong>«Legg til»</strong> øverst til høyre</p>
+          <p class="step-text">Trykk <strong>Vis mer</strong>, deretter <strong>Legg til på hjem-skjerm</strong></p>
         </div>
       </div>
       <button class="modal-close" onclick="hideInstallModal()">Lukk</button>
@@ -585,6 +612,9 @@
       <li class="sb-item" data-page="full" onclick="navigate('full')">
         <span class="sb-dot"></span>Pacing maraton
       </li>
+      <li class="sb-item" data-page="faq" onclick="navigate('faq')">
+        <span class="sb-dot"></span>FAQ
+      </li>
     </ul>
     <div class="sb-footer" id="sbFooter">
       <button class="install-btn" onclick="showInstallModal()">
@@ -592,7 +622,7 @@
           <path d="M6.5 1v7M3.5 5l3 3 3-3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M1 9.5v1A1.5 1.5 0 002.5 12h8A1.5 1.5 0 0012 10.5v-1" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        Legg til på hjemskjerm
+        Legg til på hjem-skjerm
       </button>
     </div>
   </nav>
@@ -616,6 +646,30 @@
       <div id="page-calc" class="page">
         <div class="calc-combined" id="calcCombined"></div>
         <div class="calc-dist-section" id="calcDistSection"></div>
+      </div>
+
+      <!-- FAQ -->
+      <div id="page-faq" class="page hidden">
+        <div class="faq-card">
+          <div class="faq-title">Kalkulator</div>
+          <div class="faq-body">Viser min/km og km/h side om side. Scroll hjulene for å endre verdien – begge sider oppdateres automatisk. Under hjulene vises estimert løpstid for seks standarddistanser basert på gjeldende fart.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-title">Distansefart</div>
+          <div class="faq-body">Velg en distanse og scroll inn ønsket måltid. Appen beregner nødvendig fart i min/km og km/h for å nå målsettingen.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-title">Pacing halvmaraton</div>
+          <div class="faq-body">Velg måltid for halvmaraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-title">Pacing maraton</div>
+          <div class="faq-body">Velg måltid for maraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-title">Legg til på hjemskjerm</div>
+          <div class="faq-body">Trykk på <strong style="color:rgba(255,255,255,0.85)">⋯</strong> nederst til høyre → <strong style="color:rgba(255,255,255,0.85)">Del</strong> → <strong style="color:rgba(255,255,255,0.85)">Vis mer</strong> → <strong style="color:rgba(255,255,255,0.85)">Legg til på hjem-skjerm</strong>. Appen åpnes da i fullskjerm uten nettlesergrensesnitt.</div>
+        </div>
       </div>
 
       <!-- Distansefart -->
@@ -683,6 +737,7 @@
 
     const PAGE_TITLES = {
       calc: 'Kalkulator',
+      faq:  'FAQ',
       maal: 'Distansefart',
       half: 'Pacing halvmaraton',
       full: 'Pacing maraton',
@@ -720,9 +775,6 @@
     function hideInstallModal(e) {
       if (!e || e.target === document.getElementById('installModal') || !e.target.closest('.modal-sheet'))
         document.getElementById('installModal').classList.add('hidden');
-    }
-    if (window.navigator.standalone) {
-      document.getElementById('sbFooter').style.display = 'none';
     }
 
     // ── Calculator ──
