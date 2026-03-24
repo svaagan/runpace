@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pace ↔ Speed Converter</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      padding: 2rem;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a202c;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Mode toggle */
+    .toggle {
+      display: flex;
+      background: #edf2f7;
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .toggle button {
+      flex: 1;
+      padding: 0.5rem;
+      border: none;
+      background: transparent;
+      border-radius: 7px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #718096;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .toggle button.active {
+      background: white;
+      color: #2d3748;
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    }
+
+    /* Display */
+    .display {
+      background: #f7fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      min-height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .display-input {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1a202c;
+      letter-spacing: 0.02em;
+      min-height: 2.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .display-input .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.8rem;
+      background: #4299e1;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+      border-radius: 1px;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .display-input .placeholder {
+      color: #cbd5e0;
+      font-weight: 400;
+    }
+
+    .display-unit {
+      font-size: 0.8rem;
+      color: #a0aec0;
+      margin-top: 2px;
+    }
+
+    .display-result {
+      font-size: 0.95rem;
+      color: #4a5568;
+      padding: 0.5rem 1.25rem;
+      margin-bottom: 1rem;
+      min-height: 1.75rem;
+      text-align: center;
+    }
+
+    .display-result span {
+      font-weight: 700;
+      color: #2b6cb0;
+      font-size: 1.1rem;
+    }
+
+    .display-result.empty {
+      color: #a0aec0;
+    }
+
+    /* Numpad */
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+
+    .numpad button {
+      padding: 0.9rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      background: white;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2d3748;
+      cursor: pointer;
+      transition: background 0.1s, transform 0.08s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .numpad button:hover {
+      background: #ebf8ff;
+      border-color: #bee3f8;
+    }
+
+    .numpad button:active {
+      background: #bee3f8;
+      transform: scale(0.95);
+    }
+
+    .numpad button.btn-special {
+      background: #edf2f7;
+      font-size: 0.95rem;
+      color: #4a5568;
+    }
+
+    .numpad button.btn-special:hover {
+      background: #e2e8f0;
+    }
+
+    .numpad button.btn-clear {
+      background: #fff5f5;
+      border-color: #fed7d7;
+      color: #c53030;
+    }
+
+    .numpad button.btn-clear:hover {
+      background: #fed7d7;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Pace ↔ Speed</h1>
+
+    <div class="toggle">
+      <button id="btnPaceMode" class="active" onclick="setMode('pace')">min/km → km/h</button>
+      <button id="btnSpeedMode" onclick="setMode('speed')">km/h → min/km</button>
+    </div>
+
+    <div class="display">
+      <div class="display-input" id="displayInput">
+        <span class="placeholder" id="placeholder">–</span>
+        <span class="cursor" id="cursor" style="display:none"></span>
+      </div>
+      <div class="display-unit" id="displayUnit">min/km</div>
+    </div>
+
+    <div class="display-result empty" id="result">Enter a value</div>
+
+    <div class="numpad">
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button id="btnSeparator" class="btn-special" onclick="pressSeparator()">:</button>
+      <button onclick="press('0')">0</button>
+      <button class="btn-special btn-clear" onclick="backspace()">⌫</button>
+    </div>
+  </div>
+
+  <script>
+    let mode = 'pace'; // 'pace' or 'speed'
+    let value = '';
+
+    function setMode(m) {
+      mode = m;
+      value = '';
+      document.getElementById('btnPaceMode').classList.toggle('active', m === 'pace');
+      document.getElementById('btnSpeedMode').classList.toggle('active', m === 'speed');
+      document.getElementById('displayUnit').textContent = m === 'pace' ? 'min/km' : 'km/h';
+      document.getElementById('btnSeparator').textContent = m === 'pace' ? ':' : '.';
+      updateDisplay();
+      updateResult();
+    }
+
+    function press(char) {
+      if (mode === 'pace') {
+        // Format: digits before colon (max 2), digits after colon (max 2)
+        if (value.includes(':')) {
+          const parts = value.split(':');
+          if (parts[1].length >= 2) return; // max 2 digits after colon
+        } else {
+          const digits = value.replace(':', '');
+          if (digits.length >= 2) return; // max 2 digits before colon
+        }
+      } else {
+        // Speed: max 5 chars total, only one decimal point
+        if (char === '.') return; // handled by pressSeparator
+        if (value.length >= 5) return;
+      }
+      value += char;
+      updateDisplay();
+      updateResult();
+    }
+
+    function pressSeparator() {
+      if (mode === 'pace') {
+        if (value.includes(':')) return; // only one colon
+        if (value === '') value = '0';
+        value += ':';
+      } else {
+        if (value.includes('.')) return; // only one dot
+        if (value === '') value = '0';
+        value += '.';
+      }
+      updateDisplay();
+      updateResult();
+    }
+
+    function backspace() {
+      value = value.slice(0, -1);
+      updateDisplay();
+      updateResult();
+    }
+
+    function updateDisplay() {
+      const inputEl = document.getElementById('displayInput');
+      const placeholder = document.getElementById('placeholder');
+      const cursor = document.getElementById('cursor');
+      if (value === '') {
+        placeholder.style.display = '';
+        cursor.style.display = 'none';
+        inputEl.childNodes[0] && (inputEl.childNodes[0].textContent = '–');
+      } else {
+        placeholder.style.display = 'none';
+        cursor.style.display = '';
+        // Set text node
+        let textNode = inputEl.childNodes[0];
+        if (!textNode || textNode.nodeType !== 3) {
+          textNode = document.createTextNode('');
+          inputEl.insertBefore(textNode, cursor);
+        }
+        textNode.textContent = value;
+      }
+    }
+
+    function updateResult() {
+      const resultEl = document.getElementById('result');
+      if (value === '' || value === '0' || value === '0:' || value === '0.') {
+        resultEl.innerHTML = 'Enter a value';
+        resultEl.className = 'display-result empty';
+        return;
+      }
+
+      if (mode === 'pace') {
+        const pace = parsePace(value);
+        if (pace === null || pace <= 0) {
+          resultEl.innerHTML = 'Keep typing…';
+          resultEl.className = 'display-result empty';
+          return;
+        }
+        const kmh = 60 / pace;
+        resultEl.innerHTML = `= <span>${kmh.toFixed(2)} km/h</span>`;
+        resultEl.className = 'display-result';
+      } else {
+        const speed = parseFloat(value);
+        if (isNaN(speed) || speed <= 0) {
+          resultEl.innerHTML = 'Keep typing…';
+          resultEl.className = 'display-result empty';
+          return;
+        }
+        const paceMin = 60 / speed;
+        resultEl.innerHTML = `= <span>${formatPace(paceMin)} min/km</span>`;
+        resultEl.className = 'display-result';
+      }
+    }
+
+    function parsePace(str) {
+      if (str.includes(':')) {
+        const [m, s] = str.split(':');
+        const mins = parseInt(m, 10) || 0;
+        if (s === '' || s === undefined) return mins > 0 ? mins : null;
+        const secs = parseInt(s, 10);
+        if (isNaN(secs) || secs >= 60) return null;
+        const total = mins + secs / 60;
+        return total > 0 ? total : null;
+      }
+      const val = parseFloat(str);
+      return isNaN(val) || val <= 0 ? null : val;
+    }
+
+    function formatPace(totalMinutes) {
+      const mins = Math.floor(totalMinutes);
+      const secs = Math.round((totalMinutes - mins) * 60);
+      if (secs === 60) return `${mins + 1}:00`;
+      return `${mins}:${String(secs).padStart(2, '0')}`;
+    }
+  </script>
+</body>
+</html>
