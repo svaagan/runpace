@@ -656,15 +656,15 @@
         </div>
         <div class="faq-card">
           <div class="faq-title">Distansefart</div>
-          <div class="faq-body">Velg en distanse og scroll inn ønsket måltid. Appen beregner nødvendig fart i min/km og km/h for å nå målsettingen.</div>
+          <div class="faq-body">Velg en distanse og scroll inn ønsket tidsmål. Appen beregner nødvendig fart i min/km og km/h for å nå målsettingen.</div>
         </div>
         <div class="faq-card">
           <div class="faq-title">Pacing halvmaraton</div>
-          <div class="faq-body">Velg måltid for halvmaraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
+          <div class="faq-body">Velg tidsmål for halvmaraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
         </div>
         <div class="faq-card">
           <div class="faq-title">Pacing maraton</div>
-          <div class="faq-body">Velg måltid for maraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
+          <div class="faq-body">Velg tidsmål for maraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
         </div>
         <div class="faq-card">
           <div class="faq-title">Legg til på hjemskjerm</div>
@@ -686,7 +686,7 @@
       <div id="page-half" class="page hidden">
         <div class="pacing-top">
           <div class="picker-section">
-            <p class="picker-label">Måltid halvmaraton</p>
+            <p class="picker-label">Tidsmål halvmaraton</p>
             <div class="picker-wrap" id="pac-wrap-half"></div>
             <p class="pacing-meta" id="pacing-meta-half"></p>
           </div>
@@ -695,7 +695,7 @@
           <table class="pacing-table">
             <thead><tr><th>Passering</th><th>Tid</th></tr></thead>
             <tbody id="pacing-tbody-half">
-              <tr><td colspan="2" class="pacing-placeholder">Velg en måltid</td></tr>
+              <tr><td colspan="2" class="pacing-placeholder">Velg tidsmål</td></tr>
             </tbody>
           </table>
         </div>
@@ -705,7 +705,7 @@
       <div id="page-full" class="page hidden">
         <div class="pacing-top">
           <div class="picker-section">
-            <p class="picker-label">Måltid maraton</p>
+            <p class="picker-label">Tidsmål maraton</p>
             <div class="picker-wrap" id="pac-wrap-full"></div>
             <p class="pacing-meta" id="pacing-meta-full"></p>
           </div>
@@ -714,7 +714,7 @@
           <table class="pacing-table">
             <thead><tr><th>Passering</th><th>Tid</th></tr></thead>
             <tbody id="pacing-tbody-full">
-              <tr><td colspan="2" class="pacing-placeholder">Velg en måltid</td></tr>
+              <tr><td colspan="2" class="pacing-placeholder">Velg tidsmål</td></tr>
             </tbody>
           </table>
         </div>
@@ -948,11 +948,13 @@
 
     function getWheelValue(distId, col) {
       const w = document.querySelector(`.picker-wheel[data-dist-id="${distId}"][data-col="${col}"]`);
-      return w ? Math.round(w.scrollTop / ITEM_H) : 0;
+      if (!w) return 0;
+      return Math.round(w.scrollTop / ITEM_H);
     }
     function setWheelValue(distId, col, val) {
       const w = document.querySelector(`.picker-wheel[data-dist-id="${distId}"][data-col="${col}"]`);
-      if (w) w.scrollTop = val * ITEM_H;
+      if (!w) return;
+      w.scrollTop = val * ITEM_H;
     }
 
     // ── Distansefart ──
@@ -967,7 +969,7 @@
       distLabel.textContent = 'Distanse';
       const distWrap = document.createElement('div');
       distWrap.className = 'calc-picker-wrap';
-      distWrap.appendChild(makeWheel('maal', 'dist', DISTANCES.map(d => d.name), 'w-maal w-maal-dist', updateMaalResult));
+      distWrap.appendChild(makeWheel('maal', 'dist', DISTANCES.map(d => d.name), 'w-maal w-maal-dist', updateMaalResult, null));
       distGroup.appendChild(distLabel);
       distGroup.appendChild(distWrap);
       container.appendChild(distGroup);
@@ -980,14 +982,14 @@
       timeGroup.className = 'calc-group';
       const timeLabel = document.createElement('div');
       timeLabel.className = 'calc-group-label';
-      timeLabel.textContent = 'Måltid';
+      timeLabel.textContent = 'Tidsmål';
       const timeWrap = document.createElement('div');
       timeWrap.className = 'calc-picker-wrap';
-      timeWrap.appendChild(makeWheel('maal', 'h', [...Array(10).keys()].map(String),                            'w-maal w-maal-h',  updateMaalResult));
+      timeWrap.appendChild(makeWheel('maal', 'h', [...Array(10).keys()].map(String),                            'w-maal w-maal-h',  updateMaalResult, null));
       timeWrap.appendChild(makeCalcSep(':'));
-      timeWrap.appendChild(makeWheel('maal', 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult));
+      timeWrap.appendChild(makeWheel('maal', 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult, null));
       timeWrap.appendChild(makeCalcSep(':'));
-      timeWrap.appendChild(makeWheel('maal', 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult));
+      timeWrap.appendChild(makeWheel('maal', 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult, null));
       timeGroup.appendChild(timeLabel);
       timeGroup.appendChild(timeWrap);
       container.appendChild(timeGroup);
@@ -1030,11 +1032,11 @@
 
     function buildPacingPicker(page, cb) {
       const wrap = document.getElementById('pac-wrap-' + page);
-      wrap.appendChild(makeWheel('pac-'+page, 'h', [...Array(10).keys()].map(i => String(i)), 'w-h', cb));
+      wrap.appendChild(makeWheel('pac-'+page, 'h', [...Array(10).keys()].map(i => String(i)), 'w-h', cb, null));
       wrap.appendChild(makeSep(':'));
-      wrap.appendChild(makeWheel('pac-'+page, 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms', cb));
+      wrap.appendChild(makeWheel('pac-'+page, 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms', cb, null));
       wrap.appendChild(makeSep(':'));
-      wrap.appendChild(makeWheel('pac-'+page, 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms', cb));
+      wrap.appendChild(makeWheel('pac-'+page, 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms', cb, null));
     }
 
     function updatePacingTable(page) {
@@ -1049,7 +1051,7 @@
 
       if (totalMin <= 0) {
         metaEl.textContent = '';
-        tbody.innerHTML = `<tr><td colspan="2" class="pacing-placeholder">Velg en måltid</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="2" class="pacing-placeholder">Velg tidsmål</td></tr>`;
         return;
       }
 
