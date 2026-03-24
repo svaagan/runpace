@@ -232,6 +232,19 @@
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .calc-dist-row:last-child { border-bottom: none; }
+    .calc-dist-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0.25rem 0.2rem;
+      flex-shrink: 0;
+    }
+    .calc-dist-header span {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
     .calc-dist-name { font-size: 0.88rem; font-weight: 500; color: var(--text); }
     .calc-dist-sub  { font-size: 0.65rem; color: var(--text-dim); margin-left: 0.3rem; }
     .calc-dist-time { font-size: 1rem; font-weight: 300; color: var(--btn-op); font-variant-numeric: tabular-nums; }
@@ -302,6 +315,17 @@
       display: flex;
       align-items: center;
       height: 120px;
+    }
+    .picker-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 40px;
+      height: 40px;
+      background: rgba(255,159,10,0.1);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
     }
     .picker-wheel {
       height: 120px;
@@ -735,6 +759,10 @@
     function buildCalcDist() {
       const section = document.getElementById('calcDistSection');
       section.innerHTML = '';
+      const header = document.createElement('div');
+      header.className = 'calc-dist-header';
+      header.innerHTML = '<span>Distanse</span><span>Totaltid</span>';
+      section.appendChild(header);
       DISTANCES.forEach(d => {
         const row = document.createElement('div');
         row.className = 'calc-dist-row';
