@@ -19,15 +19,15 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255,255,255,0.82);
       -webkit-backdrop-filter: blur(24px);
       backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255,255,255,0.9);
       border-radius: 28px;
       box-shadow:
-        0 2px 4px rgba(0, 82, 204, 0.04),
-        0 8px 24px rgba(0, 82, 204, 0.08),
-        0 32px 64px rgba(0, 82, 204, 0.10);
+        0 2px 4px rgba(0,82,204,0.04),
+        0 8px 24px rgba(0,82,204,0.08),
+        0 32px 64px rgba(0,82,204,0.10);
       padding: 1.75rem 1.75rem 1.5rem;
       width: 100%;
       max-width: 360px;
@@ -44,16 +44,15 @@
       margin-bottom: 1.25rem;
     }
 
-    /* ── Tab bar ── */
-    .tab-bar {
+    /* ── Segmented control (shared) ── */
+    .seg {
       display: flex;
-      background: rgba(0, 82, 204, 0.07);
+      background: rgba(0,82,204,0.07);
       border-radius: 11px;
       padding: 3px;
       margin-bottom: 1.5rem;
     }
-
-    .tab-bar button {
+    .seg button {
       flex: 1;
       padding: 0.45rem 0.25rem;
       border: none;
@@ -66,54 +65,21 @@
       transition: all 0.2s ease;
       touch-action: manipulation;
     }
-
-    .tab-bar button.active {
+    .seg button.active {
       background: white;
       color: #1a56c4;
       font-weight: 600;
-      box-shadow: 0 1px 6px rgba(0, 82, 204, 0.14);
+      box-shadow: 0 1px 6px rgba(0,82,204,0.14);
     }
 
-    /* ── Calculator tab ── */
-    /* Mode toggle */
-    .toggle {
-      display: flex;
-      background: rgba(0, 82, 204, 0.07);
-      border-radius: 11px;
-      padding: 3px;
-      margin-bottom: 1.5rem;
-    }
-
-    .toggle button {
-      flex: 1;
-      padding: 0.45rem 0.25rem;
-      border: none;
-      background: transparent;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #5a7db5;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      touch-action: manipulation;
-    }
-
-    .toggle button.active {
-      background: white;
-      color: #1a56c4;
-      font-weight: 600;
-      box-shadow: 0 1px 6px rgba(0, 82, 204, 0.14);
-    }
-
-    /* Display */
+    /* ── Calculator ── */
     .display {
-      background: linear-gradient(135deg, rgba(235, 243, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%);
-      border: 1px solid rgba(147, 197, 253, 0.4);
+      background: linear-gradient(135deg,rgba(235,243,255,0.8) 0%,rgba(219,234,254,0.6) 100%);
+      border: 1px solid rgba(147,197,253,0.4);
       border-radius: 18px;
       padding: 1.25rem 1.5rem 1rem;
       margin-bottom: 0.75rem;
     }
-
     .display-input {
       font-size: 3rem;
       font-weight: 300;
@@ -123,7 +89,6 @@
       display: flex;
       align-items: center;
     }
-
     .display-input .cursor {
       display: inline-block;
       width: 2px;
@@ -133,14 +98,8 @@
       animation: blink 1s step-end infinite;
       border-radius: 2px;
     }
-
     @keyframes blink { 50% { opacity: 0; } }
-
-    .display-input .placeholder {
-      color: rgba(37, 99, 235, 0.2);
-      font-weight: 300;
-    }
-
+    .display-input .placeholder { color: rgba(37,99,235,0.2); font-weight: 300; }
     .display-unit {
       font-size: 0.75rem;
       font-weight: 500;
@@ -149,7 +108,6 @@
       color: #93b4e8;
       margin-top: 0.25rem;
     }
-
     .display-result {
       font-size: 0.9rem;
       color: #4a7ab5;
@@ -158,27 +116,19 @@
       min-height: 2rem;
       text-align: center;
     }
-
     .display-result span {
       font-weight: 700;
       font-size: 1.35rem;
       color: #1a56c4;
       letter-spacing: -0.01em;
     }
+    .display-result.empty { color: rgba(100,149,210,0.5); font-size: 0.8rem; }
 
-    .display-result.empty {
-      color: rgba(100, 149, 210, 0.5);
-      font-size: 0.8rem;
-      letter-spacing: 0.02em;
-    }
-
-    /* Numpad */
     .numpad {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3,1fr);
       gap: 0.55rem;
     }
-
     .numpad button {
       padding: 1rem;
       border: none;
@@ -192,137 +142,147 @@
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
-      box-shadow: 0 1px 3px rgba(0, 60, 180, 0.08), 0 1px 2px rgba(0, 60, 180, 0.04);
+      box-shadow: 0 1px 3px rgba(0,60,180,0.08), 0 1px 2px rgba(0,60,180,0.04);
     }
-
-    .numpad button:hover   { background: #f0f7ff; box-shadow: 0 2px 8px rgba(0,80,200,0.12); }
-    .numpad button:active  { background: #dbeafe; transform: scale(0.94); box-shadow: none; }
-
+    .numpad button:hover  { background: #f0f7ff; box-shadow: 0 2px 8px rgba(0,80,200,0.12); }
+    .numpad button:active { background: #dbeafe; transform: scale(0.94); box-shadow: none; }
     .numpad button.btn-special {
-      background: rgba(219, 234, 254, 0.6);
-      font-size: 1rem;
-      font-weight: 500;
-      color: #2563eb;
-      box-shadow: none;
+      background: rgba(219,234,254,0.6);
+      font-size: 1rem; font-weight: 500; color: #2563eb; box-shadow: none;
     }
     .numpad button.btn-special:hover { background: #dbeafe; }
-
     .numpad button.btn-clear {
-      background: rgba(254, 226, 226, 0.5);
-      color: #dc2626;
-      box-shadow: none;
+      background: rgba(254,226,226,0.5); color: #dc2626; box-shadow: none;
     }
-    .numpad button.btn-clear:hover { background: rgba(254, 202, 202, 0.7); }
+    .numpad button.btn-clear:hover { background: rgba(254,202,202,0.7); }
 
-    /* ── Dashboard tab ── */
+    /* ── Dashboard ── */
     .dash-hint {
       text-align: center;
-      font-size: 0.8rem;
-      color: rgba(100, 149, 210, 0.7);
-      padding: 0.25rem 0 1rem;
-      letter-spacing: 0.01em;
+      font-size: 0.78rem;
+      color: rgba(100,149,210,0.65);
+      padding: 0 0 1.1rem;
     }
 
-    .dist-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
+    .dist-list { display: flex; flex-direction: column; gap: 0.7rem; }
 
     .dist-card {
-      background: linear-gradient(135deg, rgba(235,243,255,0.7) 0%, rgba(219,234,254,0.45) 100%);
-      border: 1px solid rgba(147, 197, 253, 0.35);
-      border-radius: 16px;
-      padding: 0.9rem 1.1rem;
+      background: linear-gradient(135deg,rgba(235,243,255,0.7) 0%,rgba(219,234,254,0.45) 100%);
+      border: 1px solid rgba(147,197,253,0.35);
+      border-radius: 18px;
+      overflow: hidden;
     }
 
     .dist-top {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 0.55rem;
+      padding: 0.85rem 1.1rem 0.7rem;
     }
+    .dist-name { font-size: 0.9rem; font-weight: 600; color: #1a3a6e; }
+    .dist-sub  { font-size: 0.68rem; color: #93b4e8; margin-left: 0.35rem; }
+    .dist-pred { font-size: 1.1rem; font-weight: 300; color: #1a56c4; letter-spacing: -0.01em; }
+    .dist-pred.empty { color: rgba(100,149,210,0.3); font-size: 0.85rem; }
 
-    .dist-name {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #1a3a6e;
-    }
+    .dist-divider { height: 1px; background: rgba(147,197,253,0.28); margin: 0 1.1rem; }
 
-    .dist-sub {
-      font-size: 0.7rem;
-      color: #93b4e8;
-      margin-left: 0.4rem;
-    }
-
-    .dist-pred {
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: #1a56c4;
-      letter-spacing: -0.01em;
-    }
-
-    .dist-pred.empty {
-      color: rgba(100, 149, 210, 0.3);
-      font-size: 0.9rem;
-    }
-
-    .dist-divider {
-      height: 1px;
-      background: rgba(147, 197, 253, 0.3);
-      margin-bottom: 0.55rem;
-    }
-
-    .dist-goal-row {
+    /* ── Picker ── */
+    .picker-section {
+      padding: 0.5rem 0 0.6rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
-    .goal-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
+    .picker-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: #93b4e8;
-      white-space: nowrap;
     }
 
-    .goal-input {
-      flex: 1;
-      border: 1px solid rgba(147, 197, 253, 0.5);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.7);
-      padding: 0.3rem 0.6rem;
-      font-size: 0.85rem;
-      font-family: inherit;
+    .picker-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 120px;
+    }
+
+    /* Selection highlight bar */
+    .picker-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 40px;
+      height: 40px;
+      background: rgba(37,99,235,0.08);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Fade top */
+    .picker-wrap::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 0; bottom: 0;
+      background:
+        linear-gradient(to bottom, rgba(235,242,255,0.85) 0%, transparent 33%, transparent 67%, rgba(235,242,255,0.85) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .picker-wheel {
+      height: 120px;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      position: relative;
+      z-index: 0;
+    }
+    .picker-wheel::-webkit-scrollbar { display: none; }
+
+    .picker-wheel.w-h  { width: 36px; }
+    .picker-wheel.w-ms { width: 50px; }
+
+    .picker-spacer { height: 40px; flex-shrink: 0; }
+
+    .picker-item {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      font-weight: 400;
       color: #1a3a6e;
-      outline: none;
-      min-width: 0;
-      transition: border-color 0.15s;
+      scroll-snap-align: center;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
     }
 
-    .goal-input:focus {
-      border-color: #60a5fa;
-      background: white;
+    .picker-sep {
+      font-size: 1.1rem;
+      color: #93b4e8;
+      font-weight: 300;
+      padding: 0 3px;
+      position: relative;
+      z-index: 3;
+      user-select: none;
     }
 
-    .goal-input::placeholder {
-      color: rgba(100, 149, 210, 0.4);
-    }
-
-    .goal-result {
-      font-size: 0.75rem;
+    .picker-result {
+      font-size: 0.8rem;
       font-weight: 500;
       color: #2563eb;
-      white-space: nowrap;
-      min-width: 90px;
-      text-align: right;
+      letter-spacing: 0.01em;
+      min-height: 1.1rem;
     }
-
-    .goal-result.empty {
-      color: transparent;
-    }
+    .picker-result.empty { color: transparent; }
 
     .hidden { display: none !important; }
   </style>
@@ -331,14 +291,14 @@
   <div class="card">
     <p class="app-title">RunPace</p>
 
-    <div class="tab-bar">
+    <div class="seg" id="tabBar">
       <button id="tabBtnCalc" class="active" onclick="switchTab('calc')">Kalkulator</button>
       <button id="tabBtnDash" onclick="switchTab('dash')">Dashboard</button>
     </div>
 
     <!-- ── Calculator tab ── -->
     <div id="tabCalc">
-      <div class="toggle">
+      <div class="seg">
         <button id="btnPaceMode" class="active" onclick="setMode('pace')">min/km → km/h</button>
         <button id="btnSpeedMode" onclick="setMode('speed')">km/h → min/km</button>
       </div>
@@ -363,7 +323,7 @@
         <button onclick="press('1')">1</button>
         <button onclick="press('2')">2</button>
         <button onclick="press('3')">3</button>
-        <button id="btnSeparator" class="btn-special" onclick="pressSeparator()">C</button>
+        <button id="btnSeparator" class="btn-special btn-clear" onclick="pressSeparator()">C</button>
         <button onclick="press('0')">0</button>
         <button class="btn-special btn-clear" onclick="backspace()">⌫</button>
       </div>
@@ -377,12 +337,13 @@
   </div>
 
   <script>
-    // ── Distances ──
+    const ITEM_H = 40;
+
     const DISTANCES = [
       { id: 'mile', name: '1 mile',      km: 1.60934  },
-      { id: '3k',   name: '3 000 m',     km: 3        },
-      { id: '5k',   name: '5 000 m',     km: 5        },
-      { id: '10k',  name: '10 km',       km: 10       },
+      { id: 'd3k',  name: '3 000 m',     km: 3        },
+      { id: 'd5k',  name: '5 000 m',     km: 5        },
+      { id: 'd10k', name: '10 km',       km: 10       },
       { id: 'half', name: 'Halvmaraton', km: 21.0975  },
       { id: 'full', name: 'Maraton',     km: 42.195   },
     ];
@@ -408,13 +369,8 @@
       document.getElementById('btnSpeedMode').classList.toggle('active', m === 'speed');
       document.getElementById('displayUnit').textContent = m === 'pace' ? 'min/km' : 'km/h';
       const sep = document.getElementById('btnSeparator');
-      if (m === 'pace') {
-        sep.textContent = 'C';
-        sep.classList.add('btn-clear');
-      } else {
-        sep.textContent = '.';
-        sep.classList.remove('btn-clear');
-      }
+      sep.textContent = m === 'pace' ? 'C' : '.';
+      sep.classList.toggle('btn-clear', m === 'pace');
       updateDisplay();
       updateResult();
     }
@@ -450,7 +406,7 @@
     }
 
     function formatPaceDisplay(digits) {
-      if (digits.length === 0) return '';
+      if (!digits.length) return '';
       if (digits.length === 1) return digits;
       return digits[0] + ':' + digits.slice(1).padEnd(2, ' ').trimEnd();
     }
@@ -459,171 +415,211 @@
       const inputEl     = document.getElementById('displayInput');
       const placeholder = document.getElementById('placeholder');
       const cursor      = document.getElementById('cursor');
-      const displayValue = mode === 'pace' ? formatPaceDisplay(value) : value;
-      if (value === '') {
+      const dv = mode === 'pace' ? formatPaceDisplay(value) : value;
+      if (!value) {
         placeholder.style.display = '';
         cursor.style.display = 'none';
         if (inputEl.childNodes[0]) inputEl.childNodes[0].textContent = '–';
       } else {
         placeholder.style.display = 'none';
         cursor.style.display = '';
-        let textNode = inputEl.childNodes[0];
-        if (!textNode || textNode.nodeType !== 3) {
-          textNode = document.createTextNode('');
-          inputEl.insertBefore(textNode, cursor);
-        }
-        textNode.textContent = displayValue;
+        let tn = inputEl.childNodes[0];
+        if (!tn || tn.nodeType !== 3) { tn = document.createTextNode(''); inputEl.insertBefore(tn, cursor); }
+        tn.textContent = dv;
       }
     }
 
     function updateResult() {
-      const resultEl = document.getElementById('result');
+      const el   = document.getElementById('result');
       const pace = getCurrentPaceMinPerKm();
       if (pace === null) {
-        if (value === '' || value === '0' || value === '0.') {
-          resultEl.innerHTML = 'Skriv inn en verdi';
-        } else {
-          resultEl.innerHTML = 'Fortsett å taste…';
-        }
-        resultEl.className = 'display-result empty';
+        el.innerHTML  = value && value !== '0' && value !== '0.' ? 'Fortsett å taste…' : 'Skriv inn en verdi';
+        el.className  = 'display-result empty';
         return;
       }
-      if (mode === 'pace') {
-        const kmh = 60 / pace;
-        resultEl.innerHTML = `= <span>${kmh.toFixed(2)} km/h</span>`;
-      } else {
-        resultEl.innerHTML = `= <span>${formatPaceMinKm(pace)} min/km</span>`;
-      }
-      resultEl.className = 'display-result';
+      el.innerHTML = mode === 'pace'
+        ? `= <span>${(60 / pace).toFixed(2)} km/h</span>`
+        : `= <span>${fmtPace(pace)} min/km</span>`;
+      el.className = 'display-result';
     }
 
-    // Returns current pace in min/km, or null
     function getCurrentPaceMinPerKm() {
-      if (mode === 'pace') {
-        return parsePaceDigits(value);
-      } else {
-        const speed = parseFloat(value);
-        if (isNaN(speed) || speed <= 0) return null;
-        return 60 / speed;
-      }
+      if (mode === 'pace') return parsePaceDigits(value);
+      const s = parseFloat(value);
+      return (!isNaN(s) && s > 0) ? 60 / s : null;
     }
 
     function parsePaceDigits(digits) {
-      if (!digits || digits.length === 0) return null;
+      if (!digits || !digits.length) return null;
       const mins = parseInt(digits[0], 10);
       if (digits.length === 1) return mins > 0 ? mins : null;
-      const secStr = digits.slice(1).padEnd(2, '0');
-      const secs   = parseInt(secStr, 10);
+      const secs = parseInt(digits.slice(1).padEnd(2,'0'), 10);
       if (secs >= 60) return null;
-      const total = mins + secs / 60;
-      return total > 0 ? total : null;
+      const t = mins + secs / 60;
+      return t > 0 ? t : null;
     }
 
-    function formatPaceMinKm(totalMinutes) {
-      const mins = Math.floor(totalMinutes);
-      const secs = Math.round((totalMinutes - mins) * 60);
-      if (secs === 60) return `${mins + 1}:00`;
-      return `${mins}:${String(secs).padStart(2, '0')}`;
-    }
-
-    // Format total minutes as H:MM:SS (or MM:SS if under 60 min)
-    function formatRaceTime(totalMinutes) {
-      const totalSecs = Math.round(totalMinutes * 60);
-      const h = Math.floor(totalSecs / 3600);
-      const m = Math.floor((totalSecs % 3600) / 60);
-      const s = totalSecs % 60;
-      if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    function fmtPace(totalMin) {
+      const m = Math.floor(totalMin);
+      const s = Math.round((totalMin - m) * 60);
+      if (s === 60) return `${m+1}:00`;
       return `${m}:${String(s).padStart(2,'0')}`;
     }
 
-    // Parse "H:MM:SS" or "MM:SS" to total minutes, or null
-    function parseTimeToMinutes(str) {
-      str = str.trim();
-      const parts = str.split(':');
-      if (parts.length === 2) {
-        const m = parseInt(parts[0], 10);
-        const s = parseInt(parts[1], 10);
-        if (isNaN(m) || isNaN(s) || s >= 60 || m < 0) return null;
-        return m + s / 60;
-      }
-      if (parts.length === 3) {
-        const h = parseInt(parts[0], 10);
-        const m = parseInt(parts[1], 10);
-        const s = parseInt(parts[2], 10);
-        if (isNaN(h) || isNaN(m) || isNaN(s) || m >= 60 || s >= 60) return null;
-        return h * 60 + m + s / 60;
-      }
-      return null;
+    function fmtRaceTime(totalMin) {
+      const ts = Math.round(totalMin * 60);
+      const h  = Math.floor(ts / 3600);
+      const m  = Math.floor((ts % 3600) / 60);
+      const s  = ts % 60;
+      if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      return `${m}:${String(s).padStart(2,'0')}`;
     }
 
     // ── Dashboard ──
     function buildDashboard() {
       const list = document.getElementById('distList');
-      list.innerHTML = '';
       DISTANCES.forEach(d => {
         const card = document.createElement('div');
         card.className = 'dist-card';
-        card.innerHTML = `
-          <div class="dist-top">
-            <div>
-              <span class="dist-name">${d.name}</span>
-              <span class="dist-sub">${d.km < 10 ? d.km.toFixed(3) : d.km.toFixed(2)} km</span>
-            </div>
-            <span class="dist-pred empty" id="pred-${d.id}">–</span>
+
+        // Top row
+        const top = document.createElement('div');
+        top.className = 'dist-top';
+        top.innerHTML = `
+          <div>
+            <span class="dist-name">${d.name}</span>
+            <span class="dist-sub">${d.km < 2 ? d.km.toFixed(3) : d.km} km</span>
           </div>
-          <div class="dist-divider"></div>
-          <div class="dist-goal-row">
-            <span class="goal-label">Mål</span>
-            <input class="goal-input" id="gin-${d.id}" placeholder="T:MM:SS"
-              oninput="handleTarget('${d.id}', this.value)">
-            <span class="goal-result empty" id="gres-${d.id}">–</span>
-          </div>`;
+          <span class="dist-pred empty" id="pred-${d.id}">–</span>`;
+        card.appendChild(top);
+
+        const divider = document.createElement('div');
+        divider.className = 'dist-divider';
+        card.appendChild(divider);
+
+        // Picker section
+        const section = document.createElement('div');
+        section.className = 'picker-section';
+
+        const lbl = document.createElement('p');
+        lbl.className = 'picker-label';
+        lbl.textContent = 'Måltid';
+        section.appendChild(lbl);
+
+        section.appendChild(buildPicker(d.id));
+
+        const res = document.createElement('p');
+        res.className = 'picker-result empty';
+        res.id = `pres-${d.id}`;
+        section.appendChild(res);
+
+        card.appendChild(section);
         list.appendChild(card);
       });
     }
 
-    function updateDashboard() {
-      const pace = getCurrentPaceMinPerKm();
-      const hint = document.getElementById('dashHint');
-      hint.style.display = pace ? 'none' : '';
+    function buildPicker(distId) {
+      const wrap = document.createElement('div');
+      wrap.className = 'picker-wrap';
 
-      DISTANCES.forEach(d => {
-        const predEl = document.getElementById(`pred-${d.id}`);
-        if (pace) {
-          predEl.textContent  = formatRaceTime(pace * d.km);
-          predEl.className    = 'dist-pred';
-        } else {
-          predEl.textContent  = '–';
-          predEl.className    = 'dist-pred empty';
-        }
-        // Re-evaluate any existing target inputs
-        const input = document.getElementById(`gin-${d.id}`);
-        if (input && input.value.trim()) handleTarget(d.id, input.value);
-      });
+      // Hours 0–9
+      wrap.appendChild(makeWheel(distId, 'h', [...Array(10).keys()].map(i => String(i)), 'w-h'));
+      wrap.appendChild(makeSep(':'));
+      // Minutes 00–59
+      wrap.appendChild(makeWheel(distId, 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms'));
+      wrap.appendChild(makeSep(':'));
+      // Seconds 00–59
+      wrap.appendChild(makeWheel(distId, 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms'));
+
+      return wrap;
     }
 
-    function handleTarget(id, raw) {
-      const resEl = document.getElementById(`gres-${id}`);
-      const dist  = DISTANCES.find(d => d.id === id);
-      const mins  = parseTimeToMinutes(raw);
-      if (!mins || mins <= 0 || !dist) {
+    function makeWheel(distId, col, items, widthClass) {
+      const wheel = document.createElement('div');
+      wheel.className = `picker-wheel ${widthClass}`;
+      wheel.dataset.distId = distId;
+      wheel.dataset.col    = col;
+
+      // Top spacer
+      const ts = document.createElement('div');
+      ts.className = 'picker-spacer';
+      wheel.appendChild(ts);
+
+      items.forEach(item => {
+        const el = document.createElement('div');
+        el.className   = 'picker-item';
+        el.textContent = item;
+        wheel.appendChild(el);
+      });
+
+      // Bottom spacer
+      const bs = document.createElement('div');
+      bs.className = 'picker-spacer';
+      wheel.appendChild(bs);
+
+      // Snap-on-scroll-end
+      let timer;
+      wheel.addEventListener('scroll', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const idx = Math.round(wheel.scrollTop / ITEM_H);
+          wheel.scrollTo({ top: idx * ITEM_H, behavior: 'smooth' });
+          updateTargetFromPicker(distId);
+        }, 120);
+      }, { passive: true });
+
+      return wheel;
+    }
+
+    function makeSep(char) {
+      const s = document.createElement('span');
+      s.className   = 'picker-sep';
+      s.textContent = char;
+      return s;
+    }
+
+    function getWheelValue(distId, col) {
+      const wheel = document.querySelector(`.picker-wheel[data-dist-id="${distId}"][data-col="${col}"]`);
+      return wheel ? Math.round(wheel.scrollTop / ITEM_H) : 0;
+    }
+
+    function updateTargetFromPicker(distId) {
+      const h = getWheelValue(distId, 'h');
+      const m = getWheelValue(distId, 'm');
+      const s = getWheelValue(distId, 's');
+
+      const resEl = document.getElementById(`pres-${distId}`);
+      const dist  = DISTANCES.find(d => d.id === distId);
+      const totalMin = h * 60 + m + s / 60;
+
+      if (totalMin <= 0 || !dist) {
         resEl.textContent = '';
-        resEl.className   = 'goal-result empty';
+        resEl.className   = 'picker-result empty';
         return;
       }
-      const pace  = mins / dist.km;
+      const pace  = totalMin / dist.km;
       const speed = 60 / pace;
-      resEl.textContent = `${formatPaceMinKm(pace)} · ${speed.toFixed(1)} km/h`;
-      resEl.className   = 'goal-result';
+      resEl.textContent = `${fmtPace(pace)} min/km · ${speed.toFixed(1)} km/h`;
+      resEl.className   = 'picker-result';
+    }
+
+    function updateDashboard() {
+      const pace = getCurrentPaceMinPerKm();
+      document.getElementById('dashHint').style.display = pace ? 'none' : '';
+      DISTANCES.forEach(d => {
+        const el = document.getElementById(`pred-${d.id}`);
+        if (pace) {
+          el.textContent = fmtRaceTime(pace * d.km);
+          el.className   = 'dist-pred';
+        } else {
+          el.textContent = '–';
+          el.className   = 'dist-pred empty';
+        }
+      });
     }
 
     // Init
     buildDashboard();
-
-    // Initialise separator button label (pace mode = 'C')
-    const sep = document.getElementById('btnSeparator');
-    sep.textContent = 'C';
-    sep.classList.add('btn-clear');
   </script>
 </body>
 </html>
