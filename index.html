@@ -367,31 +367,14 @@
     }
     .picker-result.empty { color: transparent; }
 
-    /* ── Pacing pages ── */
-    #page-half, #page-full {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .pacing-top {
-      flex-shrink: 0;
-      padding: 0.75rem 1.25rem 0.5rem;
-      border-bottom: 1px solid var(--divider);
-    }
-    .pacing-meta {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--btn-op);
-      text-align: center;
-      min-height: 1.2rem;
-      padding-top: 0.2rem;
-    }
     .pacing-table-wrap {
       flex: 1;
       min-height: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .pacing-table-wrap::-webkit-scrollbar { display: none; }
     .pacing-table {
       width: 100%;
       border-collapse: collapse;
@@ -440,20 +423,113 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      padding: 1rem 1.25rem max(env(safe-area-inset-bottom), 0.75rem);
+    }
+    .maal-top {
+      flex-shrink: 0;
+      padding: 0.75rem 1.25rem 0.75rem;
+      border-bottom: 1px solid var(--divider);
     }
     .picker-wheel.w-maal { height: 120px; }
     .picker-wheel.w-maal .picker-item { font-size: 1.5rem; font-weight: 200; }
-    .w-maal-dist { width: 120px; }
-    .picker-wheel.w-maal.w-maal-dist .picker-item { font-size: 0.85rem; font-weight: 300; }
+    .w-maal-dist { width: 130px; }
+    .picker-wheel.w-maal.w-maal-dist .picker-item { font-size: 0.82rem; font-weight: 300; }
     .w-maal-h  { width: 36px; }
     .w-maal-ms { width: 54px; }
-    .maal-result {
-      margin-top: 1rem;
+    .maal-custom-input {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .w-maal-custom { width: 110px; }
+    .maal-custom-dist-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .maal-unit-toggle {
+      display: flex;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+    .maal-unit-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 0.7rem;
+      touch-action: manipulation;
+    }
+    .maal-unit-btn.active {
+      background: var(--btn-op);
+      color: #000;
+    }
+    .maal-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
       border-top: 1px solid var(--divider);
-      padding-top: 0.9rem;
-      text-align: right;
-      flex-shrink: 0;
+      padding-top: 0.75rem;
+    }
+    .maal-interval-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .maal-interval-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .maal-interval-hint {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .w-maal-interval { width: 80px; }
+    .picker-wheel.w-maal.w-maal-interval .picker-item { font-size: 1.1rem; font-weight: 300; }
+    #maalCustomWheelWrap, #maalIntervalWrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 120px;
+    }
+    #maalCustomWheelWrap::before, #maalIntervalWrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 40px;
+      height: 40px;
+      background: rgba(255,159,10,0.1);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    #maalCustomWheelWrap::after, #maalIntervalWrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.85) 0%, transparent 33%,
+        transparent 67%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .maal-result {
+      margin-top: 0.6rem;
+      border-top: 1px solid var(--divider);
+      padding-top: 0.6rem;
+      text-align: center;
     }
     .maal-pace-val {
       font-size: 3rem;
@@ -610,13 +686,7 @@
         <span class="sb-dot"></span>Kalkulator
       </li>
       <li class="sb-item" data-page="maal" onclick="navigate('maal')">
-        <span class="sb-dot"></span>Distansefart
-      </li>
-      <li class="sb-item" data-page="half" onclick="navigate('half')">
-        <span class="sb-dot"></span>Pacing halvmaraton
-      </li>
-      <li class="sb-item" data-page="full" onclick="navigate('full')">
-        <span class="sb-dot"></span>Pacing maraton
+        <span class="sb-dot"></span>Pacing
       </li>
       <li class="sb-item" data-page="faq" onclick="navigate('faq')">
         <span class="sb-dot"></span>FAQ
@@ -661,16 +731,8 @@
           <div class="faq-body">Viser min/km og km/h side om side. Scroll hjulene for å endre verdien – begge sider oppdateres automatisk. Under hjulene vises estimert løpstid for seks standarddistanser basert på gjeldende fart.</div>
         </div>
         <div class="faq-card">
-          <div class="faq-title">Distansefart</div>
-          <div class="faq-body">Velg en distanse og scroll inn ønsket tidsmål. Appen beregner nødvendig fart i min/km og km/h for å nå målsettingen.</div>
-        </div>
-        <div class="faq-card">
-          <div class="faq-title">Pacing halvmaraton</div>
-          <div class="faq-body">Velg tidsmål for halvmaraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
-        </div>
-        <div class="faq-card">
-          <div class="faq-title">Pacing maraton</div>
-          <div class="faq-body">Velg tidsmål for maraton. Appen beregner passeringstider for hvert 5 km-intervall hele veien til mål, samt nødvendig fart i min/km og km/h.</div>
+          <div class="faq-title">Pacing</div>
+          <div class="faq-body">Velg en forhåndsinnstilt distanse eller legg inn egendefinert distanse i meter eller kilometer. Scroll inn ønsket tidsmål. Appen beregner nødvendig fart i min/km og km/h. Bruk Pacingfrekvens-hjulet til å velge intervall (1, 2, 5 eller 10 km) for mellomtidene i tabellen.</div>
         </div>
         <div class="faq-card">
           <div class="faq-title">Legg til på hjemskjerm</div>
@@ -678,49 +740,37 @@
         </div>
       </div>
 
-      <!-- Distansefart -->
+      <!-- Pacing -->
       <div id="page-maal" class="page hidden">
-        <div class="calc-combined" id="maalCombined"></div>
-        <div class="maal-result">
-          <div class="maal-pace-val" id="maalPaceVal">–</div>
-          <div class="maal-pace-unit">min/km</div>
-          <div class="maal-speed-val" id="maalSpeedVal"></div>
-        </div>
-      </div>
-
-      <!-- Pacing halvmaraton -->
-      <div id="page-half" class="page hidden">
-        <div class="pacing-top">
-          <div class="picker-section">
-            <p class="picker-label">Tidsmål halvmaraton</p>
-            <div class="picker-wrap" id="pac-wrap-half"></div>
-            <p class="pacing-meta" id="pacing-meta-half"></p>
+        <div class="maal-top">
+          <div class="calc-combined" id="maalCombined"></div>
+          <div class="maal-bottom-row">
+            <div id="maalCustomInput" class="maal-custom-input hidden">
+              <div class="maal-custom-dist-wrap">
+                <div class="maal-interval-label">Distanse</div>
+                <div id="maalCustomWheelWrap"></div>
+              </div>
+              <div class="maal-unit-toggle">
+                <button id="maalUnitM"  class="maal-unit-btn"        onclick="setMaalUnit('m')">m</button>
+                <button id="maalUnitKm" class="maal-unit-btn active"  onclick="setMaalUnit('km')">km</button>
+              </div>
+            </div>
+            <div class="maal-interval-group">
+              <div class="maal-interval-label">Pacingfrekvens</div>
+              <div id="maalIntervalWrap"></div>
+            </div>
+          </div>
+          <div class="maal-result">
+            <div class="maal-pace-val" id="maalPaceVal">–</div>
+            <div class="maal-pace-unit">min/km</div>
+            <div class="maal-speed-val" id="maalSpeedVal"></div>
           </div>
         </div>
         <div class="pacing-table-wrap">
           <table class="pacing-table">
-            <thead><tr><th>Passering</th><th>Tid</th></tr></thead>
-            <tbody id="pacing-tbody-half">
-              <tr><td colspan="2" class="pacing-placeholder">Velg tidsmål</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Pacing maraton -->
-      <div id="page-full" class="page hidden">
-        <div class="pacing-top">
-          <div class="picker-section">
-            <p class="picker-label">Tidsmål maraton</p>
-            <div class="picker-wrap" id="pac-wrap-full"></div>
-            <p class="pacing-meta" id="pacing-meta-full"></p>
-          </div>
-        </div>
-        <div class="pacing-table-wrap">
-          <table class="pacing-table">
-            <thead><tr><th>Passering</th><th>Tid</th></tr></thead>
-            <tbody id="pacing-tbody-full">
-              <tr><td colspan="2" class="pacing-placeholder">Velg tidsmål</td></tr>
+            <thead><tr><th>Km</th><th>Mellomtid</th></tr></thead>
+            <tbody id="maal-pacing-tbody">
+              <tr><td colspan="2" class="pacing-placeholder">Velg distanse og tidsmål</td></tr>
             </tbody>
           </table>
         </div>
@@ -733,20 +783,57 @@
     const ITEM_H = 40;
 
     const DISTANCES = [
-      { id: 'mile', name: '1 mile',      km: 1.60934,  hasHours: false },
-      { id: 'd3k',  name: '3 000 m',     km: 3,        hasHours: false },
-      { id: 'd5k',  name: '5 000 m',     km: 5,        hasHours: false },
-      { id: 'd10k', name: '10 km',       km: 10,       hasHours: true  },
-      { id: 'half', name: 'Halvmaraton', km: 21.0975,  hasHours: true  },
-      { id: 'full', name: 'Maraton',     km: 42.195,   hasHours: true  },
+      { id: 'mile',   name: '1 mile',       km: 1.60934,  hasHours: false },
+      { id: 'd3k',    name: '3 000 m',      km: 3,        hasHours: false },
+      { id: 'd5k',    name: '5 000 m',      km: 5,        hasHours: false },
+      { id: 'd10k',   name: '10 km',        km: 10,       hasHours: true  },
+      { id: 'half',   name: 'Halvmaraton',  km: 21.0975,  hasHours: true  },
+      { id: 'full',   name: 'Maraton',      km: 42.195,   hasHours: true  },
+      { id: 'custom', name: 'Egendefinert', km: null,     hasHours: true  },
     ];
+
+    const INTERVAL_KMS = [1, 2, 5, 10];
+
+    let maalCustomUnit = 'km';
+
+    function buildMaalCustomWheel() {
+      const wrap = document.getElementById('maalCustomWheelWrap');
+      wrap.innerHTML = '';
+      let items;
+      if (maalCustomUnit === 'm') {
+        items = [...Array(99).keys()].map(i => `${((i + 1) * 100).toLocaleString('no-NO')} m`);
+      } else {
+        items = [...Array(100).keys()].map(i => `${i + 1} km`);
+      }
+      wrap.appendChild(makeWheel('maal-custom', 'val', items, 'w-maal w-maal-custom', updateMaalResult, null));
+    }
+
+    function setMaalUnit(unit) {
+      const prevKm = getMaalCustomKm() || 0;
+      maalCustomUnit = unit;
+      document.getElementById('maalUnitM').classList.toggle('active',  unit === 'm');
+      document.getElementById('maalUnitKm').classList.toggle('active', unit === 'km');
+      buildMaalCustomWheel();
+      requestAnimationFrame(() => {
+        if (prevKm > 0) {
+          const idx = unit === 'm'
+            ? Math.max(0, Math.min(98,  Math.round(prevKm / 0.1) - 1))
+            : Math.max(0, Math.min(99, Math.round(prevKm)        - 1));
+          setWheelValue('maal-custom', 'val', idx);
+        }
+        updateMaalResult();
+      });
+    }
+
+    function getMaalCustomKm() {
+      const idx = getWheelValue('maal-custom', 'val');
+      return maalCustomUnit === 'm' ? (idx + 1) * 0.1 : idx + 1;
+    }
 
     const PAGE_TITLES = {
       calc: ' - Kalkulator',
       faq:  ' - FAQ',
-      maal: ' - Distansefart',
-      half: ' - Pacing halvmaraton',
-      full: ' - Pacing maraton',
+      maal: ' - Pacing',
     };
 
     // ── Navigation ──
@@ -757,7 +844,6 @@
       document.querySelectorAll('.sb-item').forEach(el =>
         el.classList.toggle('active', el.dataset.page === page));
       closeSidebar();
-      if (page === 'half' || page === 'full') updatePacingTable(page);
     }
 
     function toggleSidebar() {
@@ -1013,91 +1099,69 @@
     function updateMaalResult() {
       const paceEl  = document.getElementById('maalPaceVal');
       const speedEl = document.getElementById('maalSpeedVal');
+      const tbody   = document.getElementById('maal-pacing-tbody');
       const distIdx = getWheelValue('maal', 'dist');
       const h = getWheelValue('maal', 'h');
       const m = getWheelValue('maal', 'm');
       const s = getWheelValue('maal', 's');
       const totalMin = h*60 + m + s/60;
       const dist = DISTANCES[distIdx];
-      if (!dist || totalMin <= 0) {
+
+      const isCustom = dist && dist.id === 'custom';
+      document.getElementById('maalCustomInput').classList.toggle('hidden', !isCustom);
+
+      const km = isCustom ? getMaalCustomKm() : (dist ? dist.km : null);
+
+      if (!km || km <= 0 || totalMin <= 0) {
         paceEl.textContent = '–';
         speedEl.textContent = '';
+        tbody.innerHTML = `<tr><td colspan="2" class="pacing-placeholder">Velg distanse og tidsmål</td></tr>`;
         return;
       }
-      const pace  = totalMin / dist.km;
+
+      const pace  = totalMin / km;
       const speed = 60 / pace;
       paceEl.textContent = fmtPace(pace);
       speedEl.innerHTML  = `<span>${speed.toFixed(2)}</span> km/h`;
-    }
 
-    // ── Pacing pages ──
-    function makeSep(char) {
-      const s = document.createElement('span');
-      s.className = 'picker-sep'; s.textContent = char; return s;
-    }
-
-    function buildPacingPicker(page, cb) {
-      const wrap = document.getElementById('pac-wrap-' + page);
-      wrap.appendChild(makeWheel('pac-'+page, 'h', [...Array(10).keys()].map(i => String(i)), 'w-h', cb, null));
-      wrap.appendChild(makeSep(':'));
-      wrap.appendChild(makeWheel('pac-'+page, 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms', cb, null));
-      wrap.appendChild(makeSep(':'));
-      wrap.appendChild(makeWheel('pac-'+page, 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-ms', cb, null));
-    }
-
-    function updatePacingTable(page) {
-      const isHalf   = page === 'half';
-      const totalDist = isHalf ? 21.0975 : 42.195;
-      const h = getWheelValue('pac-'+page, 'h');
-      const m = getWheelValue('pac-'+page, 'm');
-      const s = getWheelValue('pac-'+page, 's');
-      const totalMin = h*60 + m + s/60;
-      const metaEl  = document.getElementById('pacing-meta-' + page);
-      const tbody   = document.getElementById('pacing-tbody-' + page);
-
-      if (totalMin <= 0) {
-        metaEl.textContent = '';
-        tbody.innerHTML = `<tr><td colspan="2" class="pacing-placeholder">Velg tidsmål</td></tr>`;
-        return;
+      // Build pacing table with selected interval
+      const interval = INTERVAL_KMS[Math.min(getWheelValue('maal', 'interval'), INTERVAL_KMS.length - 1)];
+      const rows = [];
+      let ckm = interval;
+      while (ckm < km - 0.001) {
+        rows.push({ km: ckm, label: `${ckm} km`, isFinish: false });
+        ckm = Math.round((ckm + interval) * 1000) / 1000;
       }
-
-      const pace  = totalMin / totalDist;
-      const speed = 60 / pace;
-      metaEl.textContent = `${fmtPace(pace)} min/km · ${speed.toFixed(1)} km/h`;
-
-      let checkpoints;
-      if (isHalf) {
-        checkpoints = [5,10,15,20].map(km => ({ km, label: `${km} km` }));
-        checkpoints.push({ km: 21.0975, label: 'Mål · 21,1 km' });
+      const lastCkm = rows.length > 0 ? rows[rows.length - 1].km : 0;
+      if (Math.abs(lastCkm - km) < 0.001) {
+        rows[rows.length - 1].isFinish = true;
       } else {
-        checkpoints = [5,10,15,20,25,30,35,40].map(km => ({ km, label: `${km} km` }));
-        checkpoints.push({ km: 42.195, label: 'Mål · 42,2 km' });
+        let finLabel;
+        if (isCustom) {
+          finLabel = maalCustomUnit === 'm'
+            ? `Mål · ${Math.round(km * 1000).toLocaleString('no-NO')} m`
+            : `Mål · ${km} km`;
+        } else {
+          finLabel = `Mål · ${dist.name}`;
+        }
+        rows.push({ km, label: finLabel, isFinish: true });
       }
 
-      tbody.innerHTML = checkpoints.map((cp, i) => {
-        const isFinish = i === checkpoints.length - 1;
-        return `<tr class="${isFinish ? 'finish' : ''}">
-          <td>${cp.label}</td>
-          <td>${fmtRaceTime(pace * cp.km)}</td>
-        </tr>`;
-      }).join('');
+      tbody.innerHTML = rows.map(r => `
+        <tr class="${r.isFinish ? 'finish' : ''}">
+          <td>${r.label}</td>
+          <td>${fmtRaceTime(pace * r.km)}</td>
+        </tr>`).join('');
     }
 
     // ── Init ──
     buildCalcDist();
     buildCalcPicker();
     buildMaalPicker();
-
-    buildPacingPicker('half', () => updatePacingTable('half'));
-    buildPacingPicker('full', () => updatePacingTable('full'));
-
-    // Default goal times: half = 2h, full = 4h
-    requestAnimationFrame(() => {
-      setWheelValue('pac-half', 'h', 2);
-      setWheelValue('pac-full', 'h', 4);
-      updatePacingTable('half');
-      updatePacingTable('full');
-    });
+    buildMaalCustomWheel();
+    document.getElementById('maalIntervalWrap').appendChild(
+      makeWheel('maal', 'interval', INTERVAL_KMS.map(n => n + ' km'), 'w-maal w-maal-interval', updateMaalResult, null)
+    );
 
     // Auto-refresh: reload when app comes back from background after 5+ minutes
     let hiddenAt = 0;
