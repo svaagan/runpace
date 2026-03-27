@@ -783,18 +783,18 @@
     const ITEM_H = 40;
 
     const DISTANCES = [
-      { id: 'd1k',    name: '1 000 m',      km: 1,        hasHours: false },
+      { id: 'd1k',    name: '1k',            km: 1,        hasHours: false },
       { id: 'mile',   name: '1 mile',       km: 1.60934,  hasHours: false },
-      { id: 'd3k',    name: '3 000 m',      km: 3,        hasHours: false },
-      { id: 'd5k',    name: '5 000 m',      km: 5,        hasHours: false },
-      { id: 'd10k',   name: '10 km',        km: 10,       hasHours: true  },
+      { id: 'd3k',    name: '3k',           km: 3,        hasHours: false },
+      { id: 'd5k',    name: '5k',           km: 5,        hasHours: false },
+      { id: 'd10k',   name: '10k',          km: 10,       hasHours: true  },
       { id: 'half',   name: 'Halvmaraton',  km: 21.0975,  hasHours: true  },
       { id: 'full',   name: 'Maraton',      km: 42.195,   hasHours: true  },
       { id: 'custom', name: 'Egendefinert', km: null,     hasHours: true  },
     ];
 
     const INTERVAL_KMS = [0.1, 0.2, 0.4, 1, 2, 5, 10];
-    const fmtIntervalDist = km => km < 1 ? `${Math.round(km * 1000)} m` : `${km} km`;
+    const fmtIntervalDist = km => km < 1 ? `${Math.round(km * 1000)} m` : `${km}k`;
 
     let maalCustomUnit = 'km';
 
