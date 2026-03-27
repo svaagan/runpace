@@ -783,6 +783,7 @@
     const ITEM_H = 40;
 
     const DISTANCES = [
+      { id: 'd1k',    name: '1 000 m',      km: 1,        hasHours: false },
       { id: 'mile',   name: '1 mile',       km: 1.60934,  hasHours: false },
       { id: 'd3k',    name: '3 000 m',      km: 3,        hasHours: false },
       { id: 'd5k',    name: '5 000 m',      km: 5,        hasHours: false },
@@ -792,7 +793,8 @@
       { id: 'custom', name: 'Egendefinert', km: null,     hasHours: true  },
     ];
 
-    const INTERVAL_KMS = [1, 2, 5, 10];
+    const INTERVAL_KMS = [0.1, 0.2, 0.4, 1, 2, 5, 10];
+    const fmtIntervalDist = km => km < 1 ? `${Math.round(km * 1000)} m` : `${km} km`;
 
     let maalCustomUnit = 'km';
 
@@ -1129,7 +1131,7 @@
       const rows = [];
       let ckm = interval;
       while (ckm < km - 0.001) {
-        rows.push({ km: ckm, label: `${ckm} km`, isFinish: false });
+        rows.push({ km: ckm, label: fmtIntervalDist(ckm), isFinish: false });
         ckm = Math.round((ckm + interval) * 1000) / 1000;
       }
       const lastCkm = rows.length > 0 ? rows[rows.length - 1].km : 0;
@@ -1160,7 +1162,7 @@
     buildMaalPicker();
     buildMaalCustomWheel();
     document.getElementById('maalIntervalWrap').appendChild(
-      makeWheel('maal', 'interval', INTERVAL_KMS.map(n => n + ' km'), 'w-maal w-maal-interval', updateMaalResult, null)
+      makeWheel('maal', 'interval', INTERVAL_KMS.map(fmtIntervalDist), 'w-maal w-maal-interval', updateMaalResult, null)
     );
 
     // Auto-refresh: reload when app comes back from background after 5+ minutes
