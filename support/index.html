@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support – PaceLoop</title>
+  <meta name="description" content="Support and help for the PaceLoop running pace calculator and iOS app. Contact us, read answers to common questions, and learn how the Apple Health feature works.">
+  <link rel="canonical" href="https://runpace.no/support">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #000;
+      --surface:  #1a1a1a;
+      --card:     #383838;
+      --accent:   #F2C800;
+      --text:     #fff;
+      --text-dim: rgba(255,255,255,0.68);
+      --divider:  rgba(255,255,255,0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Header ── */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: #000;
+      border: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .brand-name { font-size: 1.05rem; font-weight: 700; }
+    .brand-name span { color: var(--accent); }
+    .brand-sub { font-size: 0.8rem; color: var(--text-dim); }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+    }
+    .lead {
+      font-size: 1rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.25rem 0 0.9rem;
+    }
+
+    p { color: var(--text-dim); margin-bottom: 0.85rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--accent); }
+    strong { color: var(--text); }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(242,200,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.15rem;
+    }
+    .contact-value { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .contact-value a { color: var(--accent); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+    .contact-note { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
+
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+      padding: 0.7rem 1.1rem;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      text-decoration: none;
+    }
+    .email-btn:hover { background: #ffd60a; }
+
+    /* ── FAQ ── */
+    .faq-item {
+      border-bottom: 1px solid var(--divider);
+      padding: 1.15rem 0;
+    }
+    .faq-item:first-of-type { border-top: 1px solid var(--divider); }
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .faq-a { font-size: 0.92rem; color: var(--text-dim); margin: 0; }
+
+    /* ── Health callout ── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--divider);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.25rem;
+    }
+    .footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    .footer a:hover { color: var(--text); text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+
+    <div class="brand">
+      <div class="brand-logo">PL</div>
+      <div>
+        <div class="brand-name"><span>PaceLoop</span></div>
+        <div class="brand-sub">Running pace calculator</div>
+      </div>
+    </div>
+
+    <h1>Support &amp; Help</h1>
+    <p class="lead">Questions, feedback or a problem with the PaceLoop app or website? We're happy to help — here's how to reach us and answers to the most common questions.</p>
+
+    <h2>Contact us</h2>
+    <div class="contact-card">
+      <div class="contact-row">
+        <div class="contact-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="4" width="16" height="12" rx="2" stroke="#F2C800" stroke-width="1.5"/>
+            <path d="M3 5l7 5 7-5" stroke="#F2C800" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></div>
+        </div>
+      </div>
+      <p class="contact-note">We usually reply within <strong>2–3 business days</strong>. Please describe what you were doing and, if relevant, which device and iOS version you're using — it helps us solve things faster.</p>
+      <a class="email-btn" href="mailto:kontakt@runpace.no?subject=PaceLoop%20support">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="4" width="16" height="12" rx="2" stroke="#000" stroke-width="1.6"/>
+          <path d="M3 5l7 5 7-5" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Email support
+      </a>
+    </div>
+
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I use the pace calculator?</div>
+      <p class="faq-a">Scroll the wheels to set a pace (min/km) or a speed (km/h) — both update automatically. Below the wheels you'll see estimated finish times for standard distances from 1 km up to a marathon.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I build a pacing / split plan?</div>
+      <p class="faq-a">Open the <strong>Pacing</strong> screen, pick a distance (or enter a custom one), and scroll in your target finish time. PaceLoop shows the required pace and a split-time table so you know what the clock should read at each interval.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does the Apple Health feature do?</div>
+      <p class="faq-a">In the iOS app you can optionally allow PaceLoop to read your latest <strong>VO₂max</strong> (cardio fitness) value from Apple Health. It's used to suggest training zones and a starting point for race predictions. This is fully optional — every feature of the app works without it. See the callout below for details.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I turn Apple Health access on or off?</div>
+      <p class="faq-a">You can manage access any time in the app's settings, or on your device under <strong>Settings → Privacy &amp; Security → Health → PaceLoop</strong>. Turning it off does not affect any other feature.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does PaceLoop collect my data?</div>
+      <p class="faq-a">The iOS app has no account, no ads and no tracking — all calculations happen locally on your device, and nothing is sent anywhere. The website uses only anonymised, self-hosted visit statistics. See the <a href="https://runpace.no/">privacy policy</a> for full details.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The app or website isn't working correctly</div>
+      <p class="faq-a">Try closing and reopening the app, or refreshing the page. If the problem continues, email us at <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a> with a short description and a screenshot if possible, and we'll look into it.</p>
+    </div>
+
+    <h2>Apple Health &amp; your privacy</h2>
+    <div class="callout">
+      <p>PaceLoop uses Apple's <strong>HealthKit</strong> for a single, optional purpose: to read your most recent <strong>VO₂max</strong> value so it can estimate training zones and a race-prediction starting point.</p>
+      <p>The value is used only on your device, at that moment. It is <strong>never stored</strong> and <strong>never sent</strong> anywhere — not to PaceLoop and not to any third party. Granting Health access is entirely optional, and you can revoke it at any time in iOS Settings without losing any functionality.</p>
+    </div>
+
+    <div class="footer">
+      <a href="https://runpace.no/">← Back to PaceLoop</a>
+      <a href="https://runpace.no/">Privacy policy</a>
+      <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>
+    </div>
+
+  </main>
+</body>
+</html>

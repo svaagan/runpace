@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Dependencies (if build tools ever added)
+node_modules/
+
+# Lokale backup-filer — skal aldri publiseres
+*.bak
+*.no.bak

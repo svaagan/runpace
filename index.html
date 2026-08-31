@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>PaceLoop – Running Pace Calculator for Pace and Speed</title>
+  <meta name="description" content="Free running pace calculator. Convert between min/km and km/h, calculate pacing for 5K, 10K, half marathon and marathon, and build split-time tables for your goal.">
+  <link rel="canonical" href="https://runpace.no/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://runpace.no/">
+  <meta property="og:title" content="PaceLoop – Running Pace Calculator for Pace and Speed">
+  <meta property="og:description" content="Free running pace calculator. Convert pace, calculate pacing and view split-time tables for your next race.">
+  <meta property="og:locale" content="en">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PaceLoop – Running Pace Calculator for Pace and Speed">
+  <meta name="twitter:description" content="Free running pace calculator. Convert pace, calculate pacing and view split-time tables for your next race.">
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "PaceLoop – Running Pace Calculator",
+      "url": "https://runpace.no",
+      "description": "Free running pace calculator. Convert between min/km and km/h, calculate pacing for 5K, 10K, half marathon and marathon, and build split-time tables.",
+      "applicationCategory": "SportsApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "keywords": "running pace calculator, pace calculator, min/km calculator, km/h to min/km, pacing calculator, running",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "NOK"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a running pace calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A running pace calculator is a tool that lets you convert between pace (min/km) and speed (km/h), calculate finish times for different distances and build pacing plans for a target time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert min/km to km/h?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide 60 by your pace in minutes. Example: 5:00 min/km gives 60 ÷ 5 = 12 km/h. The PaceLoop running calculator does this conversion automatically as you scroll the wheels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good pace for 5 km?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For recreational runners, 5:00–6:00 min/km (10–12 km/h) is a typical pace for 5 km, giving a finish time of 25–30 minutes. Experienced runners hold 4:00–4:45 min/km."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the right pace for a marathon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply your half marathon time by 2.1 to estimate a realistic marathon time. Keep your pace steady for the first 30 kilometres – never start too fast."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PaceLoop">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #000;
+      --btn-digit: #383838;
+      --btn-fn:    #a5a5a5;
+      --btn-op:    #F2C800;
+      --text:      #fff;
+      --text-dim:  rgba(255,255,255,0.35);
+      --text-fn:   #000;
+      --surface:   #383838;
+      --divider:   rgba(255,255,255,0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg);
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── App shell ── */
+    .app-wrap {
+      width: 100%;
+      max-width: 430px;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      padding-top: max(env(safe-area-inset-top), 0.6rem);
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      padding-bottom: 0.6rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+      flex-shrink: 0;
+    }
+
+    .hamburger {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      flex-shrink: 0;
+      border-radius: 10px;
+    }
+    .hamburger:active { background: rgba(255,255,255,0.08); }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+
+    .topbar-title {
+      flex: 1;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 0.5rem;
+    }
+
+    .topbar-spacer { width: 40px; flex-shrink: 0; }
+
+    /* ── Sidebar ── */
+    .sb-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 199;
+      transition: opacity 0.25s ease;
+    }
+    .sb-backdrop.hidden { display: none; }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 72%;
+      max-width: 270px;
+      background: #111;
+      border-right: 1px solid var(--divider);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(0);
+      transition: transform 0.28s ease;
+    }
+    .sidebar.sb-closed { transform: translateX(-100%); }
+
+    .sb-header {
+      padding: max(env(safe-area-inset-top), 1.5rem) 1.25rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--btn-op);
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .sb-nav { list-style: none; padding: 0.5rem 0; flex: 1; }
+
+    .sb-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sb-item:active { background: rgba(255,255,255,0.06); }
+    .sb-item.active { color: var(--btn-op); }
+    .sb-item.active .sb-dot { background: var(--btn-op); }
+
+    .sb-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: transparent;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .sb-footer {
+      padding: 1rem 1.25rem max(env(safe-area-inset-bottom), 1.25rem);
+      border-top: 1px solid var(--divider);
+    }
+
+    /* ── Pages ── */
+    .pages {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+    }
+
+    .page {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .page.hidden { display: none; }
+
+    /* ── Calculator page ── */
+    #page-calc {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 1rem 1.25rem max(env(safe-area-inset-bottom), 0.75rem);
+      gap: 0;
+    }
+
+    .calc-combined {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+    .calc-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .calc-group-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .calc-divider {
+      width: 1px;
+      height: 60px;
+      background: var(--divider);
+      flex-shrink: 0;
+    }
+
+    /* ── Inline distance rows ── */
+    .calc-dist-section {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--divider);
+      margin-top: 0.9rem;
+    }
+    .calc-dist-row {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .calc-dist-row:last-child { border-bottom: none; }
+    .calc-dist-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0.25rem 0.2rem;
+      flex-shrink: 0;
+    }
+    .calc-dist-header span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .calc-dist-name { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+    .calc-dist-sub  { font-size: 0.65rem; color: var(--text-dim); margin-left: 0.3rem; }
+    .calc-dist-time { font-size: 1rem; font-weight: 300; color: var(--btn-op); font-variant-numeric: tabular-nums; }
+    .calc-dist-time.empty { color: rgba(255,255,255,0.2); font-size: 0.82rem; }
+
+    .calc-page-h1 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      flex-shrink: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Calculator picker wheels ── */
+    .calc-picker-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 120px;
+    }
+    .calc-picker-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 40px;
+      height: 40px;
+      background: rgba(242,200,0,0.1);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .calc-picker-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.85) 0%, transparent 33%,
+        transparent 67%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .picker-wheel.w-calc { height: 120px; }
+    .picker-wheel.w-calc .picker-item {
+      font-size: 1.7rem;
+      font-weight: 200;
+    }
+    .w-calc-narrow { width: 60px; }
+    .w-calc-wide   { width: 84px; }
+    .calc-sep {
+      font-size: 2.2rem;
+      font-weight: 200;
+      color: rgba(255,255,255,0.5);
+      padding: 0 4px;
+      position: relative;
+      z-index: 3;
+      user-select: none;
+    }
+
+    /* ── Picker (shared) ── */
+    .picker-section {
+      padding: 0.5rem 0 0.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .picker-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .picker-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 120px;
+    }
+    .picker-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 40px;
+      height: 40px;
+      background: rgba(242,200,0,0.1);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .picker-wheel {
+      height: 120px;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .picker-wheel::-webkit-scrollbar { display: none; }
+    .picker-wheel.w-h  { width: 36px; }
+    .picker-wheel.w-ms { width: 50px; }
+    .picker-spacer { height: 40px; }
+    .picker-item {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text);
+      scroll-snap-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .picker-sep {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      padding: 0 3px;
+      position: relative;
+      z-index: 3;
+      user-select: none;
+    }
+    .picker-result {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--btn-op);
+      min-height: 1.1rem;
+    }
+    .picker-result.empty { color: transparent; }
+
+    .pacing-table-wrap {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .pacing-table-wrap::-webkit-scrollbar { display: none; }
+    .pacing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .pacing-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding: 0.6rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--divider);
+    }
+    .pacing-table thead th:last-child { text-align: right; }
+    .pacing-table tbody td {
+      padding: 0.7rem 1.25rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-variant-numeric: tabular-nums;
+    }
+    .pacing-table tbody td:last-child {
+      text-align: right;
+      color: var(--btn-op);
+      font-weight: 500;
+    }
+    .pacing-table tbody tr.finish td {
+      font-weight: 700;
+      color: var(--btn-op);
+      border-top: 1px solid rgba(242,200,0,0.3);
+      border-bottom: none;
+    }
+    .pacing-placeholder {
+      text-align: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+    }
+
+    /* ── Distansefart page ── */
+    #page-maal {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .maal-top {
+      flex-shrink: 0;
+      padding: 0.75rem 1.25rem 0.75rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    .picker-wheel.w-maal { height: 120px; }
+    .picker-wheel.w-maal .picker-item { font-size: 1.5rem; font-weight: 200; }
+    .w-maal-dist { width: 130px; }
+    .picker-wheel.w-maal.w-maal-dist .picker-item { font-size: 0.82rem; font-weight: 300; }
+    .w-maal-h  { width: 36px; }
+    .w-maal-ms { width: 54px; }
+    .maal-custom-input {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .w-maal-custom { width: 110px; }
+    .maal-custom-dist-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .maal-unit-toggle {
+      display: flex;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+    .maal-unit-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 0.7rem;
+      touch-action: manipulation;
+    }
+    .maal-unit-btn.active {
+      background: var(--btn-op);
+      color: #000;
+    }
+    .maal-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      border-top: 1px solid var(--divider);
+      padding-top: 0.75rem;
+    }
+    .maal-interval-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .maal-interval-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .maal-interval-hint {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .w-maal-interval { width: 80px; }
+    .picker-wheel.w-maal.w-maal-interval .picker-item { font-size: 1.1rem; font-weight: 300; }
+    #maalCustomWheelWrap, #maalIntervalWrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 120px;
+    }
+    #maalCustomWheelWrap::before, #maalIntervalWrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 40px;
+      height: 40px;
+      background: rgba(242,200,0,0.1);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    #maalCustomWheelWrap::after, #maalIntervalWrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.85) 0%, transparent 33%,
+        transparent 67%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .maal-result {
+      margin-top: 0.6rem;
+      border-top: 1px solid var(--divider);
+      padding-top: 0.6rem;
+      text-align: center;
+    }
+    .maal-pace-val {
+      font-size: 3rem;
+      font-weight: 200;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .maal-pace-unit {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.1rem;
+    }
+    .maal-speed-val {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      padding-top: 0.3rem;
+    }
+    .maal-speed-val span {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--btn-op);
+    }
+
+    /* ── FAQ page ── */
+    #page-faq {
+      padding: 0.6rem 1rem max(env(safe-area-inset-bottom), 0.6rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow: hidden;
+      height: 100%;
+    }
+    .faq-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 0.65rem 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .faq-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--btn-op);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .faq-body {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.45;
+    }
+
+    /* ── Install button & modal ── */
+    .install-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.78rem;
+      font-family: inherit;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .install-btn:active { background: #2c2c2e; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 300;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 0.75rem max(env(safe-area-inset-bottom), 0.75rem);
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal-sheet {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem 1.5rem 1.75rem;
+      width: 100%;
+      max-width: 400px;
+      animation: slideUp 0.25s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+    .modal-title { font-size: 1rem; font-weight: 600; color: var(--text); text-align: center; margin-bottom: 1.25rem; }
+    .modal-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+    .modal-step  { display: flex; align-items: center; gap: 1rem; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--btn-op); color: #000;
+      font-size: 0.8rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-text { font-size: 0.875rem; color: rgba(255,255,255,0.8); line-height: 1.4; }
+    .step-text strong { color: var(--text); }
+    .modal-close {
+      width: 100%; padding: 0.75rem;
+      background: #383838; border: none; border-radius: 12px;
+      color: var(--text); font-size: 0.9rem; font-weight: 500;
+      font-family: inherit; cursor: pointer; touch-action: manipulation;
+    }
+    .modal-close:active { background: #444; }
+
+    .hidden { display: none !important; }
+
+    /* ── Sidebar section label ── */
+    .sb-section {
+      padding: 0.55rem 1.25rem 0.15rem;
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── Article / info pages ── */
+    .article-page {
+      padding: 1.25rem 1.25rem max(env(safe-area-inset-bottom), 1.25rem);
+    }
+    .article-page h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.35;
+    }
+    .article-page h2 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--btn-op);
+      margin-top: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+    .article-page p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+    .article-page ul, .article-page ol {
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .article-page li {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.65;
+      margin-bottom: 0.25rem;
+    }
+    .article-page a { color: var(--btn-op); }
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .article-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.3);
+      border-bottom: 1px solid var(--divider);
+    }
+    .article-table td {
+      padding: 0.6rem 0.75rem;
+      font-size: 0.87rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .article-table tr:last-child td { border-bottom: none; }
+    .calc-privacy-link {
+      text-align: center;
+      padding: 1.2rem 0 1.6rem;
+    }
+    .calc-privacy-link a {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+    .calc-privacy-link a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <noscript>
+    <h1>Running Pace Calculator – PaceLoop</h1>
+    <p>PaceLoop is a free running pace calculator. Convert between min/km and km/h, calculate finish times for 5K, 10K, half marathon and marathon, and build pacing plans for your target time. Enable JavaScript to use the calculator.</p>
+  </noscript>
+
+  <!-- Install modal -->
+  <div class="modal-backdrop hidden" id="installModal" onclick="hideInstallModal(event)">
+    <div class="modal-sheet">
+      <p class="modal-title">Add PaceLoop to your home screen</p>
+      <div class="modal-steps">
+        <div class="modal-step">
+          <div class="step-num">1</div>
+          <p class="step-text">Tap the <strong>⋯ (three dots)</strong> at the bottom right of the browser</p>
+        </div>
+        <div class="modal-step">
+          <div class="step-num">2</div>
+          <p class="step-text">Choose <strong>Share</strong></p>
+        </div>
+        <div class="modal-step">
+          <div class="step-num">3</div>
+          <p class="step-text">Tap <strong>Show more</strong>, then <strong>Add to Home Screen</strong></p>
+        </div>
+      </div>
+      <button class="modal-close" onclick="hideInstallModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Sidebar backdrop -->
+  <div class="sb-backdrop hidden" id="sbBackdrop" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar sb-closed" id="sidebar">
+    <div class="sb-header">PaceLoop</div>
+    <ul class="sb-nav">
+      <div class="sb-section">Tools</div>
+      <li class="sb-item active" data-page="calc" onclick="navigate('calc')">
+        <span class="sb-dot"></span>Calculator
+      </li>
+      <li class="sb-item" data-page="maal" onclick="navigate('maal')">
+        <span class="sb-dot"></span>Pacing
+      </li>
+      <div class="sb-section">Guides</div>
+      <li class="sb-item" data-page="minkm" onclick="navigate('minkm')">
+        <span class="sb-dot"></span>What is min/km?
+      </li>
+      <li class="sb-item" data-page="femk" onclick="navigate('femk')">
+        <span class="sb-dot"></span>5k under 25 min
+      </li>
+      <li class="sb-item" data-page="maraton" onclick="navigate('maraton')">
+        <span class="sb-dot"></span>Marathon pace
+      </li>
+      <li class="sb-item" data-page="tempofart" onclick="navigate('tempofart')">
+        <span class="sb-dot"></span>Pace vs. speed
+      </li>
+      <div class="sb-section">Info</div>
+      <li class="sb-item" data-page="omoss" onclick="navigate('omoss')">
+        <span class="sb-dot"></span>About
+      </li>
+      <li class="sb-item" data-page="personvern" onclick="navigate('personvern')">
+        <span class="sb-dot"></span>Privacy
+      </li>
+      <li class="sb-item" data-page="faq" onclick="navigate('faq')">
+        <span class="sb-dot"></span>FAQ
+      </li>
+      <a class="sb-item" href="/support" style="text-decoration:none">
+        <span class="sb-dot"></span>Support
+      </a>
+    </ul>
+    <div class="sb-footer" id="sbFooter">
+      <button class="install-btn" onclick="showInstallModal()">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <path d="M6.5 1v7M3.5 5l3 3 3-3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M1 9.5v1A1.5 1.5 0 002.5 12h8A1.5 1.5 0 0012 10.5v-1" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Add to Home Screen
+      </button>
+    </div>
+  </nav>
+
+  <!-- App wrapper -->
+  <div class="app-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <span class="topbar-title"><span style="color:var(--btn-op)">PaceLoop</span><span id="topbarTitle"> - Calculator</span></span>
+      <div class="topbar-spacer"></div>
+    </header>
+
+    <!-- Pages -->
+    <div class="pages">
+
+      <!-- Kalkulator -->
+      <div id="page-calc" class="page">
+        <h1 class="calc-page-h1">Running Pace Calculator</h1>
+        <div class="calc-combined" id="calcCombined"></div>
+        <div class="calc-dist-section" id="calcDistSection"></div>
+        <div class="calc-privacy-link">
+          <a href="#" onclick="navigate('personvern'); return false;">Privacy Policy</a>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div id="page-faq" class="page hidden">
+        <div class="faq-card">
+          <div class="faq-title">Calculator</div>
+          <div class="faq-body">Shows min/km and km/h side by side. Scroll the wheels to change the value – both sides update automatically. Below the wheels you'll see the estimated finish time for six standard distances based on the current speed.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-title">Pacing</div>
+          <div class="faq-body">Pick a preset distance or enter a custom distance in metres or kilometres. Scroll in your target time. The app calculates the required speed in min/km and km/h. Use the Split frequency wheel to choose the interval (1, 2, 5 or 10 km) for the splits in the table.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-title">Add to home screen</div>
+          <div class="faq-body">Tap <strong style="color:rgba(255,255,255,0.85)">⋯</strong> at the bottom right → <strong style="color:rgba(255,255,255,0.85)">Share</strong> → <strong style="color:rgba(255,255,255,0.85)">Show more</strong> → <strong style="color:rgba(255,255,255,0.85)">Add to Home Screen</strong>. The app then opens full screen without the browser interface.</div>
+        </div>
+      </div>
+
+      <!-- Pacing -->
+      <div id="page-maal" class="page hidden">
+        <div class="maal-top">
+          <div class="calc-combined" id="maalCombined"></div>
+          <div class="maal-bottom-row">
+            <div id="maalCustomInput" class="maal-custom-input hidden">
+              <div class="maal-custom-dist-wrap">
+                <div class="maal-interval-label">Distance</div>
+                <div id="maalCustomWheelWrap"></div>
+              </div>
+              <div class="maal-unit-toggle">
+                <button id="maalUnitM"  class="maal-unit-btn"        onclick="setMaalUnit('m')">m</button>
+                <button id="maalUnitKm" class="maal-unit-btn active"  onclick="setMaalUnit('km')">km</button>
+              </div>
+            </div>
+            <div class="maal-interval-group">
+              <div class="maal-interval-label">Split frequency</div>
+              <div id="maalIntervalWrap"></div>
+            </div>
+          </div>
+          <div class="maal-result">
+            <div class="maal-pace-val" id="maalPaceVal">–</div>
+            <div class="maal-pace-unit">min/km</div>
+            <div class="maal-speed-val" id="maalSpeedVal"></div>
+          </div>
+        </div>
+        <div class="pacing-table-wrap">
+          <table class="pacing-table">
+            <thead><tr><th>Km</th><th>Split</th></tr></thead>
+            <tbody id="maal-pacing-tbody">
+              <tr><td colspan="2" class="pacing-placeholder">Choose distance and target time</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Hva er min/km? -->
+      <div id="page-minkm" class="page hidden">
+        <div class="article-page">
+          <h1>What is min/km?</h1>
+          <p>Running pace is usually measured in minutes per kilometre (min/km). It tells you exactly how long you spend on one kilometre. A pace of 5:00 min/km means you spend five minutes per kilometre.</p>
+          <p>The lower the pace, the faster you run. 4:00 min/km is faster than 6:00 min/km. Think of it as "time per kilometre" – less time means higher speed.</p>
+
+          <h2>Converting to km/h</h2>
+          <p>Min/km and km/h describe the same thing, just from different angles. The formula is simple:</p>
+          <ul>
+            <li><strong>From min/km to km/h:</strong> 60 ÷ pace = km/h</li>
+            <li><strong>From km/h to min/km:</strong> 60 ÷ km/h = pace</li>
+          </ul>
+          <p>With a pace of 5:00 min/km, the speed becomes 60 ÷ 5 = <strong>12 km/h</strong>. The PaceLoop calculator does this conversion automatically as you scroll the wheels.</p>
+
+          <h2>Typical paces for recreational runners</h2>
+          <table class="article-table">
+            <thead><tr><th>Pace</th><th>km/h</th><th>Level</th></tr></thead>
+            <tbody>
+              <tr><td>4:00 min/km</td><td>15.0</td><td>Experienced competitive runner</td></tr>
+              <tr><td>5:00 min/km</td><td>12.0</td><td>Trained recreational runner</td></tr>
+              <tr><td>6:00 min/km</td><td>10.0</td><td>Average recreational runner</td></tr>
+              <tr><td>7:00 min/km</td><td>8.6</td><td>Beginner / easy jog</td></tr>
+            </tbody>
+          </table>
+          <p>Use the calculator at the top to find your exact value – scroll the min/km wheel and watch km/h update instantly.</p>
+        </div>
+      </div>
+
+      <!-- 5k under 25 min -->
+      <div id="page-femk" class="page hidden">
+        <div class="article-page">
+          <h1>How to run a 5k under 25 min</h1>
+          <p>A 5k under 25 minutes requires a steady pace of exactly <strong>5:00 min/km</strong> (12 km/h). For many recreational runners this is a concrete and motivating goal that is entirely achievable with a few weeks of focused training.</p>
+
+          <h2>What does it take?</h2>
+          <p>You need to be able to run 5 kilometres without stopping and hold 5:00 min/km for 25 minutes. If you currently take 30 minutes (6:00 min/km), the goal is to improve by one minute per kilometre – that's realistic in 8–12 weeks.</p>
+
+          <h2>Start slower than you think</h2>
+          <p>The most common mistake is starting too fast. Begin at 5:10–5:15 min/km for the first two kilometres, hold 5:00 min/km for km 3 and 4, and give it everything on the last one. This is called a negative split and almost always gives a better finish time than starting hard.</p>
+
+          <h2>Training plan (8 weeks, 3 days/week)</h2>
+          <ul>
+            <li><strong>Long run:</strong> 45–60 min at an easy pace (6:30–7:00 min/km). Builds your base.</li>
+            <li><strong>Intervals:</strong> 5 × 1000 m at 4:45 min/km with a 90 sec rest. Builds speed.</li>
+            <li><strong>Threshold run:</strong> 20 min continuous at 5:15 min/km. Builds endurance at goal pace.</li>
+          </ul>
+          <p>Use the Pacing page in the PaceLoop calculator to set up a split plan for 5 km with 1 km intervals – then you'll know exactly what the clock should show at every kilometre.</p>
+        </div>
+      </div>
+
+      <!-- Maraton-tempo -->
+      <div id="page-maraton" class="page hidden">
+        <div class="article-page">
+          <h1>Marathon – what is a realistic speed?</h1>
+          <p>A marathon is 42.195 km. The pace you choose determines not only your finish time, but also how hard the race feels. Starting too fast is the most common reason runners "hit the wall" after 30–35 km.</p>
+
+          <h2>Overview: pace and finish time</h2>
+          <table class="article-table">
+            <thead><tr><th>Pace</th><th>Finish time</th></tr></thead>
+            <tbody>
+              <tr><td>4:15 min/km</td><td>approx. 3:00:00</td></tr>
+              <tr><td>4:44 min/km</td><td>approx. 3:20:00</td></tr>
+              <tr><td>5:00 min/km</td><td>approx. 3:31:00</td></tr>
+              <tr><td>5:41 min/km</td><td>approx. 4:00:00</td></tr>
+              <tr><td>6:23 min/km</td><td>approx. 4:30:00</td></tr>
+              <tr><td>7:06 min/km</td><td>approx. 5:00:00</td></tr>
+            </tbody>
+          </table>
+
+          <h2>What is realistic for you?</h2>
+          <p>A simple rule of thumb: multiply your half marathon time by 2.1. If you run a half marathon in 2:00, a realistic marathon goal is about 4:12. The extra 10% is because a marathon is considerably harder than two half marathons – glycogen stores run empty and the body's pain threshold is tested.</p>
+
+          <h2>The most important advice</h2>
+          <p>Hold back for the first 30 kilometres. Start 10–15 seconds per kilometre slower than your goal pace. Most people who set a marathon personal best do it with a negative split – running the second half faster than the first. Use the Pacing page in the PaceLoop calculator to build a detailed split plan for the whole race.</p>
+        </div>
+      </div>
+
+      <!-- Tempo vs. fart -->
+      <div id="page-tempofart" class="page hidden">
+        <div class="article-page">
+          <h1>The difference between pace and speed</h1>
+          <p>Pace (min/km) and speed (km/h) say exactly the same thing – just from different perspectives. Runners almost always use min/km because it's easier to plan with: you know exactly how long one kilometre takes. Cyclists and treadmills tend to use km/h.</p>
+
+          <h2>The formula</h2>
+          <ul>
+            <li>From min/km to km/h: <strong>60 ÷ pace = km/h</strong></li>
+            <li>From km/h to min/km: <strong>60 ÷ km/h = pace</strong></li>
+          </ul>
+          <p>Example: 5:30 min/km = 60 ÷ 5.5 = <strong>10.9 km/h</strong>. The PaceLoop calculator does this conversion continuously as you scroll.</p>
+
+          <h2>Treadmill vs. running outdoors</h2>
+          <table class="article-table">
+            <thead><tr><th>km/h on treadmill</th><th>Equals</th></tr></thead>
+            <tbody>
+              <tr><td>8.0 km/h</td><td>7:30 min/km</td></tr>
+              <tr><td>10.0 km/h</td><td>6:00 min/km</td></tr>
+              <tr><td>12.0 km/h</td><td>5:00 min/km</td></tr>
+              <tr><td>14.0 km/h</td><td>4:17 min/km</td></tr>
+              <tr><td>16.0 km/h</td><td>3:45 min/km</td></tr>
+            </tbody>
+          </table>
+          <p>Many people find a treadmill feels a little easier than the equivalent pace outdoors – the belt gives you a bit of momentum, and there's no headwind. A rule of thumb is to set the treadmill to a 0.5–1.0% incline to compensate.</p>
+        </div>
+      </div>
+
+      <!-- Om oss -->
+      <div id="page-omoss" class="page hidden">
+        <div class="article-page">
+          <h1>About PaceLoop</h1>
+          <p>PaceLoop is a free running pace calculator. The tool lets you quickly convert between pace (min/km) and speed (km/h), estimate finish times for standard distances and build detailed pacing plans for a target time.</p>
+          <p>The site was made by a recreational runner who wanted a fast, mobile-friendly calculator without unnecessary clicks and page reloads. Everything happens directly in the browser – no login, no ads, no unnecessary complexity.</p>
+
+          <h2>Technical</h2>
+          <p>PaceLoop is a self-hosted web application running from a private server. The site also works as a progressive web app (PWA) and can be added to your home screen for use without the browser interface.</p>
+
+          <h2>Contact</h2>
+          <p>Questions, bugs or suggestions? Send an email to <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>.</p>
+        </div>
+      </div>
+
+      <!-- Personvern -->
+      <div id="page-personvern" class="page hidden">
+        <div class="article-page">
+          <h1>Privacy Policy</h1>
+          <p>Last updated: July 2026</p>
+
+          <h2>Who is responsible</h2>
+          <p>PaceLoop (runpace.no) is operated by a private individual. Contact: <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></p>
+
+          <h2>What we collect</h2>
+          <p>PaceLoop uses <strong>no cookies</strong>. The site uses a custom-built, self-hosted analytics system that records the following on each page visit:</p>
+          <ul>
+            <li><strong>Timestamp</strong> of the visit</li>
+            <li><strong>Anonymised IP address</strong> – your IP address is hashed (one-way encrypted) and stored only as a 16-character code. It is not possible to reconstruct the original address.</li>
+            <li><strong>Browser and device</strong> (user-agent) – used to distinguish mobile from desktop</li>
+            <li><strong>Traffic source</strong> – which page you came from (referrer), if available</li>
+          </ul>
+          <p>No <strong>personal data</strong> such as name, email or identifiable data is stored. The data is used solely to understand aggregate traffic and improve the site.</p>
+
+          <h2>Storage</h2>
+          <p>Anonymised analytics data is stored on a private server in Norway. Data is not shared with third parties and is not sold.</p>
+
+          <h2>Your rights (GDPR)</h2>
+          <p>Since no personal data is stored, there is in practice nothing to delete or export. If you still wish to send a request, contact <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>.</p>
+
+          <h2>Cookies</h2>
+          <p>PaceLoop uses <strong>no cookies</strong>. No cookies are set in your browser, and you do not need to consent to anything when visiting the site.</p>
+
+          <h2>The PaceLoop app (iOS)</h2>
+          <p>PaceLoop is also available as an iOS app (same developer). The app does not collect any data about you. It has no account, no ads, no tracking and no analytics – all calculations happen locally on your device.</p>
+          <p><strong>Apple Health:</strong> If you choose to, PaceLoop can read the latest VO₂max value (cardio fitness) from Apple Health to calculate training zones and a starting point for race prediction. The value is used only on your device at that moment, and is never stored or sent anywhere – not to PaceLoop or to third parties. Access to Apple Health is optional; all features of the app work without it. You can turn off access at any time in the app's settings, or in iOS under Settings → Privacy &amp; Security → Health.</p>
+        </div>
+      </div>
+
+    </div><!-- /pages -->
+  </div><!-- /app-wrap -->
+
+  <script>
+    const ITEM_H = 40;
+
+    const DISTANCES = [
+      { id: 'd1k',    name: '1k',            km: 1,        hasHours: false },
+      { id: 'mile',   name: '1 mile',       km: 1.60934,  hasHours: false },
+      { id: 'd3k',    name: '3k',           km: 3,        hasHours: false },
+      { id: 'd5k',    name: '5k',           km: 5,        hasHours: false },
+      { id: 'd10k',   name: '10k',          km: 10,       hasHours: true  },
+      { id: 'half',   name: 'Half marathon', km: 21.0975, hasHours: true  },
+      { id: 'full',   name: 'Marathon',     km: 42.195,   hasHours: true  },
+      { id: 'custom', name: 'Custom',       km: null,     hasHours: true  },
+    ];
+
+    const INTERVAL_KMS = [0.1, 0.2, 0.4, 1, 2, 5, 10];
+    const fmtIntervalDist = km => km < 1 ? `${Math.round(km * 1000)} m` : `${km}k`;
+
+    let maalCustomUnit = 'km';
+
+    function buildMaalCustomWheel() {
+      const wrap = document.getElementById('maalCustomWheelWrap');
+      wrap.innerHTML = '';
+      let items;
+      if (maalCustomUnit === 'm') {
+        items = [...Array(99).keys()].map(i => `${((i + 1) * 100).toLocaleString('en-US')} m`);
+      } else {
+        items = [...Array(100).keys()].map(i => `${i + 1} km`);
+      }
+      wrap.appendChild(makeWheel('maal-custom', 'val', items, 'w-maal w-maal-custom', updateMaalResult, null));
+    }
+
+    function setMaalUnit(unit) {
+      const prevKm = getMaalCustomKm() || 0;
+      maalCustomUnit = unit;
+      document.getElementById('maalUnitM').classList.toggle('active',  unit === 'm');
+      document.getElementById('maalUnitKm').classList.toggle('active', unit === 'km');
+      buildMaalCustomWheel();
+      requestAnimationFrame(() => {
+        if (prevKm > 0) {
+          const idx = unit === 'm'
+            ? Math.max(0, Math.min(98,  Math.round(prevKm / 0.1) - 1))
+            : Math.max(0, Math.min(99, Math.round(prevKm)        - 1));
+          setWheelValue('maal-custom', 'val', idx);
+        }
+        updateMaalResult();
+      });
+    }
+
+    function getMaalCustomKm() {
+      const idx = getWheelValue('maal-custom', 'val');
+      return maalCustomUnit === 'm' ? (idx + 1) * 0.1 : idx + 1;
+    }
+
+    const PAGE_TITLES = {
+      calc:       ' - Calculator',
+      maal:       ' - Pacing',
+      minkm:      ' - What is min/km?',
+      femk:       ' - 5k under 25 min',
+      maraton:    ' - Marathon pace',
+      tempofart:  ' - Pace vs. speed',
+      omoss:      ' - About',
+      personvern: ' - Privacy',
+      faq:        ' - FAQ',
+    };
+
+    // ── Navigation ──
+    function navigate(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById('page-' + page).classList.remove('hidden');
+      document.getElementById('topbarTitle').textContent = PAGE_TITLES[page];
+      document.querySelectorAll('.sb-item').forEach(el =>
+        el.classList.toggle('active', el.dataset.page === page));
+      closeSidebar();
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById('sidebar');
+      sb.classList.contains('sb-closed') ? openSidebar() : closeSidebar();
+    }
+    function openSidebar() {
+      document.getElementById('sidebar').classList.remove('sb-closed');
+      document.getElementById('sbBackdrop').classList.remove('hidden');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.add('sb-closed');
+      document.getElementById('sbBackdrop').classList.add('hidden');
+    }
+
+    // ── Install modal ──
+    function showInstallModal() {
+      closeSidebar();
+      document.getElementById('installModal').classList.remove('hidden');
+    }
+    function hideInstallModal(e) {
+      if (!e || e.target === document.getElementById('installModal') || !e.target.closest('.modal-sheet'))
+        document.getElementById('installModal').classList.add('hidden');
+    }
+
+    // ── Calculator ──
+    const CALC_SPACER_H = ITEM_H; // 40 — 3-item wheel (1 above + selected + 1 below)
+
+    function makeCalcSep(char) {
+      const s = document.createElement('span');
+      s.className = 'calc-sep'; s.textContent = char; return s;
+    }
+
+    function buildCalcPicker() {
+      const container = document.getElementById('calcCombined');
+      container.innerHTML = '';
+
+      // ── Pace group ──
+      const paceGroup = document.createElement('div');
+      paceGroup.className = 'calc-group';
+      const paceLabel = document.createElement('div');
+      paceLabel.className = 'calc-group-label';
+      paceLabel.textContent = 'min/km';
+      const paceWrap = document.createElement('div');
+      paceWrap.className = 'calc-picker-wrap';
+      paceWrap.appendChild(makeWheel('calc', 'min', [...Array(16).keys()].map(String),                            'w-calc w-calc-narrow', onPaceWheelChange, CALC_SPACER_H));
+      paceWrap.appendChild(makeCalcSep(':'));
+      paceWrap.appendChild(makeWheel('calc', 'sec', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-calc w-calc-wide',   onPaceWheelChange, CALC_SPACER_H));
+      paceGroup.appendChild(paceLabel);
+      paceGroup.appendChild(paceWrap);
+      container.appendChild(paceGroup);
+
+      // ── Divider ──
+      const divider = document.createElement('div');
+      divider.className = 'calc-divider';
+      container.appendChild(divider);
+
+      // ── Speed group ──
+      const speedGroup = document.createElement('div');
+      speedGroup.className = 'calc-group';
+      const speedLabel = document.createElement('div');
+      speedLabel.className = 'calc-group-label';
+      speedLabel.textContent = 'km/h';
+      const speedWrap = document.createElement('div');
+      speedWrap.className = 'calc-picker-wrap';
+      speedWrap.appendChild(makeWheel('calc', 'int', [...Array(41).keys()].map(String),    'w-calc w-calc-wide',   onSpeedWheelChange, CALC_SPACER_H));
+      speedWrap.appendChild(makeCalcSep('.'));
+      speedWrap.appendChild(makeWheel('calc', 'dec', [...Array(10).keys()].map(String),    'w-calc w-calc-narrow', onSpeedWheelChange, CALC_SPACER_H));
+      speedGroup.appendChild(speedLabel);
+      speedGroup.appendChild(speedWrap);
+      container.appendChild(speedGroup);
+
+      // Set defaults: 5:00 min/km = 12.0 km/h
+      requestAnimationFrame(() => {
+        setWheelValue('calc', 'min', 5);
+        setWheelValue('calc', 'sec', 0);
+        setWheelValue('calc', 'int', 12);
+        setWheelValue('calc', 'dec', 0);
+        updateCalcDist();
+      });
+    }
+
+    // Prevent ping-pong between the two groups
+    let ignoreSpeedUntil = 0;
+    let ignorePaceUntil  = 0;
+
+    function onPaceWheelChange() {
+      if (Date.now() < ignorePaceUntil) return;
+      const mins = getWheelValue('calc', 'min');
+      const secs = getWheelValue('calc', 'sec');
+      const totalMin = mins + secs/60;
+      if (totalMin <= 0) return;
+      const speed = 60 / totalMin;
+      let intPart = Math.floor(speed);
+      let decPart = Math.round((speed - intPart) * 10);
+      if (decPart === 10) { intPart++; decPart = 0; }
+      ignoreSpeedUntil = Date.now() + 300;
+      setWheelValue('calc', 'int', Math.min(intPart, 40));
+      setWheelValue('calc', 'dec', decPart);
+      updateCalcDist();
+    }
+
+    function onSpeedWheelChange() {
+      if (Date.now() < ignoreSpeedUntil) return;
+      const speed = getWheelValue('calc', 'int') + getWheelValue('calc', 'dec') / 10;
+      if (speed <= 0) return;
+      const pace = 60 / speed;
+      let mins = Math.floor(pace);
+      let secs = Math.round((pace - mins) * 60);
+      if (secs === 60) { mins++; secs = 0; }
+      ignorePaceUntil = Date.now() + 300;
+      setWheelValue('calc', 'min', Math.min(mins, 15));
+      setWheelValue('calc', 'sec', secs);
+      updateCalcDist();
+    }
+
+    function buildCalcDist() {
+      const section = document.getElementById('calcDistSection');
+      section.innerHTML = '';
+      const header = document.createElement('div');
+      header.className = 'calc-dist-header';
+      header.innerHTML = '<span>Distance</span><span>Total time</span>';
+      section.appendChild(header);
+      DISTANCES.forEach(d => {
+        const row = document.createElement('div');
+        row.className = 'calc-dist-row';
+        row.innerHTML = `
+          <div><span class="calc-dist-name">${d.name}</span></div>
+          <span class="calc-dist-time empty" id="cdist-${d.id}">–</span>`;
+        section.appendChild(row);
+      });
+    }
+
+    function updateCalcDist() {
+      const pace = getCurrentPace();
+      DISTANCES.forEach(d => {
+        const el = document.getElementById(`cdist-${d.id}`);
+        if (!el) return;
+        if (pace) { el.textContent = fmtRaceTime(pace * d.km); el.className = 'calc-dist-time'; }
+        else       { el.textContent = '–';                      el.className = 'calc-dist-time empty'; }
+      });
+    }
+
+    function getCurrentPace() {
+      const mins = getWheelValue('calc', 'min');
+      const secs = getWheelValue('calc', 'sec');
+      const t = mins + secs/60;
+      return t > 0 ? t : null;
+    }
+
+    // ── Shared formatters ──
+    function fmtPace(totalMin) {
+      const m = Math.floor(totalMin);
+      const s = Math.round((totalMin - m) * 60);
+      if (s === 60) return `${m+1}:00`;
+      return `${m}:${String(s).padStart(2,'0')}`;
+    }
+    function fmtRaceTime(totalMin) {
+      const ts = Math.round(totalMin * 60);
+      const h  = Math.floor(ts / 3600);
+      const m  = Math.floor((ts % 3600) / 60);
+      const s  = ts % 60;
+      if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      return `${m}:${String(s).padStart(2,'0')}`;
+    }
+
+    // ── Picker builder ──
+    function makeWheel(distId, col, items, widthClass, callback, spacerH) {
+      const wheel = document.createElement('div');
+      wheel.className = `picker-wheel ${widthClass}`;
+      wheel.dataset.distId = distId;
+      wheel.dataset.col    = col;
+      const ts = document.createElement('div'); ts.className = 'picker-spacer';
+      if (spacerH) ts.style.height = spacerH + 'px';
+      wheel.appendChild(ts);
+      items.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'picker-item'; el.textContent = item; wheel.appendChild(el);
+      });
+      const bs = document.createElement('div'); bs.className = 'picker-spacer';
+      if (spacerH) bs.style.height = spacerH + 'px';
+      wheel.appendChild(bs);
+      let timer;
+      wheel.addEventListener('scroll', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const idx = Math.round(wheel.scrollTop / ITEM_H);
+          wheel.scrollTo({ top: idx * ITEM_H, behavior: 'smooth' });
+          if (callback) callback();
+        }, 120);
+      }, { passive: true });
+      return wheel;
+    }
+
+    function getWheelValue(distId, col) {
+      const w = document.querySelector(`.picker-wheel[data-dist-id="${distId}"][data-col="${col}"]`);
+      if (!w) return 0;
+      return Math.round(w.scrollTop / ITEM_H);
+    }
+    function setWheelValue(distId, col, val) {
+      const w = document.querySelector(`.picker-wheel[data-dist-id="${distId}"][data-col="${col}"]`);
+      if (!w) return;
+      w.scrollTop = val * ITEM_H;
+    }
+
+    // ── Distansefart ──
+    function buildMaalPicker() {
+      const container = document.getElementById('maalCombined');
+      container.innerHTML = '';
+
+      const distGroup = document.createElement('div');
+      distGroup.className = 'calc-group';
+      const distLabel = document.createElement('div');
+      distLabel.className = 'calc-group-label';
+      distLabel.textContent = 'Distance';
+      const distWrap = document.createElement('div');
+      distWrap.className = 'calc-picker-wrap';
+      distWrap.appendChild(makeWheel('maal', 'dist', DISTANCES.map(d => d.name), 'w-maal w-maal-dist', updateMaalResult, null));
+      distGroup.appendChild(distLabel);
+      distGroup.appendChild(distWrap);
+      container.appendChild(distGroup);
+
+      const divider = document.createElement('div');
+      divider.className = 'calc-divider';
+      container.appendChild(divider);
+
+      const timeGroup = document.createElement('div');
+      timeGroup.className = 'calc-group';
+      const timeLabel = document.createElement('div');
+      timeLabel.className = 'calc-group-label';
+      timeLabel.textContent = 'Target time';
+      const timeWrap = document.createElement('div');
+      timeWrap.className = 'calc-picker-wrap';
+      timeWrap.appendChild(makeWheel('maal', 'h', [...Array(10).keys()].map(String),                            'w-maal w-maal-h',  updateMaalResult, null));
+      timeWrap.appendChild(makeCalcSep(':'));
+      timeWrap.appendChild(makeWheel('maal', 'm', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult, null));
+      timeWrap.appendChild(makeCalcSep(':'));
+      timeWrap.appendChild(makeWheel('maal', 's', [...Array(60).keys()].map(i => String(i).padStart(2,'0')), 'w-maal w-maal-ms', updateMaalResult, null));
+      timeGroup.appendChild(timeLabel);
+      timeGroup.appendChild(timeWrap);
+      container.appendChild(timeGroup);
+
+      // Default: 5 km, 25:00 → 5:00 min/km
+      requestAnimationFrame(() => {
+        setWheelValue('maal', 'dist', 2);
+        setWheelValue('maal', 'h', 0);
+        setWheelValue('maal', 'm', 25);
+        setWheelValue('maal', 's', 0);
+        updateMaalResult();
+      });
+    }
+
+    function updateMaalResult() {
+      const paceEl  = document.getElementById('maalPaceVal');
+      const speedEl = document.getElementById('maalSpeedVal');
+      const tbody   = document.getElementById('maal-pacing-tbody');
+      const distIdx = getWheelValue('maal', 'dist');
+      const h = getWheelValue('maal', 'h');
+      const m = getWheelValue('maal', 'm');
+      const s = getWheelValue('maal', 's');
+      const totalMin = h*60 + m + s/60;
+      const dist = DISTANCES[distIdx];
+
+      const isCustom = dist && dist.id === 'custom';
+      document.getElementById('maalCustomInput').classList.toggle('hidden', !isCustom);
+
+      const km = isCustom ? getMaalCustomKm() : (dist ? dist.km : null);
+
+      if (!km || km <= 0 || totalMin <= 0) {
+        paceEl.textContent = '–';
+        speedEl.textContent = '';
+        tbody.innerHTML = `<tr><td colspan="2" class="pacing-placeholder">Choose distance and target time</td></tr>`;
+        return;
+      }
+
+      const pace  = totalMin / km;
+      const speed = 60 / pace;
+      paceEl.textContent = fmtPace(pace);
+      speedEl.innerHTML  = `<span>${speed.toFixed(2)}</span> km/h`;
+
+      // Build pacing table with selected interval
+      const interval = INTERVAL_KMS[Math.min(getWheelValue('maal', 'interval'), INTERVAL_KMS.length - 1)];
+      const rows = [];
+      let ckm = interval;
+      while (ckm < km - 0.001) {
+        rows.push({ km: ckm, label: fmtIntervalDist(ckm), isFinish: false });
+        ckm = Math.round((ckm + interval) * 1000) / 1000;
+      }
+      const lastCkm = rows.length > 0 ? rows[rows.length - 1].km : 0;
+      if (Math.abs(lastCkm - km) < 0.001) {
+        rows[rows.length - 1].isFinish = true;
+      } else {
+        let finLabel;
+        if (isCustom) {
+          finLabel = maalCustomUnit === 'm'
+            ? `Finish · ${Math.round(km * 1000).toLocaleString('en-US')} m`
+            : `Finish · ${km} km`;
+        } else {
+          finLabel = `Finish · ${dist.name}`;
+        }
+        rows.push({ km, label: finLabel, isFinish: true });
+      }
+
+      tbody.innerHTML = rows.map(r => `
+        <tr class="${r.isFinish ? 'finish' : ''}">
+          <td>${r.label}</td>
+          <td>${fmtRaceTime(pace * r.km)}</td>
+        </tr>`).join('');
+    }
+
+    // ── Init ──
+    buildCalcDist();
+    buildCalcPicker();
+    buildMaalPicker();
+    buildMaalCustomWheel();
+    document.getElementById('maalIntervalWrap').appendChild(
+      makeWheel('maal', 'interval', INTERVAL_KMS.map(fmtIntervalDist), 'w-maal w-maal-interval', updateMaalResult, null)
+    );
+
+    // Analytics ping — only fires on the live site, not during local development
+    if (location.hostname === 'runpace.no') {
+      const ref = document.referrer ? '?ref=' + encodeURIComponent(document.referrer) : '';
+      fetch('https://svaagan-ubuntuserver.duckdns.org/track' + ref, { keepalive: true }).catch(() => {});
+    }
+
+    // Auto-refresh: reload when app comes back from background after 5+ minutes
+    let hiddenAt = 0;
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        hiddenAt = Date.now();
+      } else if (navigator.onLine && hiddenAt && Date.now() - hiddenAt > 5 * 60 * 1000) {
+        location.reload();
+      }
+    });
+  </script>
+</body>
+</html>
