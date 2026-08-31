@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>PaceLoop – Running Pace Calculator for Pace and Speed</title>
+  <title>RunPace – Running Pace Calculator for Pace and Speed</title>
   <meta name="description" content="Free running pace calculator. Convert between min/km and km/h, calculate pacing for 5K, 10K, half marathon and marathon, and build split-time tables for your goal.">
   <link rel="canonical" href="https://runpace.no/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://runpace.no/">
-  <meta property="og:title" content="PaceLoop – Running Pace Calculator for Pace and Speed">
+  <meta property="og:title" content="RunPace – Running Pace Calculator for Pace and Speed">
   <meta property="og:description" content="Free running pace calculator. Convert pace, calculate pacing and view split-time tables for your next race.">
   <meta property="og:locale" content="en">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="PaceLoop – Running Pace Calculator for Pace and Speed">
+  <meta name="twitter:title" content="RunPace – Running Pace Calculator for Pace and Speed">
   <meta name="twitter:description" content="Free running pace calculator. Convert pace, calculate pacing and view split-time tables for your next race.">
   <script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "PaceLoop – Running Pace Calculator",
+      "name": "RunPace – Running Pace Calculator",
       "url": "https://runpace.no",
       "description": "Free running pace calculator. Convert between min/km and km/h, calculate pacing for 5K, 10K, half marathon and marathon, and build split-time tables.",
       "applicationCategory": "SportsApplication",
@@ -50,7 +50,7 @@
           "name": "How do I convert min/km to km/h?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Divide 60 by your pace in minutes. Example: 5:00 min/km gives 60 ÷ 5 = 12 km/h. The PaceLoop running calculator does this conversion automatically as you scroll the wheels."
+            "text": "Divide 60 by your pace in minutes. Example: 5:00 min/km gives 60 ÷ 5 = 12 km/h. The RunPace running calculator does this conversion automatically as you scroll the wheels."
           }
         },
         {
@@ -75,7 +75,7 @@
   </script>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="PaceLoop">
+  <meta name="apple-mobile-web-app-title" content="RunPace">
   <meta name="theme-color" content="#000000">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
   <style>
@@ -815,14 +815,14 @@
 <body>
 
   <noscript>
-    <h1>Running Pace Calculator – PaceLoop</h1>
-    <p>PaceLoop is a free running pace calculator. Convert between min/km and km/h, calculate finish times for 5K, 10K, half marathon and marathon, and build pacing plans for your target time. Enable JavaScript to use the calculator.</p>
+    <h1>Running Pace Calculator – RunPace</h1>
+    <p>RunPace is a free running pace calculator. Convert between min/km and km/h, calculate finish times for 5K, 10K, half marathon and marathon, and build pacing plans for your target time. Enable JavaScript to use the calculator.</p>
   </noscript>
 
   <!-- Install modal -->
   <div class="modal-backdrop hidden" id="installModal" onclick="hideInstallModal(event)">
     <div class="modal-sheet">
-      <p class="modal-title">Add PaceLoop to your home screen</p>
+      <p class="modal-title">Add RunPace to your home screen</p>
       <div class="modal-steps">
         <div class="modal-step">
           <div class="step-num">1</div>
@@ -846,7 +846,7 @@
 
   <!-- Sidebar -->
   <nav class="sidebar sb-closed" id="sidebar">
-    <div class="sb-header">PaceLoop</div>
+    <div class="sb-header">RunPace</div>
     <ul class="sb-nav">
       <div class="sb-section">Tools</div>
       <li class="sb-item active" data-page="calc" onclick="navigate('calc')">
@@ -901,7 +901,7 @@
       <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <span class="topbar-title"><span style="color:var(--btn-op)">PaceLoop</span><span id="topbarTitle"> - Calculator</span></span>
+      <span class="topbar-title"><span style="color:var(--btn-op)">RunPace</span><span id="topbarTitle"> - Calculator</span></span>
       <div class="topbar-spacer"></div>
     </header>
 
@@ -983,7 +983,7 @@
             <li><strong>From min/km to km/h:</strong> 60 ÷ pace = km/h</li>
             <li><strong>From km/h to min/km:</strong> 60 ÷ km/h = pace</li>
           </ul>
-          <p>With a pace of 5:00 min/km, the speed becomes 60 ÷ 5 = <strong>12 km/h</strong>. The PaceLoop calculator does this conversion automatically as you scroll the wheels.</p>
+          <p>With a pace of 5:00 min/km, the speed becomes 60 ÷ 5 = <strong>12 km/h</strong>. The RunPace calculator does this conversion automatically as you scroll the wheels.</p>
 
           <h2>Typical paces for recreational runners</h2>
           <table class="article-table">
@@ -1017,7 +1017,7 @@
             <li><strong>Intervals:</strong> 5 × 1000 m at 4:45 min/km with a 90 sec rest. Builds speed.</li>
             <li><strong>Threshold run:</strong> 20 min continuous at 5:15 min/km. Builds endurance at goal pace.</li>
           </ul>
-          <p>Use the Pacing page in the PaceLoop calculator to set up a split plan for 5 km with 1 km intervals – then you'll know exactly what the clock should show at every kilometre.</p>
+          <p>Use the Pacing page in the RunPace calculator to set up a split plan for 5 km with 1 km intervals – then you'll know exactly what the clock should show at every kilometre.</p>
         </div>
       </div>
 
@@ -1044,7 +1044,7 @@
           <p>A simple rule of thumb: multiply your half marathon time by 2.1. If you run a half marathon in 2:00, a realistic marathon goal is about 4:12. The extra 10% is because a marathon is considerably harder than two half marathons – glycogen stores run empty and the body's pain threshold is tested.</p>
 
           <h2>The most important advice</h2>
-          <p>Hold back for the first 30 kilometres. Start 10–15 seconds per kilometre slower than your goal pace. Most people who set a marathon personal best do it with a negative split – running the second half faster than the first. Use the Pacing page in the PaceLoop calculator to build a detailed split plan for the whole race.</p>
+          <p>Hold back for the first 30 kilometres. Start 10–15 seconds per kilometre slower than your goal pace. Most people who set a marathon personal best do it with a negative split – running the second half faster than the first. Use the Pacing page in the RunPace calculator to build a detailed split plan for the whole race.</p>
         </div>
       </div>
 
@@ -1059,7 +1059,7 @@
             <li>From min/km to km/h: <strong>60 ÷ pace = km/h</strong></li>
             <li>From km/h to min/km: <strong>60 ÷ km/h = pace</strong></li>
           </ul>
-          <p>Example: 5:30 min/km = 60 ÷ 5.5 = <strong>10.9 km/h</strong>. The PaceLoop calculator does this conversion continuously as you scroll.</p>
+          <p>Example: 5:30 min/km = 60 ÷ 5.5 = <strong>10.9 km/h</strong>. The RunPace calculator does this conversion continuously as you scroll.</p>
 
           <h2>Treadmill vs. running outdoors</h2>
           <table class="article-table">
@@ -1079,12 +1079,12 @@
       <!-- Om oss -->
       <div id="page-omoss" class="page hidden">
         <div class="article-page">
-          <h1>About PaceLoop</h1>
-          <p>PaceLoop is a free running pace calculator. The tool lets you quickly convert between pace (min/km) and speed (km/h), estimate finish times for standard distances and build detailed pacing plans for a target time.</p>
+          <h1>About RunPace</h1>
+          <p>RunPace is a free running pace calculator. The tool lets you quickly convert between pace (min/km) and speed (km/h), estimate finish times for standard distances and build detailed pacing plans for a target time.</p>
           <p>The site was made by a recreational runner who wanted a fast, mobile-friendly calculator without unnecessary clicks and page reloads. Everything happens directly in the browser – no login, no ads, no unnecessary complexity.</p>
 
           <h2>Technical</h2>
-          <p>PaceLoop is a self-hosted web application running from a private server. The site also works as a progressive web app (PWA) and can be added to your home screen for use without the browser interface.</p>
+          <p>RunPace is a single static web page with no backend and no tracking scripts. The site also works as a progressive web app (PWA) and can be added to your home screen for use without the browser interface.</p>
 
           <h2>Contact</h2>
           <p>Questions, bugs or suggestions? Send an email to <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>.</p>
@@ -1098,10 +1098,10 @@
           <p>Last updated: August 2026</p>
 
           <h2>Who is responsible</h2>
-          <p>PaceLoop (runpace.no) is operated by a private individual. Contact: <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></p>
+          <p>RunPace (runpace.no) is operated by a private individual. Contact: <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></p>
 
           <h2>What we collect</h2>
-          <p>PaceLoop uses <strong>no cookies</strong>. The site uses a custom-built, self-hosted analytics system that records the following on each page visit:</p>
+          <p>RunPace uses <strong>no cookies</strong>. The site uses a custom-built, self-hosted analytics system that records the following on each page visit:</p>
           <ul>
             <li><strong>Timestamp</strong> of the visit</li>
             <li><strong>Anonymised IP address</strong> – your IP address is hashed (one-way encrypted) and stored only as a 16-character code. It is not possible to reconstruct the original address.</li>
@@ -1117,9 +1117,9 @@
           <p>For this website, no personal data is stored, so there is in practice nothing to delete or export. For the iOS app, the ad data described under «Ads in the iOS app» is held by Google, and requests about it are best directed to Google – but you are welcome to contact <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a> either way, and we will help where we can.</p>
 
           <h2>Cookies</h2>
-          <p>PaceLoop uses <strong>no cookies</strong>. No cookies are set in your browser, and you do not need to consent to anything when visiting the site.</p>
+          <p>RunPace uses <strong>no cookies</strong>. No cookies are set in your browser, and you do not need to consent to anything when visiting the site.</p>
 
-          <h2>The iOS app (RunPace)</h2>
+          <h2>The iOS app</h2>
           <p>The same calculator is available as an iOS app, published on the App Store as <strong>RunPace</strong> by the same developer. The app has no account and no login, it does not use the analytics described above, and every calculation happens on your device. The app itself collects nothing about you. The one exception is the ad banner described below, which is served by Google and only appears for some users.</p>
 
           <p><strong>Apple Health:</strong> If you choose to, RunPace can read the latest VO₂max value (cardio fitness) from Apple Health to calculate training zones and a starting point for race prediction. The value is used only on your device at that moment, and is never stored or sent anywhere – not to us and not to third parties. Access to Apple Health is optional; all features of the app work without it. You can turn off access at any time in the app's settings, or in iOS under Settings → Privacy &amp; Security → Health.</p>
