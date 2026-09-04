@@ -77,7 +77,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="RunPace">
   <meta name="theme-color" content="#000000">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
+  <!-- Safari on iOS renders Apple's own App Store banner from this -->
+  <meta name="apple-itunes-app" content="app-id=6789667868">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3ERP%3C/text%3E%3C/svg%3E">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -797,6 +799,64 @@
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .article-table tr:last-child td { border-bottom: none; }
+    /* ── App Store CTA ── */
+    .store-cta {
+      margin: 1.4rem 1.25rem 0;
+      padding: 1.1rem 1.15rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .article-page .store-cta { margin-left: 0; margin-right: 0; }
+    .store-cta-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .store-cta-text {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 0.95rem;
+    }
+    .store-badge {
+      display: inline-block;
+      line-height: 0;
+      touch-action: manipulation;
+    }
+    .store-badge img { height: 42px; width: auto; display: block; }
+    .store-badge:active { opacity: 0.7; }
+    .store-cta .install-btn {
+      width: auto;
+      margin: 0 auto;
+      justify-content: center;
+      background: #2c2c2e;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Persistent CTA in the topbar, replacing the centring spacer */
+    .topbar-store {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      touch-action: manipulation;
+      color: var(--btn-op);
+    }
+    .topbar-store:active { opacity: 0.55; }
+
+    /* Sidebar footer badge */
+    .sb-store { display: block; line-height: 0; margin-bottom: 0.7rem; }
+    .sb-store img { width: 100%; max-width: 148px; height: auto; display: block; }
+
     .calc-privacy-link {
       text-align: center;
       padding: 1.2rem 0 1.6rem;
@@ -823,18 +883,32 @@
   <div class="modal-backdrop hidden" id="installModal" onclick="hideInstallModal(event)">
     <div class="modal-sheet">
       <p class="modal-title">Add RunPace to your home screen</p>
-      <div class="modal-steps">
+      <div class="modal-steps" id="stepsIos">
         <div class="modal-step">
           <div class="step-num">1</div>
-          <p class="step-text">Tap the <strong>⋯ (three dots)</strong> at the bottom right of the browser</p>
+          <p class="step-text">In Safari, tap the <strong>Share</strong> icon in the bottom bar. In Chrome, tap the <strong>⋯</strong> at the bottom right, then <strong>Share</strong></p>
         </div>
         <div class="modal-step">
           <div class="step-num">2</div>
-          <p class="step-text">Choose <strong>Share</strong></p>
+          <p class="step-text">Scroll down and tap <strong>Add to Home Screen</strong></p>
         </div>
         <div class="modal-step">
           <div class="step-num">3</div>
-          <p class="step-text">Tap <strong>Show more</strong>, then <strong>Add to Home Screen</strong></p>
+          <p class="step-text">Tap <strong>Add</strong> — RunPace then opens full screen, without the browser interface</p>
+        </div>
+      </div>
+      <div class="modal-steps hidden" id="stepsAndroid">
+        <div class="modal-step">
+          <div class="step-num">1</div>
+          <p class="step-text">Tap the <strong>three-dot menu</strong> at the top right of Chrome</p>
+        </div>
+        <div class="modal-step">
+          <div class="step-num">2</div>
+          <p class="step-text">Choose <strong>Add to Home screen</strong></p>
+        </div>
+        <div class="modal-step">
+          <div class="step-num">3</div>
+          <p class="step-text">Tap <strong>Install</strong> — RunPace then opens full screen, without the browser interface</p>
         </div>
       </div>
       <button class="modal-close" onclick="hideInstallModal()">Close</button>
@@ -883,6 +957,10 @@
       </a>
     </ul>
     <div class="sb-footer" id="sbFooter">
+      <a class="sb-store" id="sbStore" href="https://apps.apple.com/app/id6789667868"
+         onclick="trackStore('sidebar')" target="_blank" rel="noopener">
+        <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="148" height="49">
+      </a>
       <button class="install-btn" onclick="showInstallModal()">
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
           <path d="M6.5 1v7M3.5 5l3 3 3-3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -902,7 +980,12 @@
         <span></span><span></span><span></span>
       </button>
       <span class="topbar-title"><span style="color:var(--btn-op)">RunPace</span><span id="topbarTitle"> - Calculator</span></span>
-      <div class="topbar-spacer"></div>
+      <button class="topbar-store" id="topbarStore" onclick="openStore('topbar')" aria-label="Get the RunPace app">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+          <path d="M9.5 2v9M5.5 7.5l4 4 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2.5 13v1.5A2.5 2.5 0 005 17h9a2.5 2.5 0 002.5-2.5V13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </button>
     </header>
 
     <!-- Pages -->
@@ -913,6 +996,14 @@
         <h1 class="calc-page-h1">Running Pace Calculator</h1>
         <div class="calc-combined" id="calcCombined"></div>
         <div class="calc-dist-section" id="calcDistSection"></div>
+        <div class="store-cta" data-store-cta>
+          <p class="store-cta-title">RunPace for iPhone</p>
+          <p class="store-cta-text" data-store-text>The same calculator on your home screen — pace wheels, race time estimates and split tables that work offline.</p>
+          <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+             onclick="trackStore('runpace')" target="_blank" rel="noopener">
+            <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="126" height="42">
+          </a>
+        </div>
         <div class="calc-privacy-link">
           <a href="#" onclick="navigate('personvern'); return false;">Privacy Policy</a>
         </div>
@@ -996,6 +1087,14 @@
             </tbody>
           </table>
           <p>Use the calculator at the top to find your exact value – scroll the min/km wheel and watch km/h update instantly.</p>
+                  <div class="store-cta" data-store-cta>
+            <p class="store-cta-title">Convert pace anywhere</p>
+            <p class="store-cta-text" data-store-text>RunPace for iPhone puts min/km and km/h on two linked wheels — change one and the other follows, with no internet needed.</p>
+            <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+               onclick="trackStore('convert')" target="_blank" rel="noopener">
+              <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="126" height="42">
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1018,6 +1117,14 @@
             <li><strong>Threshold run:</strong> 20 min continuous at 5:15 min/km. Builds endurance at goal pace.</li>
           </ul>
           <p>Use the Pacing page in the RunPace calculator to set up a split plan for 5 km with 1 km intervals – then you'll know exactly what the clock should show at every kilometre.</p>
+                  <div class="store-cta" data-store-cta>
+            <p class="store-cta-title">Build your 5k split plan</p>
+            <p class="store-cta-text" data-store-text>Set a goal time in the RunPace app and get the exact split for every kilometre, so you know at each marker whether you are on schedule.</p>
+            <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+               onclick="trackStore('build')" target="_blank" rel="noopener">
+              <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="126" height="42">
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1045,6 +1152,14 @@
 
           <h2>The most important advice</h2>
           <p>Hold back for the first 30 kilometres. Start 10–15 seconds per kilometre slower than your goal pace. Most people who set a marathon personal best do it with a negative split – running the second half faster than the first. Use the Pacing page in the RunPace calculator to build a detailed split plan for the whole race.</p>
+                  <div class="store-cta" data-store-cta>
+            <p class="store-cta-title">Plan your marathon pace</p>
+            <p class="store-cta-text" data-store-text>The RunPace app builds a split table for all 42.195 km, so you always know what the clock should show at the next marker.</p>
+            <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+               onclick="trackStore('plan')" target="_blank" rel="noopener">
+              <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="126" height="42">
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1073,6 +1188,14 @@
             </tbody>
           </table>
           <p>Many people find a treadmill feels a little easier than the equivalent pace outdoors – the belt gives you a bit of momentum, and there's no headwind. A rule of thumb is to set the treadmill to a 0.5–1.0% incline to compensate.</p>
+                  <div class="store-cta" data-store-cta>
+            <p class="store-cta-title">Pace and speed on one screen</p>
+            <p class="store-cta-text" data-store-text>RunPace for iPhone shows min/km and km/h side by side on two linked wheels — handy for setting the treadmill before you start.</p>
+            <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+               onclick="trackStore('pace')" target="_blank" rel="noopener">
+              <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="126" height="42">
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1543,6 +1666,55 @@
     document.getElementById('maalIntervalWrap').appendChild(
       makeWheel('maal', 'interval', INTERVAL_KMS.map(fmtIntervalDist), 'w-maal w-maal-interval', updateMaalResult, null)
     );
+
+    // ── App Store / install CTA ──
+    const APP_STORE_URL = 'https://apps.apple.com/app/id6789667868';
+    const UA = navigator.userAgent;
+    const IS_IOS = /iPad|iPhone|iPod/.test(UA) ||
+                   (UA.includes('Macintosh') && navigator.maxTouchPoints > 1);
+    const IS_ANDROID = /Android/.test(UA);
+
+    // Records the click as a referrer value so it shows up in the existing
+    // analytics without a server-side change.
+    function trackStore(placement) {
+      if (location.hostname !== 'runpace.no') return;
+      fetch('https://svaagan-ubuntuserver.duckdns.org/track'
+            + '?ref=' + encodeURIComponent('appstore-click:' + placement)
+            + '&ev=appstore&placement=' + encodeURIComponent(placement),
+            { keepalive: true }).catch(() => {});
+    }
+
+    function openStore(placement) {
+      if (IS_ANDROID) { showInstallModal(); return; }
+      trackStore(placement);
+      window.open(APP_STORE_URL, '_blank', 'noopener');
+    }
+
+    // Android has no App Store to send anyone to, so the badge becomes the
+    // home-screen install button instead.
+    function applyDeviceCta() {
+      if (!IS_ANDROID) return;
+      document.getElementById('sbStore').classList.add('hidden');
+      document.querySelectorAll('[data-store-cta]').forEach(box => {
+        box.querySelector('.store-cta-title').textContent = 'Add RunPace to your home screen';
+        box.querySelector('[data-store-text]').textContent =
+          'RunPace installs straight from the browser on Android — full screen, on your home screen, and it works offline.';
+        const badge = box.querySelector('.store-badge');
+        const btn = document.createElement('button');
+        btn.className = 'install-btn';
+        btn.type = 'button';
+        btn.textContent = 'Add to Home Screen';
+        btn.onclick = showInstallModal;
+        badge.replaceWith(btn);
+      });
+      const stepsIos = document.getElementById('stepsIos');
+      const stepsAndroid = document.getElementById('stepsAndroid');
+      if (stepsIos && stepsAndroid) {
+        stepsIos.classList.add('hidden');
+        stepsAndroid.classList.remove('hidden');
+      }
+    }
+    applyDeviceCta();
 
     // Analytics ping — only fires on the live site, not during local development
     if (location.hostname === 'runpace.no') {

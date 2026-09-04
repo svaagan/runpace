@@ -8,7 +8,9 @@
   <link rel="canonical" href="https://runpace.no/support">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#000000">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
+  <!-- Safari on iOS renders Apple's own App Store banner from this -->
+  <meta name="apple-itunes-app" content="app-id=6789667868">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23000'/%3E%3Ctext x='90' y='118' font-family='-apple-system,sans-serif' font-size='76' font-weight='700' fill='%23F2C800' text-anchor='middle'%3ERP%3C/text%3E%3C/svg%3E">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -154,6 +156,20 @@
     .faq-a { font-size: 0.92rem; color: var(--text-dim); margin: 0; }
 
     /* ── Health callout ── */
+    .store-cta {
+      margin: 2rem 0 0;
+      padding: 1.35rem 1.4rem 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--divider);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .store-cta-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .store-cta-text { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .store-badge { display: inline-block; line-height: 0; }
+    .store-badge img { height: 44px; width: auto; display: block; }
+    .store-badge:active { opacity: 0.7; }
+
     .callout {
       background: var(--surface);
       border: 1px solid var(--divider);
@@ -182,7 +198,7 @@
   <main class="wrap">
 
     <div class="brand">
-      <div class="brand-logo">PL</div>
+      <div class="brand-logo">RP</div>
       <div>
         <div class="brand-name"><span>RunPace</span></div>
         <div class="brand-sub">Running pace calculator</div>
@@ -252,6 +268,14 @@
     <div class="callout">
       <p>RunPace uses Apple's <strong>HealthKit</strong> for a single, optional purpose: to read your most recent <strong>VO₂max</strong> value so it can estimate training zones and a race-prediction starting point.</p>
       <p>The value is used only on your device, at that moment. It is <strong>never stored</strong> and <strong>never sent</strong> anywhere — not to RunPace and not to any third party. Granting Health access is entirely optional, and you can revoke it at any time in iOS Settings without losing any functionality.</p>
+    </div>
+
+    <div class="store-cta">
+      <p class="store-cta-title">RunPace for iPhone</p>
+      <p class="store-cta-text">Pace wheels, race time estimates and split tables — free on the App Store.</p>
+      <a class="store-badge" href="https://apps.apple.com/app/id6789667868" target="_blank" rel="noopener">
+        <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="132" height="44">
+      </a>
     </div>
 
     <div class="footer">
