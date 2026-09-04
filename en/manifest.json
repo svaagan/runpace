@@ -1,0 +1,18 @@
+{
+  "name": "RunPace – Running Pace Calculator",
+  "short_name": "RunPace",
+  "description": "Running pace calculator: convert min/km and km/h, see finish times and build split plans.",
+  "lang": "en",
+  "start_url": "/en/?src=pwa",
+  "scope": "/en/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "categories": ["health", "fitness", "sports", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

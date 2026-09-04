@@ -1,0 +1,110 @@
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Running Pace Calculator</h1>
+        <p class="lead">Convert between min/km and km/h, see what your pace gives you over
+          5K, 10K, half marathon and marathon — and build a split plan for your goal time.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="/en/splits/">Build a split plan</a>
+          <a class="btn-ghost" href="/en/charts/">See the pace charts</a>
+        </div>
+        <p class="hero-note">Free, no sign-in and no cookies.
+          Every calculation happens in your browser.</p>
+        <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+           data-store-link="hero" target="_blank" rel="noopener">
+          <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="150" height="50">
+        </a>
+      </div>
+      <div class="calc-card">
+        <div class="calc-combined" id="calcCombined"></div>
+        <div class="calc-dist-section" id="calcDistSection"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <h2 class="section-title">How do you convert pace to speed?</h2>
+      <p class="section-intro">Divide 60 by your pace in minutes and you get the speed in km/h.
+        5:00 min/km becomes 60 ÷ 5 = 12 km/h. The other direction is the same sum:
+        60 ÷ 12 = 5:00 min/km.</p>
+      {{alldist}}
+      <p>The table covers four common race distances. For a different pace, finer steps or
+        other distances, drag the wheels in the calculator above — or open the
+        <a href="/en/charts/min-km-to-km-h/">full conversion chart</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">Ready-made pace charts</h2>
+      <p class="section-intro">Look up your pace, or work backwards from the time you are aiming for.</p>
+      <div class="card-grid three">
+        <a class="card" href="/en/charts/marathon/">
+          <div class="card-kicker">42.195 km</div>
+          <div class="card-title">Marathon pace</div>
+          <p class="card-text">What each pace gives as a finish time, and what 3, 3:30, 4 or 5 hours demands.</p>
+        </a>
+        <a class="card" href="/en/charts/half-marathon/">
+          <div class="card-kicker">21.1 km</div>
+          <div class="card-title">Half marathon</div>
+          <p class="card-text">Pace and finish time for the half, with the halfway split.</p>
+        </a>
+        <a class="card" href="/en/charts/10k/">
+          <div class="card-kicker">10K</div>
+          <div class="card-title">10K</div>
+          <p class="card-text">From 32 to 90 minutes, with the pace each time requires.</p>
+        </a>
+        <a class="card" href="/en/charts/5k/">
+          <div class="card-kicker">5K</div>
+          <div class="card-title">5K</div>
+          <p class="card-text">A pace chart for the most common race distance there is.</p>
+        </a>
+        <a class="card" href="/en/charts/min-km-to-km-h/">
+          <div class="card-kicker">Conversion</div>
+          <div class="card-title">min/km to km/h</div>
+          <p class="card-text">The full chart from 3:00 to 8:00 min/km, in five-second steps.</p>
+        </a>
+        <a class="card" href="/en/charts/treadmill/">
+          <div class="card-kicker">Indoors</div>
+          <div class="card-title">Treadmill</div>
+          <p class="card-text">The belt shows km/h, you think in min/km. Here is the bridge.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      {{cta|RunPace for iPhone|The same calculator on your home screen — pace wheels, race times and split tables that work offline.|home}}
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <h2 class="section-title">Frequently asked questions</h2>
+      <div class="faq-item">
+        <p class="faq-q">How do I convert min/km to km/h?</p>
+        <p class="faq-a">Divide 60 by your pace in minutes. 5:00 min/km gives 60 ÷ 5 = 12.0 km/h.
+          If your pace has seconds, convert them to decimals first: 5:30 is 5.5 minutes, and
+          60 ÷ 5.5 = 10.9 km/h. The calculator above does this as you drag the wheel.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What pace do I need for a 4 hour marathon?</p>
+        <p class="faq-a">5:41 min/km, or 10.5 km/h, for the full 42.195 km. At halfway the
+          clock should read 2:00:00. <a href="/en/charts/marathon/">The full marathon chart</a>
+          lists the pace for every goal time from 2:30 to 6:00.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What is a normal running pace?</p>
+        <p class="faq-a">For most recreational runners an easy pace sits at 6:00–7:00 min/km,
+          or 8.6–10 km/h. Trained recreational runners hold 5:00–5:30 min/km on an easy run.
+          What matters is not the number but whether the pace feels easy to you.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Is the pace calculator free?</p>
+        <p class="faq-a">Yes. It is free, needs no sign-in and sets no cookies. Every
+          calculation happens in your browser — nothing is sent anywhere.</p>
+      </div>
+    </div>
+  </section>

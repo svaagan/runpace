@@ -1,0 +1,457 @@
+/* ─────────────────────────────────────────────────────────────
+   runpace.no — kalkulatoren
+   Hjulene, tempoberegningen og mellomtidstabellen. Lastes bare av
+   forsida og /mellomtider/; artikkelsidene trenger den ikke.
+   Farge- og typografitokens kommer fra site.css.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Calculator page ── */
+.calc-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1rem 1.25rem max(env(safe-area-inset-bottom), 0.75rem);
+  gap: 0;
+}
+
+.calc-combined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+.calc-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+.calc-group-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.calc-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--divider);
+  flex-shrink: 0;
+}
+
+/* ── Inline distance rows ── */
+.calc-dist-section {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--divider);
+  margin-top: 0.9rem;
+}
+.calc-dist-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.calc-dist-row:last-child { border-bottom: none; }
+.calc-dist-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0.25rem 0.2rem;
+  flex-shrink: 0;
+}
+.calc-dist-header span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.calc-dist-name { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+.calc-dist-sub  { font-size: 0.65rem; color: var(--text-dim); margin-left: 0.3rem; }
+.calc-dist-time { font-size: 1rem; font-weight: 300; color: var(--btn-op); font-variant-numeric: tabular-nums; }
+.calc-dist-time.empty { color: rgba(255,255,255,0.2); font-size: 0.82rem; }
+
+.calc-page-h1 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Calculator picker wheels ── */
+.calc-picker-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 120px;
+}
+.calc-picker-wrap::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 40px;
+  height: 40px;
+  background: rgba(242,200,0,0.1);
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 1;
+}
+.calc-picker-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.85) 0%, transparent 33%,
+    transparent 67%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+.picker-wheel.w-calc { height: 120px; }
+.picker-wheel.w-calc .picker-item {
+  font-size: 1.7rem;
+  font-weight: 200;
+}
+.w-calc-narrow { width: 60px; }
+.w-calc-wide   { width: 84px; }
+.calc-sep {
+  font-size: 2.2rem;
+  font-weight: 200;
+  color: rgba(255,255,255,0.5);
+  padding: 0 4px;
+  position: relative;
+  z-index: 3;
+  user-select: none;
+}
+
+/* ── Picker (shared) ── */
+.picker-section {
+  padding: 0.5rem 0 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.picker-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.picker-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 120px;
+}
+.picker-wrap::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 40px;
+  height: 40px;
+  background: rgba(242,200,0,0.1);
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 1;
+}
+.picker-wheel {
+  height: 120px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.picker-wheel::-webkit-scrollbar { display: none; }
+.picker-wheel.w-h  { width: 36px; }
+.picker-wheel.w-ms { width: 50px; }
+.picker-spacer { height: 40px; }
+.picker-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text);
+  scroll-snap-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.picker-sep {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  padding: 0 3px;
+  position: relative;
+  z-index: 3;
+  user-select: none;
+}
+.picker-result {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--btn-op);
+  min-height: 1.1rem;
+}
+.picker-result.empty { color: transparent; }
+
+.pacing-table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.pacing-table-wrap::-webkit-scrollbar { display: none; }
+.pacing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pacing-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 0.6rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--divider);
+}
+.pacing-table thead th:last-child { text-align: right; }
+.pacing-table tbody td {
+  padding: 0.7rem 1.25rem;
+  font-size: 0.92rem;
+  color: var(--text);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-variant-numeric: tabular-nums;
+}
+.pacing-table tbody td:last-child {
+  text-align: right;
+  color: var(--btn-op);
+  font-weight: 500;
+}
+.pacing-table tbody tr.finish td {
+  font-weight: 700;
+  color: var(--btn-op);
+  border-top: 1px solid rgba(242,200,0,0.3);
+  border-bottom: none;
+}
+.pacing-placeholder {
+  text-align: center;
+  color: rgba(255,255,255,0.25);
+  font-size: 0.85rem;
+  padding: 2rem 1rem;
+}
+
+/* ── Distansefart page ── */
+.maal-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.maal-top {
+  flex-shrink: 0;
+  padding: 0.75rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--divider);
+}
+.picker-wheel.w-maal { height: 120px; }
+.picker-wheel.w-maal .picker-item { font-size: 1.5rem; font-weight: 200; }
+.w-maal-dist { width: 130px; }
+.picker-wheel.w-maal.w-maal-dist .picker-item { font-size: 0.82rem; font-weight: 300; }
+.w-maal-h  { width: 36px; }
+.w-maal-ms { width: 54px; }
+.maal-custom-input {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.w-maal-custom { width: 110px; }
+.maal-custom-dist-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+.maal-unit-toggle {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--divider);
+}
+.maal-unit-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 0.7rem;
+  touch-action: manipulation;
+}
+.maal-unit-btn.active {
+  background: var(--btn-op);
+  color: #000;
+}
+.maal-bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--divider);
+  padding-top: 0.75rem;
+}
+.maal-interval-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+.maal-interval-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.maal-interval-hint {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.w-maal-interval { width: 80px; }
+.picker-wheel.w-maal.w-maal-interval .picker-item { font-size: 1.1rem; font-weight: 300; }
+#maalCustomWheelWrap, #maalIntervalWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 120px;
+}
+#maalCustomWheelWrap::before, #maalIntervalWrap::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 40px;
+  height: 40px;
+  background: rgba(242,200,0,0.1);
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 1;
+}
+#maalCustomWheelWrap::after, #maalIntervalWrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.85) 0%, transparent 33%,
+    transparent 67%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+.maal-result {
+  margin-top: 0.6rem;
+  border-top: 1px solid var(--divider);
+  padding-top: 0.6rem;
+  text-align: center;
+}
+.maal-pace-val {
+  font-size: 3rem;
+  font-weight: 200;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.maal-pace-unit {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.1rem;
+}
+.maal-speed-val {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  padding-top: 0.3rem;
+}
+.maal-speed-val span {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--btn-op);
+}
+/* ── FAQ page ── */
+#page-faq {
+  padding: 0.6rem 1rem max(env(safe-area-inset-bottom), 0.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+  height: 100%;
+}
+.faq-card {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 0.65rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.faq-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--btn-op);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.faq-body {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.45;
+}
+
+/* ── Kortramme: kalkulatoren er nå et element i en scrollbar side,
+      ikke en fullskjermside som fyller det som er igjen ── */
+.calc-card,
+.maal-card {
+  background: var(--surface-2);
+  border: 1px solid var(--divider);
+  border-radius: 18px;
+  height: auto;
+  overflow: visible;
+}
+.calc-card { min-height: 430px; }
+.maal-card { max-width: 560px; margin: 0 auto; }
+.calc-card .calc-dist-section { flex: 1 1 auto; min-height: 300px; }
+.maal-card { padding: 1rem 1.1rem 1.4rem; }
+
+/* På smale telefoner er de faste hjulbreddene til sammen bredere enn
+   skjermen. Mellomrommene strammes inn i stedet for å krympe tallene. */
+@media (max-width: 420px) {
+  .calc-card { padding-left: 0.6rem; padding-right: 0.6rem; }
+  .maal-card { padding-left: 0.6rem; padding-right: 0.6rem; }
+  .calc-combined { gap: 0.55rem; }
+  .maal-bottom-row { gap: 0.55rem; }
+}
+@media (max-width: 360px) {
+  .calc-combined { gap: 0.25rem; }
+  .w-calc-wide { width: 74px; }
+  .w-calc-narrow { width: 52px; }
+}

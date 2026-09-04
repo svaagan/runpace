@@ -1,88 +1,108 @@
-# RunPace
+# RunPace — runpace.no
 
-Løpekalkulator for mobil. Beregner tempo i min/km og km/h, estimerer løpstider for standarddistanser, og genererer mellomtidstabeller for et målsatt sluttid.
+Løpekalkulator for tempo, fart og mellomtider. Publisert på
+**[runpace.no](https://runpace.no)** via GitHub Pages.
 
-Tilgjengelig på **[runpace.no](https://runpace.no)**
-
----
-
-## Hva appen gjør
-
-### Kalkulator
-To sammenkoblede scrollehjul viser min/km og km/h side om side. Justerer du det ene, oppdateres det andre automatisk. Under hjulene vises estimert løpstid for sju standarddistanser (1k, 1 mile, 3k, 5k, 10k, halvmaraton, maraton).
-
-### Pacing
-Velg en distanse (forhåndsinnstilt eller egendefinert i meter eller km) og et tidsmål. Appen beregner nødvendig tempo og viser en mellomtidstabell. Du velger intervall for mellomtidene (100 m, 200 m, 400 m, 1k, 2k, 5k eller 10k).
-
-### Guider
-Fire artikler om løpeteknikk og pacing:
-- **Hva er min/km?** — forklarer tempoenheten og omregning til km/h
-- **5k under 25 min** — pacing-guide med treningsopplegg
-- **Maraton-tempo** — oversikt over tempoer og sluttider
-- **Tempo vs. fart** — forskjellen på min/km og km/h, tredemølle-tabell
-
-### Om oss / Personvern
-Informasjonsside og GDPR-erklæring. Kontakt: kontakt@runpace.no
+Sida finnes på norsk (i rota) og engelsk (under `/en/`), koblet med `hreflang`.
 
 ---
 
-## Teknisk
+## ⚠️ Rediger aldri HTML-filene direkte
 
-- **Én fil:** Hele appen er `index.html` — ingen avhengigheter, ingen byggsteg, ingen backend
-- **PWA-klar:** Kan installeres på hjemskjermen og åpnes i fullskjerm uten nettlesergrensesnitt
-- **Ingen cookies:** Appen setter ingen informasjonskapsler
-- **Språk:** Norsk (bokmål)
-- **Design:** Mørkt tema med gul aksent (`#F2C800`), iOS-inspirerte scrollehjul
+Alle `index.html`-filene er **generert**. Redigerer du dem, blir endringen
+borte neste gang noen kjører byggeren.
 
----
+| Skal du endre …            | Rediger da …                        |
+|----------------------------|-------------------------------------|
+| Brødtekst på en side       | `_src/body/<nb\|en>/<navn>.html`    |
+| Tittel, meta, URL, schema  | `_src/build.py` (`PAGES`-registeret) |
+| Meny, bunn, topplinje      | `_src/chrome.py`                    |
+| Tabellene                  | `_src/tables.py`                    |
+| Formlene                   | `_src/pacemath.py`                  |
+| Design                     | `assets/site.css`                   |
+| Kalkulatoren               | `assets/calc.js`, `assets/calc.css` |
 
-## Hosting
-
-
-Publisert med **GitHub Pages** fra `main`-branchen i dette repoet, med eget domene via `CNAME`-fila og automatisk HTTPS.
-
-For å oppdatere siden: rediger `index.html`, commit og push. GitHub bygger og publiserer automatisk, vanligvis i løpet av ett minutt.
-
----
-
-## Analytikk
-
-Egenutviklet, selvdriftet analytikkløsning. Ingen tredjepartstjenester, ingen cookies.
-
-### Hva som samles inn per besøk
-- Tidspunkt
-- Anonymisert IP (SHA-256, kun 16 tegn lagres — kan ikke rekonstrueres)
-- Nettleser/enhet (user-agent)
-- Trafikkilde (referrer)
-
-Data lagres på en privat server i Norge, deles ikke med tredjeparter og selges ikke.
-Sporingen kjører kun når siden lastes fra `runpace.no` — lokale kopier og forhåndsvisninger registreres ikke.
-
----
-
-## Filstruktur
-
-```
-runpace/
-├── index.html         # Hele appen (kalkulator, pacing, guider, om oss, personvern)
-├── support/
-│   └── index.html     # Støtteside (Support URL for App Store)
-├── robots.txt         # Instruksjoner til søkemotorer
-├── sitemap.xml        # Sidekart for søkemotorer
-├── CNAME              # Eget domene for GitHub Pages (runpace.no)
-├── .gitignore
-└── README.md          # Denne filen
-```
-
----
-
-## Git / versjonskontroll
+Etterpå:
 
 ```bash
-# Oppdater og push endringer
-git add index.html
-git commit -m "Beskriv hva du endret"
-git push
+python3 _src/build.py     # skriver alle HTML-filene, sitemap, robots, llms.txt, 404
+python3 _src/check.py     # døde lenker, hreflang, schema, HTML-nøsting, én h1 per side
+git add -A && git commit -m "..." && git push
 ```
 
-Push til `main` utløser en ny publisering til runpace.no automatisk.
+**Publiseringen har ikke noe byggsteg.** GitHub Pages serverer rå filer fra
+`main`. Byggeren kjøres lokalt og resultatet committes, så en feil i Python
+kan aldri ta ned nettsida. Push er live etter et par minutter.
+
+---
+
+## Struktur
+
+```
+/                             Løpekalkulator (forside)      ← index.html
+/mellomtider/                 Mellomtider: måltid → splitter
+/app/                         Produktside for iOS-appen
+/tabeller/…                   Seks tempotabeller + hub
+/guider/…                     Sju guider + hub
+/om/  /faq/  /personvern/     Info
+/support/                     Støtte (Support-URL i App Store Connect)
+/en/…                         Engelsk utvalg (12 sider)
+
+assets/     site.css, site.js (alle sider) · calc.css, calc.js (verktøysidene)
+            appstore-no.svg, appstore-en.svg — Apples offisielle merker
+icons/      PWA-ikoner, hentet fra iOS-appens appikon
+og/         Delebilder 1200×630, laget av _src/make_og.py
+img/app/    Skjermbilder fra iOS-appen
+_src/       Byggeren. Publiseres ikke (`Disallow` i robots.txt)
+```
+
+**Rør ikke:** `CNAME` (domenet), `app-ads.txt` (må ligge i rota for AdMob),
+og adressen `/support/` (registrert i App Store Connect).
+
+---
+
+## Slik henger tallene sammen
+
+Ingen tall på nettsida er skrevet for hånd. Alle tabeller genereres fra
+`_src/pacemath.py`, som speiler `assets/calc.js`:
+
+- fart = 60 ÷ tempo i minutter
+- sluttid = tempo × distanse, avrundet **halve oppover** som `Math.round` i JS
+  (Pythons `round()` runder til partall og gir maraton 3:30:58 i stedet for 3:30:59)
+- løpstidsanslag: Riegels formel, T₂ = T₁ × (D₂ ÷ D₁)^1,06
+
+Et oppslag i en tabell og et drag på hjulet gir dermed alltid samme svar.
+
+---
+
+## SEO og AI
+
+- Unik `title`, `description`, `canonical` og `og:image` per side
+- `hreflang`-par begge veier, `x-default` → engelsk
+- `schema.org`: Organization på alle sider, pluss WebApplication,
+  SoftwareApplication, Article, BreadcrumbList og FAQPage der de hører hjemme
+- `llms.txt` i rota: innholdsfortegnelse for AI-crawlere
+- `robots.txt` slipper eksplisitt inn GPTBot, ClaudeBot, PerplexityBot,
+  Google-Extended, Applebot-Extended med flere
+- CSS og JS får `?v=<innholdssum>`, så en endring slår igjennom med én gang
+  i stedet for etter GitHub Pages' ti minutter med caching
+
+---
+
+## App Store
+
+Appen er `RunPace – Pace Calculator`, App-ID **6789667868**. I markup brukes
+`https://apps.apple.com/app/id6789667868`, som sender brukeren til riktig land.
+
+- `<meta name="apple-itunes-app">` gir Apples egen nedlastingsbanner i Safari på iPhone
+- Klikk mot App Store logges som `appstore-click:<plassering>` i analytikken
+- Android får «Legg til på hjemskjermen» i stedet, siden appen ikke finnes der ennå
+
+---
+
+## Personvern
+
+Ingen informasjonskapsler og ingen tredjepartsskript. Besøk registreres med en
+egen løsning på en server i Norge: tidspunkt, hashet IP (16 tegn), user-agent
+og referrer. Sporingen kjører bare når vertsnavnet er `runpace.no`, så lokale
+kopier og forhåndsvisninger registreres ikke.

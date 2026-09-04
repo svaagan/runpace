@@ -1,0 +1,144 @@
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Løpekalkulator</h1>
+        <p class="lead">Regn om mellom min/km og km/t, se hva tempoet ditt gir på
+          5 km, 10 km, halvmaraton og maraton — og lag en mellomtidsplan for måltiden din.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="/mellomtider/">Lag en tempoplan</a>
+          <a class="btn-ghost" href="/tabeller/">Se tempotabellene</a>
+        </div>
+        <p class="hero-note">Gratis, uten innlogging og uten informasjonskapsler.
+          All utregning skjer i nettleseren din.</p>
+        <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+           data-store-link="hero" target="_blank" rel="noopener">
+          <img src="/assets/appstore-no.svg" alt="Last ned RunPace i App Store" width="150" height="50">
+        </a>
+      </div>
+      <div class="calc-card">
+        <div class="calc-combined" id="calcCombined"></div>
+        <div class="calc-dist-section" id="calcDistSection"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <h2 class="section-title">Hvordan regner du om tempo til fart?</h2>
+      <p class="section-intro">Del 60 på tempoet i minutter, så får du farten i km/t.
+        5:00 min/km blir 60 ÷ 5 = 12 km/t. Den andre veien er den samme regningen:
+        60 ÷ 12 = 5:00 min/km.</p>
+      {{alldist}}
+      <p>Tabellen viser fire vanlige konkurransedistanser. Trenger du et annet tempo,
+        finere trinn eller andre distanser, drar du bare på hjulene i kalkulatoren
+        øverst — eller åpner <a href="/tabeller/min-km-til-km-t/">den fullstendige
+        omregningstabellen</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">Ferdige tempotabeller</h2>
+      <p class="section-intro">Slå opp tempoet ditt, eller regn baklengs fra tiden du sikter mot.</p>
+      <div class="card-grid three">
+        <a class="card" href="/tabeller/maraton/">
+          <div class="card-kicker">42,195 km</div>
+          <div class="card-title">Maratontempo</div>
+          <p class="card-text">Hva hvert tempo gir i sluttid, og hva 3, 3:30, 4 eller 5 timer krever.</p>
+        </a>
+        <a class="card" href="/tabeller/halvmaraton/">
+          <div class="card-kicker">21,1 km</div>
+          <div class="card-title">Halvmaraton</div>
+          <p class="card-text">Tempo og sluttid for halvmaraton, med mellomtid halvveis.</p>
+        </a>
+        <a class="card" href="/tabeller/10km/">
+          <div class="card-kicker">10 km</div>
+          <div class="card-title">10 km</div>
+          <p class="card-text">Fra 30 til 90 minutter, med tempoet hver tid krever.</p>
+        </a>
+        <a class="card" href="/tabeller/5km/">
+          <div class="card-kicker">5 km</div>
+          <div class="card-title">5 km</div>
+          <p class="card-text">Tempotabell for den vanligste konkurransedistansen.</p>
+        </a>
+        <a class="card" href="/tabeller/min-km-til-km-t/">
+          <div class="card-kicker">Omregning</div>
+          <div class="card-title">min/km til km/t</div>
+          <p class="card-text">Full tabell fra 3:00 til 8:00 min/km, i trinn på fem sekunder.</p>
+        </a>
+        <a class="card" href="/tabeller/tredemolle/">
+          <div class="card-kicker">Innendørs</div>
+          <div class="card-title">Tredemølle</div>
+          <p class="card-text">Møllen viser km/t, du tenker i min/km. Her er broen mellom dem.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">Guider</h2>
+      <p class="section-intro">Korte og konkrete, uten fyllstoff.</p>
+      <div class="card-grid three">
+        <a class="card" href="/guider/hva-er-min-km/">
+          <div class="card-title">Hva betyr min/km?</div>
+          <p class="card-text">Tempoenheten forklart, og hvorfor lavere tall betyr raskere løping.</p>
+        </a>
+        <a class="card" href="/guider/god-tid-pa-5km/">
+          <div class="card-title">Hva er en god tid på 5 km?</div>
+          <p class="card-text">Holdepunkter for hva ulike tider krever — og hvorfor din egen forrige tid teller mest.</p>
+        </a>
+        <a class="card" href="/guider/negativ-split/">
+          <div class="card-title">Negativ split</div>
+          <p class="card-text">Hvorfor nesten alle personlige rekorder settes med en rask andre halvdel.</p>
+        </a>
+        <a class="card" href="/guider/riegel-formelen/">
+          <div class="card-title">Riegels formel</div>
+          <p class="card-text">Anslå tiden din på en distanse du ikke har løpt ennå.</p>
+        </a>
+        <a class="card" href="/guider/maratontempo/">
+          <div class="card-title">Maratontempo</div>
+          <p class="card-text">Hva som er realistisk, og hvorfor folk går på veggen etter 30 km.</p>
+        </a>
+        <a class="card" href="/guider/5km-under-25-minutter/">
+          <div class="card-title">5 km under 25 minutter</div>
+          <p class="card-text">Tempoet det krever, og et treningsopplegg på åtte uker.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      {{cta|RunPace til iPhone|Den samme kalkulatoren på hjemskjermen — tempohjul, løpstider og mellomtidstabeller som virker uten nett.|hjem}}
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <h2 class="section-title">Vanlige spørsmål</h2>
+      <div class="faq-item">
+        <p class="faq-q">Hvordan regner jeg min/km om til km/t?</p>
+        <p class="faq-a">Del 60 på tempoet i minutter. 5:00 min/km blir 60 ÷ 5 = 12 km/t.
+          Har tempoet sekunder, gjør du dem om til desimaler først: 5:30 er 5,5 minutter,
+          og 60 ÷ 5,5 = 10,9 km/t. Kalkulatoren øverst gjør dette mens du drar på hjulet.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Hva er et normalt løpetempo?</p>
+        <p class="faq-a">For de fleste mosjonister ligger et rolig tempo på 6:00–7:00 min/km,
+          altså 8,6–10 km/t. Trente mosjonister holder gjerne 5:00–5:30 min/km på en rolig tur.
+          «Normalt» sier likevel lite — det som betyr noe er om tempoet føles rolig for deg.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Hvilket tempo må jeg holde for å løpe maraton på 4 timer?</p>
+        <p class="faq-a">5:41 min/km, altså 10,5 km/t, hele veien i 42,195 km. Halvveis skal
+          klokka vise 2:00:00. <a href="/tabeller/maraton/">Hele maratontabellen</a> viser
+          tempoet for alle måltider fra 2:30 til 6:00.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Er løpekalkulatoren gratis?</p>
+        <p class="faq-a">Ja. Kalkulatoren er gratis, krever ingen innlogging og setter ingen
+          informasjonskapsler. All utregning skjer i nettleseren din — ingenting sendes noe sted.</p>
+      </div>
+    </div>
+  </section>

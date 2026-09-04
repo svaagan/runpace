@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>RunPace</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5CE0A"/>
+      <stop offset="1" stop-color="#E5B400"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#g)"/>
+  <!-- Løpebanen: to konsentriske stadionformer og en indre rett strekning -->
+  <rect x="71" y="154" width="368" height="205" rx="102" fill="none" stroke="#1A1A17" stroke-width="43"/>
+  <rect x="132" y="209" width="248" height="97" rx="48" fill="none" stroke="#F7EFD8" stroke-width="33"/>
+  <rect x="152" y="227" width="213" height="58" rx="29" fill="#E5B400"/>
+</svg>

@@ -1,4 +1,40 @@
+# runpace.no
 User-agent: *
 Allow: /
+
+# AI-assistenter er en uttalt trafikkilde for denne sida, og flere av dem
+# krever at de nevnes ved navn for å kunne bruke innholdet.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Byggkilden trenger ingen å indeksere
+Disallow: /_src/
 
 Sitemap: https://runpace.no/sitemap.xml

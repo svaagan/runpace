@@ -3,21 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Support &amp;amp; Help | RunPace</title>
-  <meta name="description" content="Support for the RunPace pace calculator and iOS app: how to reach us, answers to common questions, and how the Apple Health feature works.">
-  <link rel="canonical" href="https://runpace.no/support/">
+  <title>Split Calculator – build a pacing plan for your goal time | RunPace</title>
+  <meta name="description" content="Set a distance and a goal time, and get the pace you need plus a split table showing what the clock should read at every kilometre.">
+  <link rel="canonical" href="https://runpace.no/en/splits/">
+  <link rel="alternate" hreflang="nb" href="https://runpace.no/mellomtider/">
+  <link rel="alternate" hreflang="en" href="https://runpace.no/en/splits/">
+  <link rel="alternate" hreflang="x-default" href="https://runpace.no/en/splits/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RunPace">
-  <meta property="og:url" content="https://runpace.no/support/">
-  <meta property="og:title" content="Support &amp;amp; Help | RunPace">
-  <meta property="og:description" content="Support for the RunPace pace calculator and iOS app: how to reach us, answers to common questions, and how the Apple Health feature works.">
+  <meta property="og:url" content="https://runpace.no/en/splits/">
+  <meta property="og:title" content="Split Calculator – build a pacing plan for your goal time | RunPace">
+  <meta property="og:description" content="Set a distance and a goal time, and get the pace you need plus a split table showing what the clock should read at every kilometre.">
   <meta property="og:image" content="https://runpace.no/og/default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Support &amp;amp; Help | RunPace">
-  <meta name="twitter:description" content="Support for the RunPace pace calculator and iOS app: how to reach us, answers to common questions, and how the Apple Health feature works.">
+  <meta name="twitter:title" content="Split Calculator – build a pacing plan for your goal time | RunPace">
+  <meta name="twitter:description" content="Set a distance and a goal time, and get the pace you need plus a split table showing what the clock should read at every kilometre.">
   <meta name="twitter:image" content="https://runpace.no/og/default.png">
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,6 +33,7 @@
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/icons/icon-180.png">
   <link rel="stylesheet" href="/assets/site.css?v=1337713e">
+  <link rel="stylesheet" href="/assets/calc.css?v=b8410e8e">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -60,7 +64,7 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://runpace.no/support/#crumbs",
+      "@id": "https://runpace.no/en/splits/#crumbs",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -71,45 +75,7 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Support"
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://runpace.no/support/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I use the pace calculator?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Scroll the wheels to set a pace (min/km) or a speed (km/h) — both update automatically. Below the wheels you will see estimated finish times for standard distances from 1 km up to a marathon."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I build a pacing or split plan?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Open the Race plan screen in the app, pick a distance or enter a custom one, and scroll in your target finish time. RunPace shows the required pace and a split table so you know what the clock should read at each interval."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What does the Apple Health feature do?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In the iOS app you can optionally allow RunPace to read your latest VO2max value from Apple Health, to suggest training zones and a starting point for race predictions. This is fully optional — every feature works without it."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does RunPace collect my data?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The iOS app has no account and every calculation happens locally on your device. From version 1.5 it shows a small banner ad delivered by Google AdMob. Apart from that banner the app sends nothing about you anywhere, and Health data is never used for advertising."
-          }
+          "name": "Splits"
         }
       ]
     }
@@ -127,7 +93,7 @@
       <a class="brand" href="/en/"><b>Run</b>Pace</a>
       <nav class="nav-main" aria-label="Menu">
         <a href="/en/">Calculator</a>
-        <a href="/en/splits/">Splits</a>
+        <a href="/en/splits/" aria-current="page">Splits</a>
         <a href="/en/charts/">Charts</a>
         <a href="/en/app/">iOS app</a>
       </nav>
@@ -146,7 +112,7 @@
       <div class="nav-group">
         <div class="nav-group-title">Tools</div>
         <a href="/en/">Pace calculator</a>
-        <a href="/en/splits/">Splits</a>
+        <a href="/en/splits/" aria-current="page">Splits</a>
         <a href="/en/app/">RunPace for iPhone</a>
       </div>
       <div class="nav-group">
@@ -162,7 +128,7 @@
         <div class="nav-group-title">About</div>
         <a href="/en/about/">About RunPace</a>
         <a href="/en/privacy/">Privacy</a>
-        <a href="/support/" aria-current="page">Support</a>
+        <a href="/support/">Support</a>
         <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>
       </div>
     </div>
@@ -171,96 +137,85 @@
   <nav class="crumbs narrow" aria-label="Breadcrumb">
     <a href="/en/">Home</a>
     <span aria-hidden="true">/</span>
-    <span aria-current="page">Support</span>
+    <span aria-current="page">Splits</span>
   </nav>
   <main id="main">
-  <article class="narrow">
-    <h1>Support &amp; Help</h1>
+  <div class="narrow">
+    <h1>Split Calculator</h1>
     <div class="answer">
-      <p>Questions, feedback or a problem with the RunPace app or website?
-        Email <strong>kontakt@runpace.no</strong> — we usually reply within
-        <strong>2–3 business days</strong>.</p>
+      <p>Pick a distance and a goal time, and RunPace works out <strong>the pace you need</strong>
+        and builds a table showing what the clock should read at every marker.</p>
     </div>
+  </div>
 
-    <h2>Contact us</h2>
-    <div class="contact-card">
-      <div class="contact-label">Email</div>
-      <div class="contact-value"><a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></div>
-      <p>Please describe what you were doing and, if relevant, which device and iOS version
-        you are using — it helps us solve things faster.</p>
-      <a class="btn-primary" href="mailto:kontakt@runpace.no?subject=RunPace%20support">Email support</a>
+  <div class="wrap">
+    <div class="maal-card">
+      <div class="maal-top">
+        <div class="calc-combined" id="maalCombined"></div>
+        <div class="maal-bottom-row">
+          <div id="maalCustomInput" class="maal-custom-input hidden">
+            <div class="maal-custom-dist-wrap">
+              <div class="maal-interval-label">Distance</div>
+              <div id="maalCustomWheelWrap"></div>
+            </div>
+            <div class="maal-unit-toggle">
+              <button id="maalUnitM" class="maal-unit-btn" type="button" onclick="setMaalUnit('m')">m</button>
+              <button id="maalUnitKm" class="maal-unit-btn active" type="button" onclick="setMaalUnit('km')">km</button>
+            </div>
+          </div>
+          <div class="maal-interval-group">
+            <div class="maal-interval-label">Split frequency</div>
+            <div id="maalIntervalWrap"></div>
+          </div>
+        </div>
+        <div class="maal-result">
+          <div class="maal-pace-val" id="maalPaceVal">–</div>
+          <div class="maal-pace-unit">min/km</div>
+          <div class="maal-speed-val" id="maalSpeedVal"></div>
+        </div>
+      </div>
+      <div class="pacing-table-wrap">
+        <table class="pacing-table">
+          <thead><tr><th>Km</th><th>Split</th></tr></thead>
+          <tbody id="maal-pacing-tbody">
+            <tr><td colspan="2" class="pacing-placeholder">Choose distance and target time</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
-    <h2>Frequently asked questions</h2>
+  <div class="narrow">
+    <h2>How to use your splits</h2>
+    <p>A split plan exists to stop you starting too fast. That is the most common mistake in
+      any race, and it costs more at the end than it gains at the start.</p>
+    <p>Write down the times for the markers you will actually see — usually every kilometre on
+      the road, every 400 metres on the track. Then compare as you go. If you are ten seconds
+      ahead of schedule after three kilometres, you do not have a lead; you have borrowed time
+      you will pay back with interest.</p>
 
-    <div class="faq-item">
-      <p class="faq-q">How do I use the pace calculator?</p>
-      <p class="faq-a">Scroll the wheels to set a pace (min/km) or a speed (km/h) — both update
-        automatically. Below the wheels you will see estimated finish times for standard
-        distances from 1 km up to a marathon.
-        <a href="/en/">Try it in your browser.</a></p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">How do I build a pacing or split plan?</p>
-      <p class="faq-a">Open the <strong>Race plan</strong> screen in the app, pick a distance
-        (or enter a custom one), and scroll in your target finish time. RunPace shows the
-        required pace and a split table so you know what the clock should read at each interval.
-        The <a href="/en/splits/">split calculator on the website</a> does the same thing.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">What does the Apple Health feature do?</p>
-      <p class="faq-a">In the iOS app you can optionally allow RunPace to read your latest
-        <strong>VO₂max</strong> (cardio fitness) value from Apple Health. It is used to suggest
-        training zones and a starting point for race predictions. This is fully optional —
-        every feature of the app works without it.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">How do I turn Apple Health access on or off?</p>
-      <p class="faq-a">You can manage access any time in the app's settings, or on your device
-        under <strong>Settings → Privacy &amp; Security → Health → RunPace</strong>. Turning it
-        off does not affect any other feature.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">Does RunPace collect my data?</p>
-      <p class="faq-a">The iOS app has no account, and every calculation happens locally on your
-        device. From version 1.5 it shows a small banner ad, delivered by Google AdMob, which is
-        what keeps it free — anyone who installed the app before ads existed keeps it ad-free
-        permanently, and new users can remove the banner with a one-time purchase. Apart from
-        that banner the app sends nothing about you anywhere, and your Health data is never used
-        for advertising. The website uses only anonymised, self-hosted visit statistics. See the
-        <a href="/en/privacy/">privacy policy</a> for full details.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">The app or website is not working correctly</p>
-      <p class="faq-a">Try closing and reopening the app, or refreshing the page. If the problem
-        continues, email <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a> with a short
-        description and a screenshot if possible, and we will look into it.</p>
-    </div>
-
-    <h2>Apple Health &amp; your privacy</h2>
-    <div class="answer">
-      <p>RunPace uses Apple's <strong>HealthKit</strong> for a single, optional purpose: to read
-        your most recent <strong>VO₂max</strong> value so it can estimate training zones and a
-        race-prediction starting point.</p>
-      <p>The value is used only on your device, at that moment. It is never stored and never
-        sent anywhere — not to RunPace and not to any third party. Granting Health access is
-        entirely optional, and you can revoke it at any time in iOS Settings without losing any
-        functionality.</p>
-    </div>
+    <h2>Custom distances</h2>
+    <p>Choose <strong>Custom</strong> at the bottom of the distance wheel and a second wheel
+      appears where you can set the distance in metres or kilometres. Useful for track
+      sessions, an odd local race, or an interval workout you want splits for.</p>
 
     <aside class="store-cta" data-store-cta>
-  <p class="store-cta-title">RunPace for iPhone</p>
-  <p class="store-cta-text">Pace wheels, race time estimates and split tables — free on the App Store.</p>
-  <a class="store-badge" href="https://apps.apple.com/app/id6789667868" data-store-link="support" target="_blank" rel="noopener">
+  <p class="store-cta-title">Take the plan with you on race day</p>
+  <p class="store-cta-text">RunPace for iPhone builds the same split table, and it works offline — including where the mobile signal does not.</p>
+  <a class="store-badge" href="https://apps.apple.com/app/id6789667868" data-store-link="splits" target="_blank" rel="noopener">
     <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="138" height="46" loading="lazy">
   </a>
 </aside>
-  </article>
+
+    <div class="related">
+      <h2>Next</h2>
+      <ul>
+        <li><a href="/en/charts/marathon/">Marathon pace chart</a></li>
+        <li><a href="/en/charts/half-marathon/">Half marathon pace chart</a></li>
+        <li><a href="/en/">Running pace calculator</a></li>
+      </ul>
+    </div>
+  </div>
   </main>
 
   <footer class="site-footer">
@@ -297,7 +252,7 @@
       </div>
       <div class="footer-bottom">
         <span>Running pace calculator for pace, speed and splits. Made in Norway by Stian Gaare Vaagan.</span>
-        <span class="lang-switch"><a href="/" hreflang="nb">Norsk</a></span>
+        <span class="lang-switch"><a aria-current="true" href="/en/splits/">English</a><span aria-hidden="true">·</span><a href="/mellomtider/" hreflang="nb">Norsk</a></span>
       </div>
     </div>
   </footer>
@@ -320,5 +275,6 @@
   </div>
 
   <script src="/assets/site.js?v=d4c0e2d6" defer></script>
+  <script src="/assets/calc.js?v=f0013f9b" defer></script>
 </body>
 </html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Running Pace Calculator – min/km, km/h and race times | RunPace</title>
+  <meta name="description" content="Free running pace calculator. Convert between min/km and km/h, see finish times for 5K, 10K, half marathon and marathon, and build a split table for your goal.">
+  <link rel="canonical" href="https://runpace.no/en/">
+  <link rel="alternate" hreflang="nb" href="https://runpace.no/">
+  <link rel="alternate" hreflang="en" href="https://runpace.no/en/">
+  <link rel="alternate" hreflang="x-default" href="https://runpace.no/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RunPace">
+  <meta property="og:url" content="https://runpace.no/en/">
+  <meta property="og:title" content="Running Pace Calculator – min/km, km/h and race times | RunPace">
+  <meta property="og:description" content="Free running pace calculator. Convert between min/km and km/h, see finish times for 5K, 10K, half marathon and marathon, and build a split table for your goal.">
+  <meta property="og:image" content="https://runpace.no/og/home.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Running Pace Calculator – min/km, km/h and race times | RunPace">
+  <meta name="twitter:description" content="Free running pace calculator. Convert between min/km and km/h, see finish times for 5K, 10K, half marathon and marathon, and build a split table for your goal.">
+  <meta name="twitter:image" content="https://runpace.no/og/home.png">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="RunPace">
+  <!-- Safari på iPhone viser Apples egen nedlastingsbanner av denne -->
+  <meta name="apple-itunes-app" content="app-id=6789667868">
+  <link rel="manifest" href="/en/manifest.json">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/icons/icon-180.png">
+  <link rel="stylesheet" href="/assets/site.css?v=1337713e">
+  <link rel="stylesheet" href="/assets/calc.css?v=b8410e8e">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://runpace.no/#org",
+      "name": "RunPace",
+      "url": "https://runpace.no",
+      "email": "kontakt@runpace.no",
+      "founder": {
+        "@type": "Person",
+        "name": "Stian Gaare Vaagan"
+      },
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://runpace.no/icons/icon-512.png"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://runpace.no/#site",
+      "name": "RunPace",
+      "url": "https://runpace.no",
+      "publisher": {
+        "@id": "https://runpace.no/#org"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://runpace.no/en/#app",
+      "name": "RunPace",
+      "url": "https://runpace.no/en/",
+      "description": "Free running pace calculator. Convert between min/km and km/h, see finish times for 5K, 10K, half marathon and marathon, and build a split table for your goal.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web, iOS",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "inLanguage": "en",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "NOK"
+      },
+      "publisher": {
+        "@id": "https://runpace.no/#org"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://runpace.no/en/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert min/km to km/h?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide 60 by your pace in minutes. 5:00 min/km gives 60 ÷ 5 = 12 km/h."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What pace do I need for a 4 hour marathon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "5:41 min/km, or 10.5 km/h, for the full 42.195 km. At halfway the clock should read 2:00:00."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the pace calculator free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is free, needs no sign-in and sets no cookies."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+</head>
+<body>
+  <a class="sr-only skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="brand" href="/en/"><b>Run</b>Pace</a>
+      <nav class="nav-main" aria-label="Menu">
+        <a href="/en/" aria-current="page">Calculator</a>
+        <a href="/en/splits/">Splits</a>
+        <a href="/en/charts/">Charts</a>
+        <a href="/en/app/">iOS app</a>
+      </nav>
+      <div class="header-spacer"></div>
+      <a class="header-cta" href="https://apps.apple.com/app/id6789667868" data-store-link="header" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+          <path d="M9.5 2v9M5.5 7.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2.5 13v1.5A2.5 2.5 0 005 17h9a2.5 2.5 0 002.5-2.5V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg><span>Get the app</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="nav-drawer" id="navDrawer">
+    <div class="wrap">
+      <div class="nav-group">
+        <div class="nav-group-title">Tools</div>
+        <a href="/en/" aria-current="page">Pace calculator</a>
+        <a href="/en/splits/">Splits</a>
+        <a href="/en/app/">RunPace for iPhone</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Pace charts</div>
+        <a href="/en/charts/marathon/">Marathon</a>
+        <a href="/en/charts/half-marathon/">Half marathon</a>
+        <a href="/en/charts/10k/">10K</a>
+        <a href="/en/charts/5k/">5K</a>
+        <a href="/en/charts/min-km-to-km-h/">min/km to km/h</a>
+        <a href="/en/charts/treadmill/">Treadmill</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">About</div>
+        <a href="/en/about/">About RunPace</a>
+        <a href="/en/privacy/">Privacy</a>
+        <a href="/support/">Support</a>
+        <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Running Pace Calculator</h1>
+        <p class="lead">Convert between min/km and km/h, see what your pace gives you over
+          5K, 10K, half marathon and marathon — and build a split plan for your goal time.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="/en/splits/">Build a split plan</a>
+          <a class="btn-ghost" href="/en/charts/">See the pace charts</a>
+        </div>
+        <p class="hero-note">Free, no sign-in and no cookies.
+          Every calculation happens in your browser.</p>
+        <a class="store-badge" href="https://apps.apple.com/app/id6789667868"
+           data-store-link="hero" target="_blank" rel="noopener">
+          <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="150" height="50">
+        </a>
+      </div>
+      <div class="calc-card">
+        <div class="calc-combined" id="calcCombined"></div>
+        <div class="calc-dist-section" id="calcDistSection"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <h2 class="section-title">How do you convert pace to speed?</h2>
+      <p class="section-intro">Divide 60 by your pace in minutes and you get the speed in km/h.
+        5:00 min/km becomes 60 ÷ 5 = 12 km/h. The other direction is the same sum:
+        60 ÷ 12 = 5:00 min/km.</p>
+      <div class="table-scroll">
+    <table>
+      <thead><tr><th>Pace</th><th class="num">km/h</th><th class="num">5 km</th><th class="num">10 km</th><th class="num">Half marathon</th><th class="num">Marathon</th></tr></thead>
+      <tbody>
+        <tr><td>3:30 min/km</td><td class="num">17.1</td><td class="num">17:30</td><td class="num">35:00</td><td class="num">1:13:50</td><td class="num">2:27:41</td></tr>
+        <tr><td>3:45 min/km</td><td class="num">16.0</td><td class="num">18:45</td><td class="num">37:30</td><td class="num">1:19:07</td><td class="num">2:38:14</td></tr>
+        <tr><td>4:00 min/km</td><td class="num">15.0</td><td class="num">20:00</td><td class="num">40:00</td><td class="num">1:24:23</td><td class="num">2:48:47</td></tr>
+        <tr><td>4:15 min/km</td><td class="num">14.1</td><td class="num">21:15</td><td class="num">42:30</td><td class="num">1:29:40</td><td class="num">2:59:20</td></tr>
+        <tr><td>4:30 min/km</td><td class="num">13.3</td><td class="num">22:30</td><td class="num">45:00</td><td class="num">1:34:56</td><td class="num">3:09:53</td></tr>
+        <tr><td>4:45 min/km</td><td class="num">12.6</td><td class="num">23:45</td><td class="num">47:30</td><td class="num">1:40:13</td><td class="num">3:20:26</td></tr>
+        <tr><td>5:00 min/km</td><td class="num">12.0</td><td class="num">25:00</td><td class="num">50:00</td><td class="num">1:45:29</td><td class="num">3:30:59</td></tr>
+        <tr><td>5:15 min/km</td><td class="num">11.4</td><td class="num">26:15</td><td class="num">52:30</td><td class="num">1:50:46</td><td class="num">3:41:31</td></tr>
+        <tr><td>5:30 min/km</td><td class="num">10.9</td><td class="num">27:30</td><td class="num">55:00</td><td class="num">1:56:02</td><td class="num">3:52:04</td></tr>
+        <tr><td>5:45 min/km</td><td class="num">10.4</td><td class="num">28:45</td><td class="num">57:30</td><td class="num">2:01:19</td><td class="num">4:02:37</td></tr>
+        <tr><td>6:00 min/km</td><td class="num">10.0</td><td class="num">30:00</td><td class="num">1:00:00</td><td class="num">2:06:35</td><td class="num">4:13:10</td></tr>
+        <tr><td>6:15 min/km</td><td class="num">9.6</td><td class="num">31:15</td><td class="num">1:02:30</td><td class="num">2:11:52</td><td class="num">4:23:43</td></tr>
+        <tr><td>6:30 min/km</td><td class="num">9.2</td><td class="num">32:30</td><td class="num">1:05:00</td><td class="num">2:17:08</td><td class="num">4:34:16</td></tr>
+        <tr><td>6:45 min/km</td><td class="num">8.9</td><td class="num">33:45</td><td class="num">1:07:30</td><td class="num">2:22:24</td><td class="num">4:44:49</td></tr>
+        <tr><td>7:00 min/km</td><td class="num">8.6</td><td class="num">35:00</td><td class="num">1:10:00</td><td class="num">2:27:41</td><td class="num">4:55:22</td></tr>
+      </tbody>
+    </table>
+  </div>
+      <p>The table covers four common race distances. For a different pace, finer steps or
+        other distances, drag the wheels in the calculator above — or open the
+        <a href="/en/charts/min-km-to-km-h/">full conversion chart</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">Ready-made pace charts</h2>
+      <p class="section-intro">Look up your pace, or work backwards from the time you are aiming for.</p>
+      <div class="card-grid three">
+        <a class="card" href="/en/charts/marathon/">
+          <div class="card-kicker">42.195 km</div>
+          <div class="card-title">Marathon pace</div>
+          <p class="card-text">What each pace gives as a finish time, and what 3, 3:30, 4 or 5 hours demands.</p>
+        </a>
+        <a class="card" href="/en/charts/half-marathon/">
+          <div class="card-kicker">21.1 km</div>
+          <div class="card-title">Half marathon</div>
+          <p class="card-text">Pace and finish time for the half, with the halfway split.</p>
+        </a>
+        <a class="card" href="/en/charts/10k/">
+          <div class="card-kicker">10K</div>
+          <div class="card-title">10K</div>
+          <p class="card-text">From 32 to 90 minutes, with the pace each time requires.</p>
+        </a>
+        <a class="card" href="/en/charts/5k/">
+          <div class="card-kicker">5K</div>
+          <div class="card-title">5K</div>
+          <p class="card-text">A pace chart for the most common race distance there is.</p>
+        </a>
+        <a class="card" href="/en/charts/min-km-to-km-h/">
+          <div class="card-kicker">Conversion</div>
+          <div class="card-title">min/km to km/h</div>
+          <p class="card-text">The full chart from 3:00 to 8:00 min/km, in five-second steps.</p>
+        </a>
+        <a class="card" href="/en/charts/treadmill/">
+          <div class="card-kicker">Indoors</div>
+          <div class="card-title">Treadmill</div>
+          <p class="card-text">The belt shows km/h, you think in min/km. Here is the bridge.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <aside class="store-cta" data-store-cta>
+  <p class="store-cta-title">RunPace for iPhone</p>
+  <p class="store-cta-text">The same calculator on your home screen — pace wheels, race times and split tables that work offline.</p>
+  <a class="store-badge" href="https://apps.apple.com/app/id6789667868" data-store-link="home" target="_blank" rel="noopener">
+    <img src="/assets/appstore-en.svg" alt="Download RunPace on the App Store" width="138" height="46" loading="lazy">
+  </a>
+</aside>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <h2 class="section-title">Frequently asked questions</h2>
+      <div class="faq-item">
+        <p class="faq-q">How do I convert min/km to km/h?</p>
+        <p class="faq-a">Divide 60 by your pace in minutes. 5:00 min/km gives 60 ÷ 5 = 12.0 km/h.
+          If your pace has seconds, convert them to decimals first: 5:30 is 5.5 minutes, and
+          60 ÷ 5.5 = 10.9 km/h. The calculator above does this as you drag the wheel.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What pace do I need for a 4 hour marathon?</p>
+        <p class="faq-a">5:41 min/km, or 10.5 km/h, for the full 42.195 km. At halfway the
+          clock should read 2:00:00. <a href="/en/charts/marathon/">The full marathon chart</a>
+          lists the pace for every goal time from 2:30 to 6:00.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What is a normal running pace?</p>
+        <p class="faq-a">For most recreational runners an easy pace sits at 6:00–7:00 min/km,
+          or 8.6–10 km/h. Trained recreational runners hold 5:00–5:30 min/km on an easy run.
+          What matters is not the number but whether the pace feels easy to you.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Is the pace calculator free?</p>
+        <p class="faq-a">Yes. It is free, needs no sign-in and sets no cookies. Every
+          calculation happens in your browser — nothing is sent anywhere.</p>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h3>Tools</h3>
+          <ul>
+            <li><a href="/en/">Pace calculator</a></li>
+            <li><a href="/en/splits/">Splits</a></li>
+            <li><a href="/en/app/">RunPace for iPhone</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Pace charts</h3>
+          <ul>
+            <li><a href="/en/charts/marathon/">Marathon</a></li>
+            <li><a href="/en/charts/half-marathon/">Half marathon</a></li>
+            <li><a href="/en/charts/10k/">10K</a></li>
+            <li><a href="/en/charts/5k/">5K</a></li>
+            <li><a href="/en/charts/min-km-to-km-h/">min/km to km/h</a></li>
+            <li><a href="/en/charts/treadmill/">Treadmill</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>About</h3>
+          <ul>
+            <li><a href="/en/about/">About RunPace</a></li>
+            <li><a href="/en/privacy/">Privacy</a></li>
+            <li><a href="/support/">Support</a></li>
+            <li><a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Running pace calculator for pace, speed and splits. Made in Norway by Stian Gaare Vaagan.</span>
+        <span class="lang-switch"><a aria-current="true" href="/en/">English</a><span aria-hidden="true">·</span><a href="/" hreflang="nb">Norsk</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop hidden" id="installModal">
+    <div class="modal-sheet">
+      <p class="modal-title">Add RunPace to your home screen</p>
+      <div class="modal-steps" id="stepsIos">
+        <div class="modal-step"><div class="step-num">1</div><p class="step-text">In Safari, tap the <strong>Share</strong> icon in the bottom bar. In Chrome, tap <strong>⋯</strong> at the bottom right, then <strong>Share</strong></p></div>
+        <div class="modal-step"><div class="step-num">2</div><p class="step-text">Scroll down and tap <strong>Add to Home Screen</strong></p></div>
+        <div class="modal-step"><div class="step-num">3</div><p class="step-text">Tap <strong>Add</strong> — RunPace then opens full screen, without the browser interface</p></div>
+      </div>
+      <div class="modal-steps hidden" id="stepsAndroid">
+        <div class="modal-step"><div class="step-num">1</div><p class="step-text">Tap the <strong>three-dot menu</strong> at the top right of Chrome</p></div>
+        <div class="modal-step"><div class="step-num">2</div><p class="step-text">Choose <strong>Add to Home screen</strong></p></div>
+        <div class="modal-step"><div class="step-num">3</div><p class="step-text">Tap <strong>Install</strong> — RunPace then opens full screen, without the browser interface</p></div>
+      </div>
+      <button class="modal-close" type="button">Close</button>
+    </div>
+  </div>
+
+  <script src="/assets/site.js?v=d4c0e2d6" defer></script>
+  <script src="/assets/calc.js?v=f0013f9b" defer></script>
+</body>
+</html>

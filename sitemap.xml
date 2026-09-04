@@ -1,9 +1,280 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://runpace.no/</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/mellomtider/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/mellomtider/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/splits/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/splits/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/app/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/app/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/app/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/maraton/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/maraton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/marathon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/marathon/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/halvmaraton/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/halvmaraton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/half-marathon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/half-marathon/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/10km/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/10km/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/10k/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/10k/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/5km/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/5km/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/5k/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/5k/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/min-km-til-km-t/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/min-km-til-km-t/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/min-km-to-km-h/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/min-km-to-km-h/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/tabeller/tredemolle/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/tredemolle/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/treadmill/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/treadmill/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/hva-er-min-km/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/5km-under-25-minutter/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/maratontempo/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/tempo-vs-fart/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/god-tid-pa-5km/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/riegel-formelen/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/guider/negativ-split/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/om/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/om/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/about/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/faq/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/personvern/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/personvern/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/splits/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/mellomtider/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/splits/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/splits/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/app/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/app/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/app/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/marathon/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/maraton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/marathon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/marathon/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/half-marathon/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/halvmaraton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/half-marathon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/half-marathon/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/10k/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/10km/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/10k/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/10k/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/5k/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/5km/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/5k/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/5k/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/min-km-to-km-h/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/min-km-til-km-t/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/min-km-to-km-h/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/min-km-to-km-h/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/charts/treadmill/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/tredemolle/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/charts/treadmill/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/charts/treadmill/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/about/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/om/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/about/"/>
+  </url>
+  <url>
+    <loc>https://runpace.no/support/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://runpace.no/en/privacy/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/personvern/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://runpace.no/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://runpace.no/en/privacy/"/>
   </url>
 </urlset>

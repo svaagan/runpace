@@ -1,0 +1,73 @@
+  <div class="narrow">
+    <h1>Mellomtider</h1>
+    <div class="answer">
+      <p>Velg distanse og måltid, så regner RunPace ut <strong>tempoet du må holde</strong>
+        og setter opp en tabell med klokkeslettet du skal se ved hvert merke.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="maal-card">
+      <div class="maal-top">
+        <div class="calc-combined" id="maalCombined"></div>
+        <div class="maal-bottom-row">
+          <div id="maalCustomInput" class="maal-custom-input hidden">
+            <div class="maal-custom-dist-wrap">
+              <div class="maal-interval-label">Distanse</div>
+              <div id="maalCustomWheelWrap"></div>
+            </div>
+            <div class="maal-unit-toggle">
+              <button id="maalUnitM" class="maal-unit-btn" type="button" onclick="setMaalUnit('m')">m</button>
+              <button id="maalUnitKm" class="maal-unit-btn active" type="button" onclick="setMaalUnit('km')">km</button>
+            </div>
+          </div>
+          <div class="maal-interval-group">
+            <div class="maal-interval-label">Mellomtid hver</div>
+            <div id="maalIntervalWrap"></div>
+          </div>
+        </div>
+        <div class="maal-result">
+          <div class="maal-pace-val" id="maalPaceVal">–</div>
+          <div class="maal-pace-unit">min/km</div>
+          <div class="maal-speed-val" id="maalSpeedVal"></div>
+        </div>
+      </div>
+      <div class="pacing-table-wrap">
+        <table class="pacing-table">
+          <thead><tr><th>Km</th><th>Mellomtid</th></tr></thead>
+          <tbody id="maal-pacing-tbody">
+            <tr><td colspan="2" class="pacing-placeholder">Velg distanse og måltid</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="narrow">
+    <h2>Slik bruker du mellomtidene</h2>
+    <p>En mellomtidsplan er til for å hindre deg i å starte for fort. Det er den vanligste
+      feilen i et løp, og den koster mer på slutten enn den gir i starten.</p>
+    <p>Skriv ned tidene for de merkene du faktisk kommer til å se — på et gateløp er det
+      gjerne hver kilometer, på bane hver 400 meter. Så sammenligner du underveis. Ligger du
+      ti sekunder foran skjema etter tre kilometer, har du ikke et forsprang; du har lånt tid
+      du må betale tilbake med renter.</p>
+    <p>Vil du legge inn en bevisst skjevfordeling, med rolig start og rask avslutning, er det
+      forklart i <a href="/guider/negativ-split/">guiden om negativ split</a>.</p>
+
+    <h2>Egendefinert distanse</h2>
+    <p>Velg <strong>Egendefinert</strong> nederst i distansehjulet, så dukker det opp et eget
+      hjul der du kan sette distansen i meter eller kilometer. Nyttig for baneøkter, et
+      lokalt løp med skjev distanse, eller en intervalljobb du vil ha mellomtider på.</p>
+
+    {{cta|Ha planen med deg på løpsdagen|RunPace til iPhone lager den samme mellomtidstabellen, og den virker uten nett — også der mobildekningen ikke gjør det.|mellomtider}}
+
+    <div class="related">
+      <h2>Videre</h2>
+      <ul>
+        <li><a href="/tabeller/maraton/">Maratontempo: tabell over tempo og sluttid</a></li>
+        <li><a href="/tabeller/halvmaraton/">Halvmaraton: tempo og sluttid</a></li>
+        <li><a href="/guider/negativ-split/">Negativ split: slik legger du opp løpet</a></li>
+        <li><a href="/">Løpekalkulator: tempo og fart</a></li>
+      </ul>
+    </div>
+  </div>

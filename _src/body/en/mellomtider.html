@@ -1,0 +1,70 @@
+  <div class="narrow">
+    <h1>Split Calculator</h1>
+    <div class="answer">
+      <p>Pick a distance and a goal time, and RunPace works out <strong>the pace you need</strong>
+        and builds a table showing what the clock should read at every marker.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="maal-card">
+      <div class="maal-top">
+        <div class="calc-combined" id="maalCombined"></div>
+        <div class="maal-bottom-row">
+          <div id="maalCustomInput" class="maal-custom-input hidden">
+            <div class="maal-custom-dist-wrap">
+              <div class="maal-interval-label">Distance</div>
+              <div id="maalCustomWheelWrap"></div>
+            </div>
+            <div class="maal-unit-toggle">
+              <button id="maalUnitM" class="maal-unit-btn" type="button" onclick="setMaalUnit('m')">m</button>
+              <button id="maalUnitKm" class="maal-unit-btn active" type="button" onclick="setMaalUnit('km')">km</button>
+            </div>
+          </div>
+          <div class="maal-interval-group">
+            <div class="maal-interval-label">Split frequency</div>
+            <div id="maalIntervalWrap"></div>
+          </div>
+        </div>
+        <div class="maal-result">
+          <div class="maal-pace-val" id="maalPaceVal">–</div>
+          <div class="maal-pace-unit">min/km</div>
+          <div class="maal-speed-val" id="maalSpeedVal"></div>
+        </div>
+      </div>
+      <div class="pacing-table-wrap">
+        <table class="pacing-table">
+          <thead><tr><th>Km</th><th>Split</th></tr></thead>
+          <tbody id="maal-pacing-tbody">
+            <tr><td colspan="2" class="pacing-placeholder">Choose distance and target time</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="narrow">
+    <h2>How to use your splits</h2>
+    <p>A split plan exists to stop you starting too fast. That is the most common mistake in
+      any race, and it costs more at the end than it gains at the start.</p>
+    <p>Write down the times for the markers you will actually see — usually every kilometre on
+      the road, every 400 metres on the track. Then compare as you go. If you are ten seconds
+      ahead of schedule after three kilometres, you do not have a lead; you have borrowed time
+      you will pay back with interest.</p>
+
+    <h2>Custom distances</h2>
+    <p>Choose <strong>Custom</strong> at the bottom of the distance wheel and a second wheel
+      appears where you can set the distance in metres or kilometres. Useful for track
+      sessions, an odd local race, or an interval workout you want splits for.</p>
+
+    {{cta|Take the plan with you on race day|RunPace for iPhone builds the same split table, and it works offline — including where the mobile signal does not.|splits}}
+
+    <div class="related">
+      <h2>Next</h2>
+      <ul>
+        <li><a href="/en/charts/marathon/">Marathon pace chart</a></li>
+        <li><a href="/en/charts/half-marathon/">Half marathon pace chart</a></li>
+        <li><a href="/en/">Running pace calculator</a></li>
+      </ul>
+    </div>
+  </div>

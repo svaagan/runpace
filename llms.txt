@@ -1,0 +1,50 @@
+# RunPace
+
+> Løpekalkulator for tempo, fart og mellomtider. Regner om mellom min/km og km/t, viser sluttider for standarddistanser og lager mellomtidsplaner. Gratis, uten innlogging og uten informasjonskapsler. Finnes også som iOS-app. Laget i Norge av Stian Gaare Vaagan.
+
+Alle tall på sida er regnet ut fra to formler: fart = 60 ÷ tempo i minutter, og sluttid = tempo × distanse. Løpstidsanslag bruker Riegels formel T₂ = T₁ × (D₂ ÷ D₁)^1,06. Distansene er 5 km, 10 km, halvmaraton 21,0975 km og maraton 42,195 km.
+
+## Norsk
+
+- [Løpekalkulator](https://runpace.no/): Gratis løpekalkulator. Regn om mellom min/km og km/t, se sluttider for 5 km, 10 km, halvmaraton og maraton, og lag mellomtidstabell for måltiden din.
+- [Mellomtider](https://runpace.no/mellomtider/): Sett en distanse og en måltid, så får du tempoet du må holde og en mellomtidstabell med klokkeslett for hver kilometer.
+- [Tempotabeller](https://runpace.no/tabeller/): Ferdige tempotabeller: hvilket tempo som gir hvilken sluttid, og hvilket tempo måltiden din krever. For maraton, halvmaraton, 10 km, 5 km og tredemølle.
+- [Maratontempo: tabell over tempo og sluttid](https://runpace.no/tabeller/maraton/): Full maratontabell: hvilken sluttid hvert tempo gir, og hvilket tempo du må holde for 3, 3:30, 4, 4:30 eller 5 timer. Med halvveismerke.
+- [Halvmaraton: tabell over tempo og sluttid](https://runpace.no/tabeller/halvmaraton/): Tempotabell for halvmaraton: sluttid for hvert tempo, og nødvendig tempo for 1:30, 1:45, 2:00 og 2:30. Med mellomtid halvveis.
+- [10 km: tabell over tempo og sluttid](https://runpace.no/tabeller/10km/): Tempotabell for 10 km: hvilken sluttid hvert tempo gir, og hvilket tempo du trenger for 40, 45, 50 eller 60 minutter.
+- [5 km: tabell over tempo og sluttid](https://runpace.no/tabeller/5km/): Tempotabell for 5 km: sluttid for hvert tempo fra 3:00 til 7:30 min/km, og nødvendig tempo for 20, 22, 25 eller 30 minutter.
+- [min/km til km/t: omregningstabell](https://runpace.no/tabeller/min-km-til-km-t/): Full omregningstabell mellom min/km og km/t, fra 3:00 til 8:00 min/km. Med formelen, og sluttider på 5 km og 10 km for hvert tempo.
+- [Tredemølle: km/t til min/km](https://runpace.no/tabeller/tredemolle/): Tredemøllen viser km/t, men du tenker i min/km. Full tabell fra 6 til 20 km/t, med sluttider og hva stigning gjør med tempoet.
+- [Guider](https://runpace.no/guider/): Korte, konkrete guider om tempo: hva min/km betyr, hvordan du legger opp farten i et løp, og hva som er realistisk å sikte mot.
+- [Hva betyr min/km?](https://runpace.no/guider/hva-er-min-km/): min/km er minutter per kilometer — tiden du bruker på én kilometer. Lavere tall betyr raskere løping. Her er hva tallene betyr i praksis.
+- [5 km under 25 minutter](https://runpace.no/guider/5km-under-25-minutter/): 5 km på 25 minutter krever 5:00 min/km hele veien. Her er hva det innebærer, hvordan du legger opp løpet, og et treningsopplegg på åtte uker.
+- [Maratontempo: hva er realistisk?](https://runpace.no/guider/maratontempo/): Ganger du halvmaratontiden din med 2,1, får du et realistisk maratonmål. Her er hvorfor, og hvordan du unngår å gå på veggen etter 30 km.
+- [Tempo eller fart: min/km eller km/t?](https://runpace.no/guider/tempo-vs-fart/): min/km og km/t beskriver det samme, sett fra hver sin kant. Her er formelen, og hvorfor løpere bruker det ene og tredemøller det andre.
+- [Hva er en god tid på 5 km?](https://runpace.no/guider/god-tid-pa-5km/): Det finnes ikke ett svar, men det finnes noen holdepunkter. Her er hva ulike 5 km-tider tilsvarer i tempo, og hva de krever av trening.
+- [Riegels formel: fra én distanse til en annen](https://runpace.no/guider/riegel-formelen/): Har du en tid på 5 km, kan du anslå hva du klarer på 10 km, halvmaraton og maraton. Riegels formel forklart, med ferdig tabell.
+- [Negativ split: slik legger du opp løpet](https://runpace.no/guider/negativ-split/): Nesten alle personlige rekorder settes med negativ split — andre halvdel raskere enn første. Her er hvorfor det virker, og hvordan du planlegger det.
+- [RunPace til iPhone](https://runpace.no/app/): RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og mellomtider — uten innlogging, og den virker uten nett.
+- [Om RunPace](https://runpace.no/om/): RunPace er en løpekalkulator laget i Norge. Ingen innlogging, ingen informasjonskapsler, og all utregning skjer i nettleseren din.
+- [Vanlige spørsmål](https://runpace.no/faq/): Svar på de vanligste spørsmålene om tempo, fart, mellomtider og RunPace-appen.
+- [Personvernerklæring](https://runpace.no/personvern/): Hva RunPace samler inn, hva vi ikke samler inn, og hvordan reklamen i iOS-appen fungerer.
+
+## English
+
+- [Running Pace Calculator](https://runpace.no/en/): Free running pace calculator. Convert between min/km and km/h, see finish times for 5K, 10K, half marathon and marathon, and build a split table for your goal.
+- [Split Calculator](https://runpace.no/en/splits/): Set a distance and a goal time, and get the pace you need plus a split table showing what the clock should read at every kilometre.
+- [Pace charts](https://runpace.no/en/charts/): Ready-made pace charts: what finish time each pace gives, and what pace your goal time needs. For marathon, half marathon, 10K, 5K and the treadmill.
+- [Marathon pace chart](https://runpace.no/en/charts/marathon/): Full marathon pace chart: the finish time each pace gives, and the pace needed for a 3, 3:30, 4, 4:30 or 5 hour marathon. With halfway splits.
+- [Half marathon pace chart](https://runpace.no/en/charts/half-marathon/): Half marathon pace chart: finish time for every pace, and the pace needed for 1:30, 1:45, 2:00 and 2:30. With halfway splits.
+- [10K pace chart](https://runpace.no/en/charts/10k/): 10K pace chart: the finish time each pace gives, and the pace needed for 40, 45, 50 or 60 minutes.
+- [5K pace chart](https://runpace.no/en/charts/5k/): 5K pace chart: finish time for every pace from 3:00 to 7:30 min/km, and the pace needed for 20, 22, 25 or 30 minutes.
+- [min/km to km/h conversion chart](https://runpace.no/en/charts/min-km-to-km-h/): Full conversion chart between min/km and km/h, from 3:00 to 8:00 min/km, with the formula and 5K and 10K finish times for every pace.
+- [Treadmill pace chart: km/h to min/km](https://runpace.no/en/charts/treadmill/): The treadmill shows km/h but you think in min/km. Full chart from 6 to 20 km/h, with finish times and what incline does to your effort.
+- [RunPace for iPhone](https://runpace.no/en/app/): RunPace is a free running pace calculator for iPhone. Pace, speed, race times and splits — no sign-in, and it works offline.
+- [About RunPace](https://runpace.no/en/about/): RunPace is a running pace calculator made in Norway. No sign-in, no cookies, and every calculation happens in your browser.
+- [Support &amp; Help](https://runpace.no/support/): Support for the RunPace pace calculator and iOS app: how to reach us, answers to common questions, and how the Apple Health feature works.
+- [Privacy Policy](https://runpace.no/en/privacy/): What RunPace collects, what it does not, and how the ads in the iOS app work.
+
+## Kontakt
+
+- E-post: kontakt@runpace.no
+- iOS-app: https://apps.apple.com/app/id6789667868

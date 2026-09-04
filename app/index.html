@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RunPace til iPhone – løpekalkulator i lomma | RunPace</title>
+  <meta name="description" content="RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og mellomtider — uten innlogging, og den virker uten nett.">
+  <link rel="canonical" href="https://runpace.no/app/">
+  <link rel="alternate" hreflang="nb" href="https://runpace.no/app/">
+  <link rel="alternate" hreflang="en" href="https://runpace.no/en/app/">
+  <link rel="alternate" hreflang="x-default" href="https://runpace.no/en/app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RunPace">
+  <meta property="og:url" content="https://runpace.no/app/">
+  <meta property="og:title" content="RunPace til iPhone – løpekalkulator i lomma | RunPace">
+  <meta property="og:description" content="RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og mellomtider — uten innlogging, og den virker uten nett.">
+  <meta property="og:image" content="https://runpace.no/og/app.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="nb_NO">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RunPace til iPhone – løpekalkulator i lomma | RunPace">
+  <meta name="twitter:description" content="RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og mellomtider — uten innlogging, og den virker uten nett.">
+  <meta name="twitter:image" content="https://runpace.no/og/app.png">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="RunPace">
+  <!-- Safari på iPhone viser Apples egen nedlastingsbanner av denne -->
+  <meta name="apple-itunes-app" content="app-id=6789667868">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/icons/icon-180.png">
+  <link rel="stylesheet" href="/assets/site.css?v=1337713e">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://runpace.no/#org",
+      "name": "RunPace",
+      "url": "https://runpace.no",
+      "email": "kontakt@runpace.no",
+      "founder": {
+        "@type": "Person",
+        "name": "Stian Gaare Vaagan"
+      },
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://runpace.no/icons/icon-512.png"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://runpace.no/app/#ios",
+      "name": "RunPace – Pace Calculator",
+      "url": "https://runpace.no/app/",
+      "installUrl": "https://apps.apple.com/app/id6789667868",
+      "downloadUrl": "https://apps.apple.com/app/id6789667868",
+      "description": "RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og mellomtider — uten innlogging, og den virker uten nett.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "iOS 17.0 or later",
+      "author": {
+        "@type": "Person",
+        "name": "Stian Gaare Vaagan"
+      },
+      "publisher": {
+        "@id": "https://runpace.no/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "NOK",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://runpace.no/app/#crumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Hjem",
+          "item": "https://runpace.no/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Appen"
+        }
+      ]
+    }
+  ]
+}</script>
+</head>
+<body>
+  <a class="sr-only skip-link" href="#main">Hopp til innhold</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <button class="hamburger" type="button" aria-label="Meny" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="brand" href="/"><b>Run</b>Pace</a>
+      <nav class="nav-main" aria-label="Meny">
+        <a href="/">Kalkulator</a>
+        <a href="/mellomtider/">Mellomtider</a>
+        <a href="/tabeller/">Tabeller</a>
+        <a href="/guider/">Guider</a>
+        <a href="/app/" aria-current="page">Appen</a>
+      </nav>
+      <div class="header-spacer"></div>
+      <a class="header-cta" href="https://apps.apple.com/app/id6789667868" data-store-link="header" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+          <path d="M9.5 2v9M5.5 7.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2.5 13v1.5A2.5 2.5 0 005 17h9a2.5 2.5 0 002.5-2.5V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg><span>Få appen</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="nav-drawer" id="navDrawer">
+    <div class="wrap">
+      <div class="nav-group">
+        <div class="nav-group-title">Verktøy</div>
+        <a href="/">Løpekalkulator</a>
+        <a href="/mellomtider/">Mellomtider</a>
+        <a href="/app/" aria-current="page">RunPace til iPhone</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Tempotabeller</div>
+        <a href="/tabeller/maraton/">Maraton</a>
+        <a href="/tabeller/halvmaraton/">Halvmaraton</a>
+        <a href="/tabeller/10km/">10 km</a>
+        <a href="/tabeller/5km/">5 km</a>
+        <a href="/tabeller/min-km-til-km-t/">min/km til km/t</a>
+        <a href="/tabeller/tredemolle/">Tredemølle</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Guider</div>
+        <a href="/guider/hva-er-min-km/">Hva er min/km?</a>
+        <a href="/guider/5km-under-25-minutter/">5 km under 25 minutter</a>
+        <a href="/guider/maratontempo/">Maratontempo</a>
+        <a href="/guider/tempo-vs-fart/">Tempo eller fart?</a>
+        <a href="/guider/god-tid-pa-5km/">Hva er en god 5 km-tid?</a>
+        <a href="/guider/riegel-formelen/">Riegels formel</a>
+        <a href="/guider/negativ-split/">Negativ split</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Om</div>
+        <a href="/om/">Om RunPace</a>
+        <a href="/faq/">Vanlige spørsmål</a>
+        <a href="/personvern/">Personvern</a>
+        <a href="/support/">Støtte</a>
+        <a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="crumbs narrow" aria-label="Brødsmuler">
+    <a href="/">Hjem</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Appen</span>
+  </nav>
+  <main id="main">
+  <div class="narrow">
+    <h1>RunPace til iPhone</h1>
+    <div class="answer">
+      <p>Den samme løpekalkulatoren som på denne sida, men <strong>i lomma og uten nett</strong>
+        — og med tre ting nettsida ikke har: løpstider på tvers av distanser, treningstempo
+        fra VO₂max, og miles for dem som løper i det.</p>
+      <p>Gratis, ingen konto, ingen innlogging. Alt regnes ut på telefonen din.</p>
+    </div>
+
+    <p style="text-align:center;margin-bottom:0">
+      <a class="store-badge" href="https://apps.apple.com/app/id6789667868" data-store-link="app-topp" target="_blank" rel="noopener">
+        <img src="/assets/appstore-no.svg" alt="Last ned RunPace i App Store" width="160" height="53">
+      </a>
+    </p>
+  </div>
+
+  <div class="wrap">
+    <div class="shots">
+      <figure class="shot">
+        <img src="/img/app/nb-1.png" width="560" height="1211" loading="lazy"
+             alt="Kalkulatoren i RunPace: hjul for min/km og km/t side om side, med sluttider for sju distanser under.">
+        <figcaption>Kalkulator</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/img/app/nb-2.png" width="560" height="1211" loading="lazy"
+             alt="Løpsplan i RunPace: distanse og måltid øverst, mellomtidstabell under.">
+        <figcaption>Løpsplan</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/img/app/nb-3.png" width="560" height="1211" loading="lazy"
+             alt="Løpstider i RunPace: ett resultat inn, estimerte tider på de andre distansene ut.">
+        <figcaption>Løpstider</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/img/app/nb-4.png" width="560" height="1211" loading="lazy"
+             alt="Treningstempo i RunPace: soner for rolig, maraton, terskel, intervall og repetisjon.">
+        <figcaption>Treningstempo</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="narrow">
+    <h2>Hva appen gjør</h2>
+
+    <div class="feature">
+      <h3>Kalkulator</h3>
+      <p>Tempo og fart på to hjul som henger sammen — drar du i det ene, følger det andre etter.
+        Under vises sluttiden for alle vanlige distanser, eller mellomtider for typiske
+        intervalldistanser.</p>
+    </div>
+    <div class="feature">
+      <h3>Løpsplan</h3>
+      <p>Sett distanse og måltid, få tempoet du må holde og en jevn mellomtidstabell.
+        Det samme som <a href="/mellomtider/">mellomtidsverktøyet her på sida</a>, bare med
+        deg ut i løypa.</p>
+    </div>
+    <div class="feature">
+      <h3>Løpstider</h3>
+      <p>Legg inn ett resultat, få anslag på alle de andre distansene. Bygget på
+        <a href="/guider/riegel-formelen/">Riegels formel</a>. Har du VO₂max i Apple Helse,
+        kan appen bruke den som utgangspunkt i stedet.</p>
+    </div>
+    <div class="feature">
+      <h3>Treningstempo</h3>
+      <p>VDOT-baserte soner — rolig, maraton, terskel, intervall og repetisjon — satt
+        automatisk fra VO₂max-en din, med en trendlinje for de siste tolv månedene.
+        Dette finnes ikke på nettsida.</p>
+    </div>
+
+    <h2>Laget for løpere</h2>
+    <ul class="tick">
+      <li>Kilometer eller miles — du bytter én gang, og hele appen følger etter</li>
+      <li>Lyst, mørkt eller systemtema</li>
+      <li>Helt på norsk, med engelsk et trykk unna</li>
+      <li>Ingen konto og ingen innlogging — tallene blir liggende på enheten din</li>
+      <li>Virker uten nett, også der dekningen svikter på løpsdagen</li>
+    </ul>
+
+    <h2>Hva koster den?</h2>
+    <p>Appen er <strong>gratis</strong>, med ett lite reklamebanner nederst. Ett engangskjøp
+      fjerner banneret for godt, på alle enhetene du bruker med samme Apple-konto. Det er
+      ingen abonnement og ingenting som låses bak betaling — hele kalkulatoren virker like
+      fullt uten at du betaler noe.</p>
+    <p>Hadde du appen før reklamen kom, ser du den aldri. Det er avgjort én gang, ved første
+      oppstart, og gjelder permanent. Detaljene står i
+      <a href="/personvern/">personvernerklæringen</a>.</p>
+
+    <h2>Krav</h2>
+    <p>iPhone med iOS 17 eller nyere. Appen finnes ikke på Android ennå — der kan du
+      <a href="#" data-install>legge nettsida på hjemskjermen</a> i stedet, så oppfører den
+      seg som en app med egen ikon og full skjerm.</p>
+
+    <aside class="store-cta" data-store-cta>
+  <p class="store-cta-title">Last ned RunPace</p>
+  <p class="store-cta-text">Gratis i App Store. Ingen konto, ingen innlogging — bare kalkulatoren.</p>
+  <a class="store-badge" href="https://apps.apple.com/app/id6789667868" data-store-link="app-bunn" target="_blank" rel="noopener">
+    <img src="/assets/appstore-no.svg" alt="Last ned RunPace i App Store" width="138" height="46" loading="lazy">
+  </a>
+</aside>
+
+    <div class="related">
+      <h2>Videre</h2>
+      <ul>
+        <li><a href="/">Prøv kalkulatoren i nettleseren først</a></li>
+        <li><a href="/support/">Støtte og vanlige spørsmål om appen</a></li>
+        <li><a href="/personvern/">Personvern: hva appen samler inn</a></li>
+      </ul>
+    </div>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h3>Verktøy</h3>
+          <ul>
+            <li><a href="/">Løpekalkulator</a></li>
+            <li><a href="/mellomtider/">Mellomtider</a></li>
+            <li><a href="/app/">RunPace til iPhone</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Tempotabeller</h3>
+          <ul>
+            <li><a href="/tabeller/maraton/">Maraton</a></li>
+            <li><a href="/tabeller/halvmaraton/">Halvmaraton</a></li>
+            <li><a href="/tabeller/10km/">10 km</a></li>
+            <li><a href="/tabeller/5km/">5 km</a></li>
+            <li><a href="/tabeller/min-km-til-km-t/">min/km til km/t</a></li>
+            <li><a href="/tabeller/tredemolle/">Tredemølle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Guider</h3>
+          <ul>
+            <li><a href="/guider/hva-er-min-km/">Hva er min/km?</a></li>
+            <li><a href="/guider/5km-under-25-minutter/">5 km under 25 minutter</a></li>
+            <li><a href="/guider/maratontempo/">Maratontempo</a></li>
+            <li><a href="/guider/tempo-vs-fart/">Tempo eller fart?</a></li>
+            <li><a href="/guider/god-tid-pa-5km/">Hva er en god 5 km-tid?</a></li>
+            <li><a href="/guider/riegel-formelen/">Riegels formel</a></li>
+            <li><a href="/guider/negativ-split/">Negativ split</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Om</h3>
+          <ul>
+            <li><a href="/om/">Om RunPace</a></li>
+            <li><a href="/faq/">Vanlige spørsmål</a></li>
+            <li><a href="/personvern/">Personvern</a></li>
+            <li><a href="/support/">Støtte</a></li>
+            <li><a href="mailto:kontakt@runpace.no">kontakt@runpace.no</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Løpekalkulator for tempo, fart og mellomtider. Laget i Norge av Stian Gaare Vaagan.</span>
+        <span class="lang-switch"><a aria-current="true" href="/app/">Norsk</a><span aria-hidden="true">·</span><a href="/en/app/" hreflang="en">English</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop hidden" id="installModal">
+    <div class="modal-sheet">
+      <p class="modal-title">Legg RunPace på hjemskjermen</p>
+      <div class="modal-steps" id="stepsIos">
+        <div class="modal-step"><div class="step-num">1</div><p class="step-text">Trykk <strong>Del</strong>-ikonet i Safari, nederst på skjermen. I Chrome: <strong>⋯</strong> nederst til høyre, så <strong>Del</strong></p></div>
+        <div class="modal-step"><div class="step-num">2</div><p class="step-text">Bla ned og trykk <strong>Legg til på Hjem-skjerm</strong></p></div>
+        <div class="modal-step"><div class="step-num">3</div><p class="step-text">Trykk <strong>Legg til</strong> — RunPace åpnes nå i full skjerm, uten nettleseren rundt</p></div>
+      </div>
+      <div class="modal-steps hidden" id="stepsAndroid">
+        <div class="modal-step"><div class="step-num">1</div><p class="step-text">Trykk <strong>tre-prikk-menyen</strong> øverst til høyre i Chrome</p></div>
+        <div class="modal-step"><div class="step-num">2</div><p class="step-text">Velg <strong>Legg til på startsiden</strong></p></div>
+        <div class="modal-step"><div class="step-num">3</div><p class="step-text">Trykk <strong>Installer</strong> — RunPace åpnes nå i full skjerm, uten nettleseren rundt</p></div>
+      </div>
+      <button class="modal-close" type="button">Lukk</button>
+    </div>
+  </div>
+
+  <script src="/assets/site.js?v=d4c0e2d6" defer></script>
+</body>
+</html>
