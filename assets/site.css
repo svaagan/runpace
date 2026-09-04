@@ -436,3 +436,11 @@ caption {
 }
 .contact-value { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.9rem; }
 .contact-value a { color: var(--accent); }
+
+/* Personvernlenke under kalkulatoren på forsida. runpace.no er den
+   registrerte Privacy Policy URL-en i App Store Connect, så erklæringen
+   må være synlig ett klikk unna — ikke bare nevnt nederst i bunnen. */
+.hero-legal { margin: 0.9rem 0 0; font-size: 0.85rem; text-align: center; }
+.hero-legal a { color: var(--text-dim); }
+.hero-legal a:hover { color: var(--accent); }
+@media (min-width: 900px) { .hero-legal { grid-column: 2; } }
