@@ -56,8 +56,13 @@ img/app/    Skjermbilder fra iOS-appen
 _src/       Byggeren. Publiseres ikke (`Disallow` i robots.txt)
 ```
 
-**Rør ikke:** `CNAME` (domenet), `app-ads.txt` (må ligge i rota for AdMob),
-og adressen `/support/` (registrert i App Store Connect).
+**Rør ikke:** `CNAME` (domenet) og adressen `/support/` (registrert i App Store
+Connect).
+
+`app-ads.txt` ligger i rota fordi AdMob krevde den. iOS-appen slutter med reklame
+i 2.0, men brukere som ennå ikke har oppdatert kjører fortsatt en utgave med
+annonser — fila skal derfor bli liggende til 2.0 er ute og har fått spre seg, og
+først da slettes sammen med linja her.
 
 ---
 
