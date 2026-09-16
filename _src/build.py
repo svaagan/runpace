@@ -81,6 +81,9 @@ PAGES = [
          ("Hvilket tempo må jeg holde for å løpe maraton på 4 timer?",
           "5:41 min/km, altså 10,5 km/t, hele veien i 42,195 km. Halvveis skal klokka "
           "vise 2:00:00."),
+         ("Hva er en løpekalkulator?",
+          "Et verktøy som regner mellom tempo, distanse og tid. Kjenner du to av dem, gir "
+          "kalkulatoren deg den tredje — og regner samtidig om mellom min/km og km/t."),
          ("Er løpekalkulatoren gratis?",
           "Ja. Kalkulatoren på runpace.no er gratis, krever ingen innlogging og setter "
           "ingen informasjonskapsler.")]),
@@ -108,7 +111,7 @@ PAGES = [
  P_("/tabeller/maraton/", "table", "tables",
     "Maratontempo-tabell – tempo, fart og sluttid for 42,195 km | RunPace",
     "Full maratontabell: hvilken sluttid hvert tempo gir, og hvilket tempo du må "
-    "holde for 3, 3:30, 4, 4:30 eller 5 timer. Med halvveismerke.",
+    "holde for 3, 3:30, 4, 4:30 eller 5 timer. Med halvveismerke og hva som er en god tid.",
     "Maratontempo: tabell over tempo og sluttid", "tab-maraton",
     alt="/en/charts/marathon/", crumbs=[TAB_NB, ("Maraton", None)],
     faq=[("Hvilket tempo må jeg holde for maraton på 4 timer?",
@@ -116,16 +119,30 @@ PAGES = [
          ("Hvilket tempo gir maraton på 3:30?",
           "4:59 min/km, altså 12,1 km/t. Halvveis skal klokka vise 1:45:00."),
          ("Hvor fort er maraton på 5:00 min/km?",
-          "5:00 min/km i 42,195 km gir 3:30:59.")]),
+          "5:00 min/km i 42,195 km gir 3:30:59."),
+         ("Hvor lang er et maraton?",
+          "42,195 km. De siste 195 meterne tar 1:06 i firetimersfart, så de er ingen avrunding "
+          "du kan se bort fra når du regner på måltiden."),
+         ("Hva er en god maratontid?",
+          "Under 4:00 er grensa flest sikter mot, og krever 5:41 min/km. Under 4:30 er godt "
+          "innenfor rekkevidde med et solid opplegg, under 3:30 regnes som godt trent og under "
+          "3:00 som sterk mosjonist.")]),
 
  P_("/tabeller/halvmaraton/", "table", "tables",
     "Halvmaraton-tempotabell – tempo, fart og sluttid for 21,1 km | RunPace",
     "Tempotabell for halvmaraton: sluttid for hvert tempo, og nødvendig tempo for "
-    "1:30, 1:45, 2:00 og 2:30. Med mellomtid halvveis.",
+    "1:30, 1:45, 2:00 og 2:30. Med mellomtid halvveis, og hva som er en god tid.",
     "Halvmaraton: tabell over tempo og sluttid", "tab-halvmaraton",
     alt="/en/charts/half-marathon/", crumbs=[TAB_NB, ("Halvmaraton", None)],
     faq=[("Hvilket tempo må jeg holde for halvmaraton på 2 timer?",
           "5:41 min/km, som er 10,5 km/t, gjennom hele 21,0975 km."),
+         ("Hvor lang er en halvmaraton?",
+          "21,0975 km, nøyaktig halvparten av maraton. I dagligtale sier de fleste 21,1 km, "
+          "og de 2,5 meterne som skiller de to koster under ett sekund."),
+         ("Hva er en god halvmaratontid?",
+          "2:00 er det vanligste målet blant mosjonister og innen rekkevidde for de fleste som "
+          "trener jevnt. 1:45 regnes som godt trent og 1:30 som sterk mosjonist. Den beste "
+          "målestokken er likevel din egen forrige tid på distansen."),
          ("Hva kreves for halvmaraton under 1:30?",
           "4:16 min/km, altså 14,1 km/t.")]),
 
@@ -148,24 +165,33 @@ PAGES = [
          ("Hva må til for 5 km under 20 minutter?", "4:00 min/km, som er 15,0 km/t.")]),
 
  P_("/tabeller/min-km-til-km-t/", "table", "tables",
-    "min/km til km/t – omregningstabell for løpetempo | RunPace",
-    "Full omregningstabell mellom min/km og km/t, fra 3:00 til 8:00 min/km. "
-    "Med formelen, og sluttider på 5 km og 10 km for hvert tempo.",
-    "min/km til km/t: omregningstabell", "tab-omregning",
+    "min/km til km/t og km/t til min/km – omregningstabell | RunPace",
+    "Regn om løpetempo begge veier. Full tabell fra min/km til km/t og fra km/t til "
+    "min/km, formelen bak, og de omregningene folk spør om oftest.",
+    "min/km til km/t — og km/t til min/km", "tab-omregning",
     alt="/en/charts/min-km-to-km-h/", crumbs=[TAB_NB, ("min/km til km/t", None)],
     faq=[("Hvordan regner jeg min/km om til km/t?",
           "Del 60 på tempoet i minutter. 5:00 min/km blir 60 ÷ 5 = 12 km/t. "
           "Sekunder må gjøres om til desimaler først: 5:30 er 5,5 minutter, og 60 ÷ 5,5 = 10,9 km/t."),
+         ("Hvordan regner jeg km/t om til min/km?",
+          "Del 60 på farten. 12 km/t blir 60 ÷ 12 = 5:00 min/km, og 10 km/t blir 6:00 min/km. "
+          "Det er den samme formelen begge veier."),
          ("Hvor mange km/t er 5:30 min/km?", "10,9 km/t."),
-         ("Hvor mange min/km er 12 km/t?", "5:00 min/km.")]),
+         ("Hvor mange min/km er 12 km/t?", "5:00 min/km."),
+         ("Hvor mange min/km er 10 km/t?", "6:00 min/km, som gir 1:00:00 på 10 km."),
+         ("Hva betyr min per km?",
+          "min/km er minutter per kilometer — tiden du bruker på én kilometer. Lavere tall "
+          "betyr raskere løping, motsatt av km/t der høyere tall er raskere.")]),
 
  P_("/tabeller/tredemolle/", "table", "tables",
     "Tredemølle: km/t til min/km – omregningstabell | RunPace",
     "Tredemøllen viser km/t, men du tenker i min/km. Full tabell fra 6 til 20 km/t, "
-    "med sluttider og hva stigning gjør med tempoet.",
+    "farten måltiden din krever, og hva stigning gjør med tempoet.",
     "Tredemølle: km/t til min/km", "tab-tredemolle",
     alt="/en/charts/treadmill/", crumbs=[TAB_NB, ("Tredemølle", None)],
     faq=[("Hvor fort er 12 km/t på tredemølle?", "12 km/t er 5:00 min/km."),
+         ("Hvilken fart må jeg stille tredemøllen på for 5 km på 25 minutter?",
+          "12,0 km/t, som er 5:00 min/km. For 5 km på 30 minutter holder 10,0 km/t."),
          ("Hvilken stigning bør jeg bruke på tredemølle?",
           "1 % er den vanligste anbefalingen. Uten motvind og med et belte som drar "
           "føttene bakover, blir samme fart litt lettere inne enn ute.")]),
@@ -401,15 +427,22 @@ PAGES = [
     faq=[("What pace gives a 25 minute 5K?", "5:00 min/km, or 12.0 km/h.")]),
 
  P_("/en/charts/min-km-to-km-h/", "table", "tables",
-    "min/km to km/h – running pace conversion chart | RunPace",
-    "Full conversion chart between min/km and km/h, from 3:00 to 8:00 min/km, with "
-    "the formula and 5K and 10K finish times for every pace.",
-    "min/km to km/h conversion chart", "tab-omregning", lang="en",
+    "min/km to km/h and km/h to min/km – pace conversion chart | RunPace",
+    "Convert running pace both ways. Full charts from min/km to km/h and from km/h to "
+    "min/km, the formula behind them, and the conversions people ask for most.",
+    "min/km to km/h — and km/h to min/km", "tab-omregning", lang="en",
     alt="/tabeller/min-km-til-km-t/", crumbs=[TAB_EN, ("min/km to km/h", None)],
     faq=[("How do I convert min/km to km/h?",
           "Divide 60 by your pace in minutes. 5:00 min/km gives 60 ÷ 5 = 12 km/h. "
           "Convert seconds to decimals first: 5:30 is 5.5 minutes, and 60 ÷ 5.5 = 10.9 km/h."),
-         ("How many km/h is 5:30 min/km?", "10.9 km/h.")]),
+         ("How do I convert km/h to min/km?",
+          "Divide 60 by the speed. 12 km/h gives 60 ÷ 12 = 5:00 min/km, and 10 km/h gives "
+          "6:00 min/km. It is the same formula in both directions."),
+         ("How many km/h is 5:30 min/km?", "10.9 km/h."),
+         ("How many min/km is 10 km/h?", "6:00 min/km, which is 1:00:00 for 10K."),
+         ("What does min per km mean?",
+          "min/km is minutes per kilometre — the time you spend covering one kilometre. "
+          "A lower number means faster running, the opposite of km/h.")]),
 
  P_("/en/charts/treadmill/", "table", "tables",
     "Treadmill pace chart – km/h to min/km | RunPace",
@@ -531,6 +564,10 @@ def expand(html, page):
             return T.conversion(lang)
         if a[0] == "treadmill":
             return T.treadmill(lang)
+        if a[0] == "speed2pace":
+            return T.speed_to_pace(lang)
+        if a[0] == "goalspeed":
+            return T.goal_speeds(lang)
         if a[0] == "alldist":
             return T.all_distances(lang)
         if a[0] == "riegel":

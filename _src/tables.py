@@ -97,6 +97,43 @@ def treadmill(lang):
                    ("21,1 km" if lang == "nb" else "21.1 km", True)], rows)
 
 
+def speed_to_pace(lang):
+    """km/t -> min/km i hele trinn. Motstykket til conversion(), og bevisst
+    grovere enn treadmill() — de to tabellene skal ikke være samme tabell."""
+    t = TXT[lang]
+    rows = []
+    v = 6.0
+    while v <= 20.001:
+        pace = P.kmh_to_pace(v)
+        rows.append([
+            (P.fmt_kmh(v, lang) + " " + t["km"], ""),
+            (P.fmt_pace(pace) + " min/km", "num hi"),
+            (P.fmt_time(P.finish_seconds(pace, 10)), "num"),
+            (P.fmt_time(P.finish_seconds(pace, P.DISTANCES["marathon"])), "num"),
+        ])
+        v += 1.0
+    return _table([(t["speed"], False), (t["pace"], True), ("10 km", True),
+                   (P.NAMES[lang]["marathon"], True)], rows)
+
+
+def goal_speeds(lang):
+    """Måltid -> farten du må stille mølla på. Den ene retningen tabellene
+    over ikke dekker: du vet hva du vil løpe, og skal sette en fart."""
+    t = TXT[lang]
+    goals = [("5k", 20), ("5k", 25), ("5k", 30), ("5k", 35),
+             ("10k", 45), ("10k", 50), ("10k", 55), ("10k", 60), ("10k", 70)]
+    rows = []
+    for key, minutes in goals:
+        km = P.DISTANCES[key]
+        pace = minutes * 60.0 / km
+        rows.append([
+            (P.NAMES[lang][key] + " " + P.fmt_time(minutes * 60), ""),
+            (P.fmt_kmh(P.pace_to_kmh(pace), lang) + " " + t["km"], "num hi"),
+            (P.fmt_pace(pace) + " min/km", "num"),
+        ])
+    return _table([(t["goal"], False), (t["speed"], True), (t["pace"], True)], rows)
+
+
 def all_distances(lang, start="3:30", end="7:00", step=15):
     """Ett tempo, alle distansene. Den kompakte oversikten på forsida."""
     t = TXT[lang]

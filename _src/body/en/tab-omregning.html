@@ -1,26 +1,51 @@
   <article class="narrow">
-    <h1>min/km to km/h conversion chart</h1>
+    <h1>min/km to km/h — and km/h to min/km</h1>
     <div class="answer">
       <p>Divide <strong>60 by your pace in minutes</strong> to get the speed in km/h.
-        5:00 min/km becomes 60 ÷ 5 = <strong>12.0 km/h</strong>. The other direction is the
-        same sum: 60 ÷ 12 = 5:00 min/km.</p>
+        5:00 min/km becomes 60 ÷ 5 = <strong>12.0 km/h</strong>. The other direction is exactly
+        the same sum: 60 ÷ 12 = <strong>5:00 min/km</strong>.</p>
       <p>If your pace has seconds, convert them to decimals first. 5:30 is 5.5 minutes, and
         60 ÷ 5.5 = 10.9 km/h.</p>
     </div>
 
-    <h2>The formula</h2>
+    <h2>The formula, both ways</h2>
     <ul>
       <li><strong>min/km to km/h:</strong> 60 ÷ pace in minutes = km/h</li>
       <li><strong>km/h to min/km:</strong> 60 ÷ km/h = pace in minutes</li>
     </ul>
-    <p>The trap is the seconds. 5:30 min/km is <em>not</em> 5.30 minutes but 5.5 — because
-      30 seconds is half of the minute, not thirty hundredths of it. Divide the seconds by 60
-      before you go any further.</p>
+    <p>The two are the same formula. Pace and speed are inverses of each other: multiply them
+      together and you always get 60.</p>
 
-    <h2>Full conversion chart</h2>
+    <h2>The trap: seconds are not decimals</h2>
+    <p>5:30 min/km is <em>not</em> 5.30 minutes but 5.5 — because 30 seconds is half of the
+      minute, not thirty hundredths of it. Divide the seconds by 60 before you go any further.
+      This single detail is why mental arithmetic lands a few tenths off.</p>
+
+    <h2>From min/km to km/h</h2>
     <p>From 3:00 to 8:00 min/km in five-second steps. The 5K and 10K finish times are included
       so you do not have to look in two places.</p>
     {{conversion}}
+
+    <h2>From km/h to min/km</h2>
+    <p>The other direction, in whole steps: the speed you set on a treadmill or read off a
+      display, translated into the pace you think in.</p>
+    {{speed2pace}}
+
+    <h2>The conversions people ask for most</h2>
+    <ul>
+      <li><strong>10 km/h</strong> is 6:00 min/km — 1:00:00 for 10K</li>
+      <li><strong>12 km/h</strong> is 5:00 min/km — 50:00 for 10K</li>
+      <li><strong>14 km/h</strong> is 4:17 min/km — 42:51 for 10K</li>
+      <li><strong>5:00 min/km</strong> is 12.0 km/h — 3:30:59 for a marathon</li>
+      <li><strong>5:30 min/km</strong> is 10.9 km/h — 3:52:04 for a marathon</li>
+      <li><strong>6:00 min/km</strong> is 10.0 km/h — 4:13:10 for a marathon</li>
+    </ul>
+
+    <h2>What does "min per km" mean?</h2>
+    <p>min/km reads "minutes per kilometre" and is the time you spend covering one kilometre.
+      A lower number means faster running — the opposite of km/h, where a higher number is
+      faster. <em>Min per kilometre</em>, <em>min/km</em> and <em>pace</em> all mean the same
+      thing.</p>
 
     <h2>Why two units for the same thing?</h2>
     <p>Pace in min/km answers the question runners actually ask themselves mid-race: how long
@@ -33,7 +58,7 @@
     <div class="related">
       <h2>Next</h2>
       <ul>
-        <li><a href="/en/charts/treadmill/">Treadmill: km/h to min/km</a></li>
+        <li><a href="/en/charts/treadmill/">Treadmill: km/h, min/km and what incline does</a></li>
         <li><a href="/en/">Convert in the calculator</a></li>
         <li><a href="/en/charts/">All the pace charts</a></li>
       </ul>

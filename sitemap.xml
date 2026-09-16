@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://runpace.no/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/"/>
@@ -39,7 +39,7 @@
   </url>
   <url>
     <loc>https://runpace.no/tabeller/maraton/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/maraton/"/>
@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://runpace.no/tabeller/halvmaraton/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/halvmaraton/"/>
@@ -75,7 +75,7 @@
   </url>
   <url>
     <loc>https://runpace.no/tabeller/min-km-til-km-t/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/min-km-til-km-t/"/>
@@ -84,7 +84,7 @@
   </url>
   <url>
     <loc>https://runpace.no/tabeller/tredemolle/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="nb" href="https://runpace.no/tabeller/tredemolle/"/>
