@@ -45,7 +45,8 @@ kan aldri ta ned nettsida. Push er live etter et par minutter.
 /tabeller/…                   Seks tempotabeller + hub
 /guider/…                     Sju guider + hub
 /om/  /faq/  /personvern/     Info
-/support/                     Støtte (Support-URL i App Store Connect)
+/stotte/                      Støtte på norsk
+/support/                     Support på engelsk (Support-URL i App Store Connect)
 /en/…                         Engelsk utvalg (12 sider)
 
 assets/     site.css, site.js (alle sider) · calc.css, calc.js (verktøysidene)
@@ -91,6 +92,9 @@ Et oppslag i en tabell og et drag på hjulet gir dermed alltid samme svar.
   Google-Extended, Applebot-Extended med flere
 - CSS og JS får `?v=<innholdssum>`, så en endring slår igjennom med én gang
   i stedet for etter GitHub Pages' ti minutter med caching
+- «Sist oppdatert» og `dateModified` hentes fra **git**, per brødtekstfil: en side
+  som ikke er rørt, får ikke ny dato, og en side med ucommittet endring får dagens.
+  Derfor skal datoer aldri skrives inn for hånd i `PAGES`
 
 ---
 
@@ -100,7 +104,9 @@ Appen er `RunPace – Pace Calculator`, App-ID **6789667868**. I markup brukes
 `https://apps.apple.com/app/id6789667868`, som sender brukeren til riktig land.
 
 - `<meta name="apple-itunes-app">` gir Apples egen nedlastingsbanner i Safari på iPhone
-- Klikk mot App Store logges som `appstore-click:<plassering>` i analytikken
+- Klikk mot App Store logges med `ev=appstore` og plasseringen i analytikken
+- `?ref=<kilde>` i adressen sendes videre som trafikkilde (`kilde:<verdi>`). Del-lenka
+  fra iOS-appen bruker `?ref=app`; e-poster og innlegg får hver sin verdi
 - Android får «Legg til på hjemskjermen» i stedet, siden appen ikke finnes der ennå
 
 ---
