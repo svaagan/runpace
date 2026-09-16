@@ -26,7 +26,8 @@ Alle tall på sida er regnet ut fra to formler: fart = 60 ÷ tempo i minutter, o
 - [RunPace til iPhone](https://runpace.no/app/): RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og mellomtider — uten innlogging, og den virker uten nett.
 - [Om RunPace](https://runpace.no/om/): RunPace er en løpekalkulator laget i Norge. Ingen innlogging, ingen informasjonskapsler, og all utregning skjer i nettleseren din.
 - [Vanlige spørsmål](https://runpace.no/faq/): Svar på de vanligste spørsmålene om tempo, fart, mellomtider og RunPace-appen.
-- [Personvernerklæring](https://runpace.no/personvern/): Hva RunPace samler inn, hva vi ikke samler inn, og hvordan reklamen i iOS-appen fungerer.
+- [Støtte og hjelp](https://runpace.no/stotte/): Hjelp med RunPace-appen og løpekalkulatoren: hvordan du når oss, svar på vanlige spørsmål, og hva Apple Helse-funksjonen gjør.
+- [Personvernerklæring](https://runpace.no/personvern/): Hva RunPace samler inn og hva vi ikke samler inn. Ingen informasjonskapsler, og iOS-appen er uten reklame og uten sporing fra versjon 2.0.
 
 ## English
 
@@ -42,7 +43,7 @@ Alle tall på sida er regnet ut fra to formler: fart = 60 ÷ tempo i minutter, o
 - [RunPace for iPhone](https://runpace.no/en/app/): RunPace is a free running pace calculator for iPhone. Pace, speed, race times and splits — no sign-in, and it works offline.
 - [About RunPace](https://runpace.no/en/about/): RunPace is a running pace calculator made in Norway. No sign-in, no cookies, and every calculation happens in your browser.
 - [Support &amp; Help](https://runpace.no/support/): Support for the RunPace pace calculator and iOS app: how to reach us, answers to common questions, and how the Apple Health feature works.
-- [Privacy Policy](https://runpace.no/en/privacy/): What RunPace collects, what it does not, and how the ads in the iOS app work.
+- [Privacy Policy](https://runpace.no/en/privacy/): What RunPace collects and what it does not. No cookies, and from version 2.0 the iOS app has no ads and no tracking.
 
 ## Kontakt
 

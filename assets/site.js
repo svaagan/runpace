@@ -90,11 +90,11 @@
           { keepalive: true })['catch'](function () {});
   }
 
-  // Klikk mot App Store logges som en referrer-verdi, slik at det dukker
-  // opp i den analytikken som allerede finnes uten endring på serveren.
+  // Serveren har egne felt for hendelse og plassering. Tidligere ble klikket
+  // pakket inn i ref fordi den ikke hadde det; gjør man begge deler nå, blir
+  // klikket stående som sin egen trafikkilde i tillegg.
   function trackStore(placement) {
-    ping({ ref: 'appstore-click:' + placement, ev: 'appstore',
-           placement: placement, path: location.pathname });
+    ping({ ev: 'appstore', placement: placement, path: location.pathname });
   }
 
   function openStore(placement) {
@@ -148,8 +148,16 @@
   }
 
   applyDeviceCta();
-  ping(document.referrer ? { ref: document.referrer, path: location.pathname }
-                         : { path: location.pathname });
+
+  // ?ref= i adressen er kampanjemarkøren vår: del-lenka fra iOS-appen bærer
+  // ?ref=app, og hver e-post og hvert innlegg får sin egen verdi. Uten dette
+  // teller de som «Direkte» sammen med alle andre uten referrer.
+  function source() {
+    var m = /[?&]ref=([^&#]{1,40})/.exec(location.search);
+    if (m) return 'kilde:' + decodeURIComponent(m[1]);
+    return document.referrer || '';
+  }
+  ping({ ref: source(), path: location.pathname });
 
   /* ── Last på nytt etter lang tid i bakgrunnen ───────────── */
   var hiddenAt = 0;

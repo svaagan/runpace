@@ -11,12 +11,35 @@ import os, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "og")
 
+# Tittelen settes i 82 px og har ~1040 px å gå på: hold den under 22 tegn,
+# ellers renner den ut av kortet. Detaljene hører hjemme i undertittelen.
 CARDS = {
-    "default": ("Løpekalkulator", "Tempo, fart og mellomtider"),
-    "home":    ("Løpekalkulator", "min/km ↔ km/t · sluttider · mellomtider"),
-    "app":     ("RunPace til iPhone", "Gratis løpekalkulator i lomma"),
-    "tabeller":("Tempotabeller", "Maraton · halvmaraton · 10 km · 5 km"),
-    "guider":  ("Guider om løpetempo", "Kort, konkret og uten fyllstoff"),
+    "default":  ("Løpekalkulator", "Tempo, fart og mellomtider"),
+    "home":     ("Løpekalkulator", "min/km ↔ km/t · sluttider · mellomtider"),
+    "app":      ("RunPace til iPhone", "Gratis løpekalkulator i lomma"),
+    "tabeller": ("Tempotabeller", "Maraton · halvmaraton · 10 km · 5 km"),
+    "guider":   ("Guider om løpetempo", "Kort, konkret og uten fyllstoff"),
+
+    # Én per side som deles i sosiale medier eller lenkes til utenfra.
+    "maraton":     ("Maratontempo", "Tempo, fart og sluttid for 42,195 km"),
+    "halvmaraton": ("Halvmaraton", "Tempo, fart og sluttid for 21,1 km"),
+    "10km":        ("10 km", "Tempo, fart og sluttid"),
+    "5km":         ("5 km", "Tempo, fart og sluttid"),
+    "omregning":   ("min/km ↔ km/t", "Full omregningstabell for løpetempo"),
+    "tredemolle":  ("Tredemølle", "km/t til min/km, og hva stigning gjør"),
+    "mellomtider": ("Mellomtider", "Tempoplan og splitter for måltiden din"),
+
+    "en-default":     ("Running pace", "Pace, speed and splits"),
+    "en-home":        ("Pace Calculator", "min/km ↔ km/h · finish times · splits"),
+    "en-app":         ("RunPace for iPhone", "A free pace calculator in your pocket"),
+    "en-charts":      ("Pace charts", "Marathon · half · 10K · 5K · treadmill"),
+    "en-marathon":    ("Marathon pace", "Pace, speed and finish time"),
+    "en-half":        ("Half marathon", "Pace, speed and finish time"),
+    "en-10k":         ("10K pace chart", "Pace, speed and finish time"),
+    "en-5k":          ("5K pace chart", "Pace, speed and finish time"),
+    "en-conversion":  ("min/km ↔ km/h", "Full running pace conversion chart"),
+    "en-treadmill":   ("Treadmill pace", "km/h to min/km, and what incline does"),
+    "en-splits":      ("Split calculator", "A pacing plan for your goal time"),
 }
 
 FONT = "SF Pro Display, Helvetica Neue, Helvetica, Arial, sans-serif"

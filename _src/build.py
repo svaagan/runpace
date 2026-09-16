@@ -11,7 +11,7 @@ aldri ta ned nettsida.
 Rediger ALDRI de genererte HTML-filene direkte; endringene blir overskrevet.
 Rediger brødteksten i _src/body/ eller rammeverket i _src/chrome.py.
 """
-import io, os, re, sys, datetime
+import io, os, re, sys, datetime, subprocess
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import chrome as C
@@ -20,15 +20,46 @@ import pacemath as P
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "_src")
-TODAY = "2026-09-04"
+TODAY = datetime.date.today().isoformat()
+
+
+# ── Datoer ──────────────────────────────────────────────────────────
+# «Sist oppdatert» og dateModified hentes fra git, ikke fra en konstant.
+# En konstant ga alle sidene samme dato på sekundet, som ser maskinskrevet
+# ut for både Google og lesere. Regelen er enkel: en side som ikke er rørt,
+# skal ikke få ny dato. Er brødteksten endret men ikke committet, er den
+# endret i dag.
+def _git(*args):
+    try:
+        out = subprocess.run(("git",) + args, cwd=ROOT, capture_output=True, text=True)
+    except OSError:
+        return ""
+    return out.stdout.strip() if out.returncode == 0 else ""
+
+
+_DIRTY = {line[3:].strip().strip('"')
+          for line in _git("status", "--porcelain").splitlines() if line}
+
+
+def file_dates(rel):
+    """(først lagt til, sist endret) for en fil, som ISO-datoer.
+
+    Uten git — eller for en fil git ikke kjenner — faller begge tilbake på
+    dagens dato, som er det ærligste svaret vi har da."""
+    if rel in _DIRTY:
+        last = TODAY
+    else:
+        last = _git("log", "-1", "--format=%cs", "--", rel) or TODAY
+    first = (_git("log", "--reverse", "--format=%cs", "--", rel).split("\n") or [""])[0]
+    return (first or last, last)
 
 # ── Sideregister ────────────────────────────────────────────────────
 # url, kind, nav, tittel, beskrivelse, h1, og fila i _src/body/<lang>/
 def P_(url, kind, nav, title, desc, h1, body, lang="nb", alt=None, crumbs=None,
-       calc=False, og=None, faq=None, updated=TODAY, hero=None):
+       calc=False, og=None, faq=None, updated=None, hero=None):
     return dict(url=url, kind=kind, nav=nav, title=title, desc=desc, h1=h1,
                 body=body, lang=lang, alt=alt, crumbs=crumbs or [], calc=calc,
-                og=og or "/og/default.png", faq=faq, updated=updated, hero=hero)
+                og=og, faq=faq, updated=updated, hero=hero)
 
 TAB_NB = ("Tabeller", "/tabeller/")
 GUI_NB = ("Guider", "/guider/")
@@ -40,7 +71,7 @@ PAGES = [
     "Løpekalkulator – regn ut tempo i min/km og km/t | RunPace",
     "Gratis løpekalkulator. Regn om mellom min/km og km/t, se sluttider for 5 km, "
     "10 km, halvmaraton og maraton, og lag mellomtidstabell for måltiden din.",
-    "Løpekalkulator", "index", alt="/en/", calc=True, og="/og/home.png",
+    "Løpekalkulator", "index", alt="/en/", calc=True,
     faq=[("Hvordan regner jeg om min/km til km/t?",
           "Del 60 på tempoet i minutter. 5:00 min/km blir 60 ÷ 5 = 12 km/t. "
           "Løpekalkulatoren på runpace.no gjør omregningen mens du drar på hjulet."),
@@ -65,7 +96,7 @@ PAGES = [
     "RunPace til iPhone – løpekalkulator i lomma | RunPace",
     "RunPace er en gratis løpekalkulator for iPhone. Tempo, fart, løpstider og "
     "mellomtider — uten innlogging, og den virker uten nett.",
-    "RunPace til iPhone", "app", alt="/en/app/", og="/og/app.png",
+    "RunPace til iPhone", "app", alt="/en/app/",
     crumbs=[("Appen", None)]),
 
  P_("/tabeller/", "hub", "tables",
@@ -259,15 +290,44 @@ PAGES = [
           "Ja. Sida virker som en app når den er installert — full skjerm, egen ikon og "
           "uten nettleseren rundt."),
          ("Hva koster RunPace-appen?",
-          "Ingenting. Den er gratis med et lite reklamebanner nederst, og ett engangskjøp "
-          "fjerner banneret for godt. Ingen funksjoner er låst bak betaling."),
+          "Appen er gratis og uten reklame. Kalkulatoren og løpsplanen med mellomtider koster "
+          "ingenting. RunPace Pro, ett engangskjøp på 29 kroner, låser opp Løpstider og "
+          "Treningstempo. Alle som hadde appen før versjon 2.0, beholder alt gratis."),
          ("Finnes RunPace på Android?",
           "Ikke ennå. På Android kan du legge nettsida på hjemskjermen, så oppfører den "
           "seg som en app med egen ikon og full skjerm.")]),
 
+ P_("/stotte/", "info", None, "Støtte og hjelp | RunPace",
+    "Hjelp med RunPace-appen og løpekalkulatoren: hvordan du når oss, svar på vanlige "
+    "spørsmål, og hva Apple Helse-funksjonen gjør.",
+    "Støtte og hjelp", "stotte", alt="/support/", crumbs=[("Støtte", None)],
+    faq=[("Hvordan bruker jeg kalkulatoren?",
+          "Dra på hjulene for å sette et tempo (min/km) eller en fart (km/t) — begge oppdaterer "
+          "seg selv. Under hjulene står sluttidene for distansene fra 1 km opp til maraton."),
+         ("Hvordan lager jeg en løpsplan med mellomtider?",
+          "Åpne Løpsplan i appen, velg en distanse eller skriv inn din egen, og dra inn måltiden. "
+          "RunPace viser tempoet du må holde og en mellomtidstabell, så du vet hva klokka skal "
+          "vise underveis."),
+         ("Hva koster RunPace Pro?",
+          "RunPace Pro er ett engangskjøp på 29 kroner som låser opp Løpstider og Treningstempo. "
+          "Kalkulatoren og løpsplanen er gratis, det finnes ingen abonnement, og alle som hadde "
+          "appen før versjon 2.0 beholder alt gratis."),
+         ("Jeg har byttet telefon — hvordan får jeg tilbake kjøpet?",
+          "Åpne Innstillinger i appen og trykk «Hent det tilbake» ved siden av «Kjøpt fra før?». "
+          "RunPace Pro følger Apple-kontoen din og låses opp igjen på alle enheter som er logget "
+          "inn på den samme kontoen."),
+         ("Hva gjør Apple Helse-funksjonen?",
+          "Hvis du vil, kan RunPace lese den nyeste VO₂max-verdien din fra Apple Helse. Den "
+          "brukes til å foreslå treningssoner og et utgangspunkt for løpstidsanslag. Dette er "
+          "helt valgfritt — alt i appen virker uten."),
+         ("Samler RunPace inn data om meg?",
+          "Nei. Appen har ingen konto, all utregning skjer på enheten din, og fra versjon 2.0 "
+          "finnes det verken reklame eller sporing i den. Helsedataene dine forlater aldri "
+          "telefonen, og nettsida bruker bare anonymisert besøksstatistikk på egen server.")]),
+
  P_("/personvern/", "info", None, "Personvernerklæring | RunPace",
-    "Hva RunPace samler inn, hva vi ikke samler inn, og hvordan reklamen i "
-    "iOS-appen fungerer.",
+    "Hva RunPace samler inn og hva vi ikke samler inn. Ingen informasjonskapsler, og "
+    "iOS-appen er uten reklame og uten sporing fra versjon 2.0.",
     "Personvernerklæring", "personvern", alt="/en/privacy/",
     crumbs=[("Personvern", None)]),
 
@@ -276,7 +336,7 @@ PAGES = [
     "Running Pace Calculator – min/km, km/h and race times | RunPace",
     "Free running pace calculator. Convert between min/km and km/h, see finish times "
     "for 5K, 10K, half marathon and marathon, and build a split table for your goal.",
-    "Running Pace Calculator", "index", lang="en", alt="/", calc=True, og="/og/home.png",
+    "Running Pace Calculator", "index", lang="en", alt="/", calc=True,
     faq=[("How do I convert min/km to km/h?",
           "Divide 60 by your pace in minutes. 5:00 min/km gives 60 ÷ 5 = 12 km/h."),
          ("What pace do I need for a 4 hour marathon?",
@@ -296,7 +356,7 @@ PAGES = [
     "RunPace for iPhone – a pace calculator in your pocket | RunPace",
     "RunPace is a free running pace calculator for iPhone. Pace, speed, race times "
     "and splits — no sign-in, and it works offline.",
-    "RunPace for iPhone", "app", lang="en", alt="/app/", og="/og/app.png",
+    "RunPace for iPhone", "app", lang="en", alt="/app/",
     crumbs=[("iOS app", None)]),
 
  P_("/en/charts/", "hub", "tables",
@@ -369,7 +429,7 @@ PAGES = [
  P_("/support/", "info", None, "Support &amp; Help | RunPace",
     "Support for the RunPace pace calculator and iOS app: how to reach us, answers to "
     "common questions, and how the Apple Health feature works.",
-    "Support &amp; Help", "support", lang="en", crumbs=[("Support", None)],
+    "Support &amp; Help", "support", lang="en", alt="/stotte/", crumbs=[("Support", None)],
     faq=[("How do I use the pace calculator?",
           "Scroll the wheels to set a pace (min/km) or a speed (km/h) — both update "
           "automatically. Below the wheels you will see estimated finish times for standard "
@@ -383,18 +443,74 @@ PAGES = [
           "from Apple Health, to suggest training zones and a starting point for race "
           "predictions. This is fully optional — every feature works without it."),
          ("Does RunPace collect my data?",
-          "The iOS app has no account and every calculation happens locally on your device. "
-          "From version 1.5 it shows a small banner ad delivered by Google AdMob. Apart from "
-          "that banner the app sends nothing about you anywhere, and Health data is never "
-          "used for advertising.")]),
+          "No. The iOS app has no account, every calculation happens locally on your device, "
+          "and from version 2.0 there are no ads and no tracking in it at all. Apple lists it "
+          "as Data Not Collected, and Health data never leaves the device."),
+         ("What does RunPace Pro cost?",
+          "RunPace Pro is a one-time $1.99 purchase that unlocks the Race times and Training "
+          "paces screens. The calculator and the race plan are free, there is no subscription, "
+          "and anyone who had the app before version 2.0 keeps everything for free."),
+         ("How do I restore a purchase on a new iPhone?",
+          "Open Settings inside the app and tap Restore, next to Already bought it. RunPace Pro "
+          "follows your Apple Account, so it unlocks again on every device signed in to the "
+          "same account.")]),
 
  P_("/en/privacy/", "info", None, "Privacy Policy | RunPace",
-    "What RunPace collects, what it does not, and how the ads in the iOS app work.",
+    "What RunPace collects and what it does not. No cookies, and from version 2.0 the "
+    "iOS app has no ads and no tracking.",
     "Privacy Policy", "personvern", lang="en", alt="/personvern/",
     crumbs=[("Privacy", None)]),
 ]
 
 BY_URL = {p["url"]: p for p in PAGES}
+
+
+# ── Delebilder ──────────────────────────────────────────────────────
+# Kortet som vises når noen limer inn lenka i Facebook, LinkedIn, Slack
+# eller Reddit. Én per side det er verdt å dele; resten arver språkets
+# standardkort. Bildene lages av _src/make_og.py.
+OG = {
+    "/":                             "/og/home.png",
+    "/mellomtider/":                 "/og/mellomtider.png",
+    "/app/":                         "/og/app.png",
+    "/tabeller/":                    "/og/tabeller.png",
+    "/tabeller/maraton/":            "/og/maraton.png",
+    "/tabeller/halvmaraton/":        "/og/halvmaraton.png",
+    "/tabeller/10km/":               "/og/10km.png",
+    "/tabeller/5km/":                "/og/5km.png",
+    "/tabeller/min-km-til-km-t/":    "/og/omregning.png",
+    "/tabeller/tredemolle/":         "/og/tredemolle.png",
+    "/guider/":                      "/og/guider.png",
+    "/en/":                          "/og/en-home.png",
+    "/en/splits/":                   "/og/en-splits.png",
+    "/en/app/":                      "/og/en-app.png",
+    "/en/charts/":                   "/og/en-charts.png",
+    "/en/charts/marathon/":          "/og/en-marathon.png",
+    "/en/charts/half-marathon/":     "/og/en-half.png",
+    "/en/charts/10k/":               "/og/en-10k.png",
+    "/en/charts/5k/":                "/og/en-5k.png",
+    "/en/charts/min-km-to-km-h/":    "/og/en-conversion.png",
+    "/en/charts/treadmill/":         "/og/en-treadmill.png",
+}
+
+# Guidene har ingen egne kort ennå og deler guidekortet.
+for _p in PAGES:
+    if _p["og"]:
+        continue
+    if _p["url"] in OG:
+        _p["og"] = OG[_p["url"]]
+    elif _p["kind"] == "guide":
+        _p["og"] = "/og/guider.png"
+    else:
+        _p["og"] = "/og/default.png" if _p["lang"] == "nb" else "/og/en-default.png"
+
+# Datoene hentes fra git, med brødtekstfila som fasit. En side som ikke er
+# rørt siden i fjor, skal fortelle det.
+for _p in PAGES:
+    _first, _last = file_dates("_src/body/%s/%s.html" % (_p["lang"], _p["body"]))
+    _p["published"] = _first
+    if not _p["updated"]:
+        _p["updated"] = _last
 
 
 # ── Innsetting av genererte tabeller ────────────────────────────────
@@ -435,10 +551,13 @@ def render(page):
     body = expand(io.open(body_path, encoding="utf-8").read().rstrip(), page)
 
     alt = page.get("alt")
-    updated = ""
+
+    # Datoen har ligget i schema-en hele tida, men aldri stått på sida. Den
+    # settes rett under h1-en, der lesere ser etter den.
     if page["kind"] in ("guide", "table"):
-        updated = ('  <p class="page-meta"><span>%s %s</span></p>\n'
-                   % (C.STR[lang]["updated"], C.pretty_date(page["updated"], lang)))
+        meta = ('\n    <p class="page-meta"><span>%s %s</span></p>'
+                % (C.STR[lang]["updated"], C.pretty_date(page["updated"], lang)))
+        body = body.replace("</h1>", "</h1>" + meta, 1)
 
     scripts = '  <script src="%s" defer></script>\n' % C.asset("/assets/site.js")
     if page.get("calc"):

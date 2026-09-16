@@ -63,7 +63,7 @@ FOOTER = {
                     ("Riegels formel", "/guider/riegel-formelen/"),
                     ("Negativ split", "/guider/negativ-split/")]),
         ("Om", [("Om RunPace", "/om/"), ("Vanlige spørsmål", "/faq/"),
-                ("Personvern", "/personvern/"), ("Støtte", "/support/"),
+                ("Personvern", "/personvern/"), ("Støtte", "/stotte/"),
                 (CONTACT, "mailto:" + CONTACT)]),
     ],
     "en": [
@@ -178,11 +178,19 @@ def schema(page):
     url = SITE + page["url"]
     graph = []
 
+    # sameAs knytter navnet «RunPace» til App Store-oppføringa. Det er det
+    # eneste stedet utenfor eget domene vi selv rår over, og uten den koblingen
+    # har Google ingenting som forteller at de to er samme sak.
     org = {"@type": "Organization", "@id": SITE + "/#org", "name": "RunPace",
            "url": SITE, "email": CONTACT,
+           "description": ("Løpekalkulator for tempo, fart og mellomtider."
+                           if lang == "nb" else
+                           "Running pace calculator for pace, speed and splits."),
            "founder": {"@type": "Person", "name": AUTHOR},
+           "sameAs": [APP_URL],
            "logo": {"@type": "ImageObject", "url": SITE + "/icons/icon-512.png"}}
     site = {"@type": "WebSite", "@id": SITE + "/#site", "name": "RunPace",
+            "alternateName": "RunPace løpekalkulator" if lang == "nb" else "RunPace pace calculator",
             "url": SITE, "publisher": {"@id": SITE + "/#org"},
             "inLanguage": "nb-NO" if lang == "nb" else "en"}
 

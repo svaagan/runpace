@@ -413,6 +413,13 @@ caption {
 .feature { margin-bottom: 1.5rem; }
 .feature h3 { margin: 0 0 0.3rem; }
 .feature p { margin: 0; }
+/* Merkelapp for det som ligger bak RunPace Pro */
+.pro-tag {
+  display: inline-block; vertical-align: 0.1em;
+  font-size: 0.62em; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 0.15em 0.5em; border-radius: 4px;
+  background: var(--accent); color: #000;
+}
 .tick { list-style: none; margin-left: 0; }
 .tick li { position: relative; padding-left: 1.5rem; }
 .tick li::before {
