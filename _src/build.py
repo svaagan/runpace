@@ -30,15 +30,30 @@ TODAY = datetime.date.today().isoformat()
 # skal ikke få ny dato. Er brødteksten endret men ikke committet, er den
 # endret i dag.
 def _git(*args):
+    """Rå stdout fra git. Ikke strippet: `status --porcelain` begynner hver linje
+    med to statustegn og et mellomrom, og et .strip() på hele utdataet spiser
+    mellomrommet i den *første* linja — da mister den fila første tegn i stien og
+    blir aldri regnet som endret."""
     try:
         out = subprocess.run(("git",) + args, cwd=ROOT, capture_output=True, text=True)
     except OSError:
         return ""
-    return out.stdout.strip() if out.returncode == 0 else ""
+    return out.stdout if out.returncode == 0 else ""
 
 
-_DIRTY = {line[3:].strip().strip('"')
-          for line in _git("status", "--porcelain").splitlines() if line}
+def _dirty():
+    paths = set()
+    for line in _git("status", "--porcelain").splitlines():
+        if len(line) < 4:
+            continue
+        path = line[3:]
+        if " -> " in path:          # omdøpt fil: git skriver «gammel -> ny»
+            path = path.split(" -> ", 1)[1]
+        paths.add(path.strip('"'))
+    return paths
+
+
+_DIRTY = _dirty()
 
 
 def file_dates(rel):
@@ -49,9 +64,9 @@ def file_dates(rel):
     if rel in _DIRTY:
         last = TODAY
     else:
-        last = _git("log", "-1", "--format=%cs", "--", rel) or TODAY
-    first = (_git("log", "--reverse", "--format=%cs", "--", rel).split("\n") or [""])[0]
-    return (first or last, last)
+        last = _git("log", "-1", "--format=%cs", "--", rel).strip() or TODAY
+    first = _git("log", "--reverse", "--format=%cs", "--", rel).splitlines()
+    return ((first[0] if first else "") or last, last)
 
 # ── Sideregister ────────────────────────────────────────────────────
 # url, kind, nav, tittel, beskrivelse, h1, og fila i _src/body/<lang>/
