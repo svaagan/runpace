@@ -768,6 +768,32 @@ def write_404():
     io.open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8").write(html)
 
 
+# ── /tall/ ──────────────────────────────────────────────────────────
+def write_tall():
+    """Nedlastinger, kjøp og kroner — offentlig med vilje (besluttet 2026-10-16).
+
+    Står utenfor PAGES som 404-sida: ikke i menyen, sitemap, llms.txt eller
+    hreflang, og med noindex. Tallene ligger i tall/tall.json, som
+    hjemmeserveren (runpace-analyse/dashboard.mjs) pusher hver natt — sida
+    selv endres ikke når tallene gjør det."""
+    page = P_("/tall/", "info", None, "RunPace i tall | RunPace",
+              "Nedlastinger, kjøp og inntekt for RunPace-appen, rett fra App Store "
+              "og oppdatert hver dag.",
+              "RunPace i tall", "tall", crumbs=[("RunPace i tall", None)])
+    page["updated"] = TODAY
+    html = render(page)
+    html = html.replace('<link rel="canonical"',
+                        '<meta name="robots" content="noindex">\n  <link rel="canonical"', 1)
+    html = html.replace("</head>", '  <link rel="stylesheet" href="%s">\n</head>'
+                        % C.asset("/assets/tall.css"), 1)
+    html = html.replace("</body>", '  <script src="%s" defer></script>\n</body>'
+                        % C.asset("/assets/tall.js"), 1)
+    d = os.path.join(ROOT, "tall")
+    if not os.path.isdir(d):
+        os.makedirs(d)
+    io.open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(html)
+
+
 def main():
     written = []
     for page in PAGES:
@@ -783,6 +809,7 @@ def main():
     write_robots()
     write_llms()
     write_404()
+    write_tall()
     for url, n in written:
         print("  %-34s %6d B" % (url, n))
     print("\n%d sider skrevet, pluss sitemap.xml, robots.txt, llms.txt og 404.html."

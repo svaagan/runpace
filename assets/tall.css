@@ -1,0 +1,38 @@
+/* runpace.no/tall/ — tallsida. Lastes bare der. */
+
+.tall { padding-top: 1.5rem; padding-bottom: 3rem; }
+.tall-kpi { margin: 1.5rem 0 2rem; }
+.tall-stor {
+  font-size: 2.2rem; font-weight: 700; line-height: 1.15;
+  font-variant-numeric: tabular-nums; color: var(--text); margin: 0.2rem 0 0.35rem;
+}
+
+.tall-figur { margin: 0 0 2.25rem; }
+.tall-figur figcaption {
+  font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem;
+}
+.tall-graf { position: relative; width: 100%; }
+.tall-graf svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tall-graf text {
+  font-family: var(--font); font-size: 11px; fill: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+.tall-graf .verdi { fill: var(--text-mid); font-weight: 600; }
+.tall-graf .merke { fill: var(--text-mid); }
+.tall-graf .rutenett { stroke: var(--divider-2); stroke-width: 1; }
+.tall-graf .akse { stroke: var(--divider); stroke-width: 1; }
+.tall-graf .soyle { fill: var(--accent); }
+.tall-graf .treff { fill: transparent; cursor: default; }
+.tall-graf .soyle.aktiv { fill: #ffd92e; }
+
+.tall-tips {
+  position: absolute; pointer-events: none; z-index: 2;
+  background: var(--surface-3); border: 1px solid var(--divider);
+  border-radius: 8px; padding: 0.45rem 0.6rem; font-size: 0.82rem;
+  color: var(--text); white-space: nowrap; transform: translate(-50%, -100%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.tall-tips span { color: var(--text-dim); }
+
+#tall-maned td.num { font-variant-numeric: tabular-nums; }
+#tall-maned tfoot td { font-weight: 600; color: var(--text); border-top: 1px solid var(--divider); }
