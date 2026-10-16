@@ -7,6 +7,28 @@
   'use strict';
 
   var APP_STORE_URL = 'https://apps.apple.com/app/id6789667868';
+
+  // Apples kampanjelenke. pt er leverandørnøkkelen (App Store Connect →
+  // Analytics → Campaigns), ct sier hvor på runpace.no klikket kom fra. Da
+  // teller Apple produktsidevisninger og «Hent» per seksjon i sin egen
+  // `Campaign`-kolonne — uten den stopper målingen ved klikket.
+  //
+  // Én verdi per seksjon, ikke per side eller knapp: Apple skjuler små
+  // grupper, og mange smale kampanjer blir bare tomme rader.
+  //
+  // Settes på i nettleseren, ikke i HTML-en: søkemotorer og lenkedelinger
+  // ser den rene adressen.
+  var APP_STORE_PT = '129137071';
+  function storeCampaign() {
+    var seg = location.pathname.split('/').filter(Boolean);
+    var en = seg[0] === 'en';
+    if (en) seg.shift();
+    // Apple godtar høyst 30 tegn
+    return ('web-' + (en ? 'en-' : '') + (seg[0] || 'forside')).slice(0, 30);
+  }
+  // Formen Apples egen lenkegenerator lager: /app/apple-store/id…?pt&ct&mt=8
+  var STORE_LINK = 'https://apps.apple.com/app/apple-store/id6789667868' +
+    '?pt=' + APP_STORE_PT + '&ct=' + encodeURIComponent(storeCampaign()) + '&mt=8';
   var UA = navigator.userAgent;
   var IS_IOS = /iPad|iPhone|iPod/.test(UA) ||
                (UA.indexOf('Macintosh') > -1 && navigator.maxTouchPoints > 1);
@@ -100,13 +122,16 @@
   function openStore(placement) {
     if (IS_ANDROID) { showInstallModal(); return; }
     trackStore(placement);
-    window.open(APP_STORE_URL, '_blank', 'noopener');
+    window.open(STORE_LINK, '_blank', 'noopener');
   }
 
   /* ── App Store-knapper ──────────────────────────────────── */
   // Android har ingen App Store å sende folk til, så merket byttes ut
   // med installering på hjemskjermen.
   function applyDeviceCta() {
+    document.querySelectorAll('a[href^="' + APP_STORE_URL + '"]').forEach(function (a) {
+      a.href = STORE_LINK;
+    });
     document.querySelectorAll('[data-store-link]').forEach(function (a) {
       a.addEventListener('click', function () {
         trackStore(a.getAttribute('data-store-link') || 'link');
@@ -172,5 +197,5 @@
   // Brukes av markup og av kalkulatorsidene
   window.showInstallModal = showInstallModal;
   window.openStore = openStore;
-  window.RunPace = { isIOS: IS_IOS, isAndroid: IS_ANDROID, storeUrl: APP_STORE_URL };
+  window.RunPace = { isIOS: IS_IOS, isAndroid: IS_ANDROID, storeUrl: STORE_LINK };
 })();
