@@ -60,6 +60,14 @@ _src/       Byggeren. Publiseres ikke (`Disallow` i robots.txt)
 **Rør ikke:** `CNAME` (domenet) og adressen `/support/` (registrert i App Store
 Connect).
 
+**`/tall/` — nedlastinger, kjøp og inntekt, offentlig med vilje.** Sida bygges
+av `write_tall()` i `_src/build.py` (utenfor `PAGES`: ikke i menyen, sitemap eller
+`llms.txt`, og med `noindex`). Tallene ligger i `tall/tall.json`, som
+hjemmeserveren pusher hver dag rundt 14:00 UTC med en egen deploy key
+(`runpace-analyse/publiser-tall.mjs`). **Kjør derfor `git pull --rebase` før du
+pusher herfra**, ellers avvises pushen. Rediger aldri `tall/tall.json` for hånd —
+den overskrives neste natt.
+
 `app-ads.txt` ligger i rota fordi AdMob krevde den. iOS-appen slutter med reklame
 i 2.0, men brukere som ennå ikke har oppdatert kjører fortsatt en utgave med
 annonser — fila skal derfor bli liggende til 2.0 er ute og har fått spre seg, og
