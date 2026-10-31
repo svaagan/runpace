@@ -1,13 +1,13 @@
 {
-  "oppdatert": "2026-10-29",
+  "oppdatert": "2026-10-30",
   "forsteDag": "2026-08-04",
   "usdNok": 10.5,
   "totalt": {
-    "nedlastinger": 1028,
-    "kjop": 13,
-    "kr": 190.88,
+    "nedlastinger": 997,
+    "kjop": 11,
+    "kr": 124.24,
     "perValuta": {
-      "NOK": 160.64,
+      "NOK": 94,
       "USD": 2.88,
       "EUR": 1.38
     }
@@ -349,16 +349,8 @@
       "annet": 0,
       "kr": 0
     },
-    "2026-10-23": {
-      "nedlastinger": 7,
-      "pro": 0,
-      "supporter": 0,
-      "app": 0,
-      "annet": 2,
-      "kr": 66.64
-    },
     "2026-10-24": {
-      "nedlastinger": 8,
+      "nedlastinger": 1,
       "pro": 0,
       "supporter": 0,
       "app": 0,
@@ -366,7 +358,7 @@
       "kr": 0
     },
     "2026-10-25": {
-      "nedlastinger": 5,
+      "nedlastinger": 1,
       "pro": 0,
       "supporter": 0,
       "app": 0,
@@ -374,31 +366,23 @@
       "kr": 0
     },
     "2026-10-26": {
-      "nedlastinger": 6,
-      "pro": 1,
+      "nedlastinger": 3,
+      "pro": 2,
       "supporter": 0,
       "app": 0,
-      "annet": 1,
+      "annet": 0,
       "kr": 8.82
     },
-    "2026-10-27": {
-      "nedlastinger": 7,
-      "pro": 0,
-      "supporter": 0,
-      "app": 0,
-      "annet": 0,
-      "kr": 0
-    },
     "2026-10-28": {
-      "nedlastinger": 6,
+      "nedlastinger": 2,
       "pro": 0,
       "supporter": 0,
       "app": 0,
       "annet": 0,
       "kr": 0
     },
-    "2026-10-29": {
-      "nedlastinger": 1,
+    "2026-10-30": {
+      "nedlastinger": 2,
       "pro": 0,
       "supporter": 0,
       "app": 0,
