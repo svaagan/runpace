@@ -46,6 +46,11 @@ NAV = {
     ],
 }
 
+# Fellessiden med alle appene (repoet svaagan/svaagan.github.io). Studionavnet er
+# et arbeidsnavn; byttes det, endres det her og i fellessidens _src/apps.py.
+STUDIO = "App Factory"
+STUDIO_URL = "https://svaagan.github.io/"
+
 FOOTER = {
     "nb": [
         ("Verktøy", [("Løpekalkulator", "/"), ("Mellomtider", "/mellomtider/"),
@@ -64,7 +69,8 @@ FOOTER = {
                     ("Negativ split", "/guider/negativ-split/")]),
         ("Om", [("Om RunPace", "/om/"), ("Vanlige spørsmål", "/faq/"),
                 ("Personvern", "/personvern/"), ("Støtte", "/stotte/"),
-                (CONTACT, "mailto:" + CONTACT)]),
+                (CONTACT, "mailto:" + CONTACT),
+                ("Flere apper fra " + STUDIO, STUDIO_URL)]),
     ],
     "en": [
         ("Tools", [("Pace calculator", "/en/"), ("Splits", "/en/splits/"),
@@ -75,7 +81,8 @@ FOOTER = {
                          ("min/km to km/h", "/en/charts/min-km-to-km-h/"),
                          ("Treadmill", "/en/charts/treadmill/")]),
         ("About", [("About RunPace", "/en/about/"), ("Privacy", "/en/privacy/"),
-                   ("Support", "/support/"), (CONTACT, "mailto:" + CONTACT)]),
+                   ("Support", "/support/"), (CONTACT, "mailto:" + CONTACT),
+                   ("More apps from " + STUDIO, STUDIO_URL + "en/")]),
     ],
 }
 
