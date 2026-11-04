@@ -1,14 +1,14 @@
 {
-  "oppdatert": "2026-11-02",
+  "oppdatert": "2026-11-03",
   "forsteDag": "2026-08-04",
   "usdNok": 10.5,
   "totalt": {
     "nedlastinger": 999,
-    "kjop": 11,
-    "kr": 124.24,
+    "kjop": 12,
+    "kr": 133.06,
     "perValuta": {
       "NOK": 94,
-      "USD": 2.88,
+      "USD": 3.72,
       "EUR": 1.38
     }
   },
@@ -396,6 +396,14 @@
       "app": 0,
       "annet": 0,
       "kr": 0
+    },
+    "2026-11-03": {
+      "nedlastinger": 0,
+      "pro": 1,
+      "supporter": 0,
+      "app": 0,
+      "annet": 0,
+      "kr": 8.82
     }
   }
 }
